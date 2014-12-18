@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="migrationstreams" defaultIdMethod="native">
+  <table name="persons" phpName="Person" namespace="Person">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="first_name" type="varchar" size="255" required="true" />
+    <column name="last_name" type="varchar" size="255" required="true" />
+    <column name="birthday" type="date" required="true" />
+    <column name="day_of_death" type="date" required="false" />
+    <column name="denomination_id" type="integer" required="true"/>
+    <foreign-key foreignTable="denominations">
+      <reference local="denomination_id" foreign="id"/>
+    </foreign-key>
+    <column name="professional_category_id" type="integer" required="true"/>
+    <foreign-key foreignTable="professional_categories">
+      <reference local="professional_category_id" foreign="id"/>
+    </foreign-key>
+    <column name="profession" type="varchar" size="255" required="true" />
+    <column name="country_of_birth_id" type="integer" required="true"/>
+    <foreign-key foreignTable="countries">
+      <reference local="country_of_birth_id" foreign="id"/>
+    </foreign-key>
+    <column name="place_of_birth" type="varchar" size="255" required="false" />
+  </table>
+  <table name="migrations" phpName="Migration" namespace="Migration">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="city" type="varchar" size="255" required="false" />
+    <column name="country_id" type="integer" required="true"/>
+    <foreign-key foreignTable="countries">
+      <reference local="country_id" foreign="id"/>
+    </foreign-key>
+    <column name="month" type="integer" required="true"/>
+    <column name="year" type="integer" required="true"/>
+    <column name="person_id" type="integer" required="true"/>
+    <foreign-key foreignTable="persons">
+      <reference local="person_id" foreign="id"/>
+    </foreign-key>
+  </table>
+  <table name="countries" phpName="Country" namespace="Country">
+  	<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+  	<column name="country" type="varchar" size="255" required="true"/>
+  </table>
+  <table name="professional_categories" phpName="ProfessionalCategory" namespace="ProfessionalCategory">
+  	<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+  	<column name="professional_category" type="varchar" size="255" required="true"/>
+  </table>
+  <table name="denominations" phpName="Denomination" namespace="Denomination">
+  	<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+  	<column name="denomination" type="varchar" size="255" required="true"/>
+  </table>
+</database>

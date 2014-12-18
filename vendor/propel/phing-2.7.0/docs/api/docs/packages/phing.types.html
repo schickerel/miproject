@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>     &raquo; \phing.types
+</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+            <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+            <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+        <![endif]-->
+        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+        <script src="../js/template.js" type="text/javascript"></script>
+        <script src="../js/prettify/prettify.min.js" type="text/javascript"></script>
+    
+            <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png"/>
+    </head>
+<body>
+
+        <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> </a>
+                <a class="brand" href="../index.html">Phing API Documentation</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                API Documentation <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                                                                            </ul>
+                        </li>
+                        <li class="dropdown" id="charts-menu">
+                            <a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                Charts <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../graph_class.html">
+                                        <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" id="reports-menu">
+                            <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                Reports <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../errors.html">
+                                        <i class="icon-list-alt"></i>&#160;Errors
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../markers.html">
+                                        <i class="icon-list-alt"></i>&#160;Markers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../deprecated.html">
+                                        <i class="icon-list-alt"></i>&#160;Deprecated
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="go_to_top">
+            <a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>
+        </div>
+    </div>
+    
+    <div id="___" class="container">
+        <noscript>
+            <div class="alert alert-warning">
+                Javascript is disabled; several features are only available if Javascript is enabled.
+            </div>
+        </noscript>
+
+        
+            
+    <div class="row">
+
+        <div class="span4">
+            <div class="btn-group view pull-right" data-toggle="buttons-radio">
+                <button class="btn details" title="Show descriptions and method names">
+                    <i class="icon-list"></i></button><button class="btn simple" title="Show only method names">
+                    <i class="icon-align-justify"></i>
+                </button>
+            </div>
+            <ul class="side-nav nav nav-list">
+                <li class="nav-header">
+                    <i class="icon-map-marker"></i> Packages
+                </li>
+                    
+    
+            </ul>
+        </div>
+
+        <div class="span8 package-contents">
+                
+    
+        <ul class="breadcrumb">
+            <li><a href="../index.html"><i class="icon-th"></i></a></li>
+                
+                
+    
+    <li>
+        <span class="divider">\</span><a href="../packages/default.html"></a>
+    </li>
+
+    
+    <li>
+        <span class="divider">\</span><a href="../packages/phing.types.html">phing.types</a>
+    </li>
+
+        </ul>
+
+        
+        
+                    <div class="package-indent">
+                <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
+                
+                                        <div id="Parameterizable" class="element ajax clickable interface">
+        <h1>Parameterizable<a href="../classes/Parameterizable.html">¶</a></h1>
+        <p class="short_description">Parameterizable objects take genric key value pairs.</p>
+        <div class="details collapse"></div>
+        <a href="../classes/Parameterizable.html" class="more">« More »</a>
+    </div>
+
+                
+                                        <div id="DataType" class="element ajax clickable class">
+        <h1>DataType<a href="../classes/DataType.html">¶</a></h1>
+        <p class="short_description">Base class for those classes that can appear inside the build file
+as stand alone data types.</p>
+        <div class="details collapse">This class handles the common description attribute and provides
+a default implementation for reference handling and checking for
+circular references that is appropriate for types that can not be
+nested inside elements of the same type (i.e. patternset but not path)</div>
+        <a href="../classes/DataType.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Reference" class="element ajax clickable class">
+        <h1>Reference<a href="../classes/Reference.html">¶</a></h1>
+        <p class="short_description">Class to hold a reference to another object in the project.</p>
+        <div class="details collapse"></div>
+        <a href="../classes/Reference.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Parameter" class="element ajax clickable class">
+        <h1>Parameter<a href="../classes/Parameter.html">¶</a></h1>
+        <p class="short_description">A parameter is composed of a name, type and value. Nested
+Parameters are also possible, but the using task/type has
+to support them</p>
+        <div class="details collapse">This class handles the common description attribute and provides
+a default implementation for reference handling and checking for
+circular references that is appropriate for types that can not be
+nested inside elements of the same type (i.e. patternset but not path)</div>
+        <a href="../classes/Parameter.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="IterableFileSet" class="element ajax clickable class">
+        <h1>IterableFileSet<a href="../classes/IterableFileSet.html">¶</a></h1>
+        <p class="short_description">FileSet adapter to SPL&#039;s Iterator.</p>
+        <div class="details collapse">TODO:
+  - merge this with patternsets: FileSet extends PatternSet !!!
+    requires additional mods to the parsing algo
+        [HL] .... not sure if that really makes so much sense.  I think
+           that perhaps they should use common utility class if there really
+           is that much shared functionality</div>
+        <a href="../classes/IterableFileSet.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="TokenSource" class="element ajax clickable class">
+        <h1>TokenSource<a href="../classes/TokenSource.html">¶</a></h1>
+        <p class="short_description">A parameter is composed of a name, type and value.</p>
+        <div class="details collapse">Example of usage:
+
+&lt;replacetokens&gt;
+  &lt;tokensource classname=&quot;phing.filters.util.IniFileTokenReader&quot;&gt;
+    &lt;!-- all params for the TokenReader here --&gt;
+    &lt;param name=&quot;file&quot; value=&quot;tokens.ini&quot; /&gt;
+  &lt;/tokensource&gt;
+&lt;/replacetokens&gt;
+
+or:
+
+&lt;filterreader classname=&quot;phing.filters.ReplaceTokens&quot;&gt;
+  &lt;param type=&quot;tokensource&gt;
+    &lt;param name=&quot;classname&quot; value=&quot;phing.filters.util.IniFileTokenReader&quot; /&gt;
+    &lt;param name=&quot;file&quot; value=&quot;tokens.ini&quot; /&gt;
+  &lt;/param&gt;
+&lt;/filterreader&gt;</div>
+        <a href="../classes/TokenSource.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PhingFilterReader" class="element ajax clickable class">
+        <h1>PhingFilterReader<a href="../classes/PhingFilterReader.html">¶</a></h1>
+        <p class="short_description">A PhingFilterReader is a wrapper class that encloses the className
+and configuration of a Configurable FilterReader.</p>
+        <div class="details collapse">This class handles the common description attribute and provides
+a default implementation for reference handling and checking for
+circular references that is appropriate for types that can not be
+nested inside elements of the same type (i.e. patternset but not path)</div>
+        <a href="../classes/PhingFilterReader.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Excludes" class="element ajax clickable class">
+        <h1>Excludes<a href="../classes/Excludes.html">¶</a></h1>
+        <p class="short_description">Datatype which handles excluded files, classes and methods.</p>
+        <div class="details collapse">This class handles the common description attribute and provides
+a default implementation for reference handling and checking for
+circular references that is appropriate for types that can not be
+nested inside elements of the same type (i.e. patternset but not path)</div>
+        <a href="../classes/Excludes.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="DirSet" class="element ajax clickable class">
+        <h1>DirSet<a href="../classes/DirSet.html">¶</a></h1>
+        <p class="short_description">Subclass as hint for supporting tasks that the included directories
+instead of files should be used.</p>
+        <div class="details collapse">TODO:
+  - merge this with patternsets: FileSet extends PatternSet !!!
+    requires additional mods to the parsing algo
+        [HL] .... not sure if that really makes so much sense.  I think
+           that perhaps they should use common utility class if there really
+           is that much shared functionality</div>
+        <a href="../classes/DirSet.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="FileSet" class="element ajax clickable class">
+        <h1>FileSet<a href="../classes/FileSet.html">¶</a></h1>
+        <p class="short_description">Moved out of MatchingTask to make it a standalone object that could
+be referenced (by scripts for example).</p>
+        <div class="details collapse">TODO:
+  - merge this with patternsets: FileSet extends PatternSet !!!
+    requires additional mods to the parsing algo
+        [HL] .... not sure if that really makes so much sense.  I think
+           that perhaps they should use common utility class if there really
+           is that much shared functionality</div>
+        <a href="../classes/FileSet.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="FilterChain" class="element ajax clickable class">
+        <h1>FilterChain<a href="../classes/FilterChain.html">¶</a></h1>
+        <p class="short_description">FilterChain may contain a chained set of filter readers.</p>
+        <div class="details collapse">This class handles the common description attribute and provides
+a default implementation for reference handling and checking for
+circular references that is appropriate for types that can not be
+nested inside elements of the same type (i.e. patternset but not path)</div>
+        <a href="../classes/FilterChain.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PropertyValue" class="element ajax clickable class">
+        <h1>PropertyValue<a href="../classes/PropertyValue.html">¶</a></h1>
+        <p class="short_description">Class to hold a property value
+ Class only required to make it possible to add a property as reference</p>
+        <div class="details collapse"></div>
+        <a href="../classes/PropertyValue.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Mapper" class="element ajax clickable class">
+        <h1>Mapper<a href="../classes/Mapper.html">¶</a></h1>
+        <p class="short_description">Filename Mapper maps source file name(s) to target file name(s).</p>
+        <div class="details collapse">Built-in mappers can be accessed by specifying they &quot;type&quot; attribute:
+&lt;code&gt;
+&lt;mapper type=&quot;glob&quot; from=&quot;*.php&quot; to=&quot;*.php.bak&quot;/&gt;
+&lt;/code&gt;
+Custom mappers can be specified by providing a dot-path to a include_path-relative
+class:
+&lt;code&gt;
+&lt;mapper classname=&quot;myapp.mappers.DevToProdMapper&quot; from=&quot;*.php&quot; to=&quot;*.php&quot;/&gt;
+&lt;!-- maps all PHP files from development server to production server, for example --&gt;
+&lt;/code&gt;</div>
+        <a href="../classes/Mapper.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="RegularExpression" class="element ajax clickable class">
+        <h1>RegularExpression<a href="../classes/RegularExpression.html">¶</a></h1>
+        <p class="short_description">A regular expression datatype.  Keeps an instance of the
+compiled expression for speed purposes.  This compiled
+expression is lazily evaluated (it is compiled the first
+time it is needed).  The syntax is the dependent on which
+regular expression type you are using.</p>
+        <div class="details collapse">This class handles the common description attribute and provides
+a default implementation for reference handling and checking for
+circular references that is appropriate for types that can not be
+nested inside elements of the same type (i.e. patternset but not path)</div>
+        <a href="../classes/RegularExpression.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PearPackageFileSet" class="element ajax clickable class">
+        <h1>PearPackageFileSet<a href="../classes/PearPackageFileSet.html">¶</a></h1>
+        <p class="short_description">Fileset that contains files of an installed PEAR package.</p>
+        <div class="details collapse">It can be used to package up PEAR package dependencies in own
+release files (zip, tgz, phar).</div>
+        <a href="../classes/PearPackageFileSet.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="AbstractFileSet" class="element ajax clickable class">
+        <h1>AbstractFileSet<a href="../classes/AbstractFileSet.html">¶</a></h1>
+        <p class="short_description">The FileSet class provides methods and properties for accessing
+and managing filesets. It extends ProjectComponent and thus inherits
+all methods and properties (not explicitly declared). See ProjectComponent
+for further detail.</p>
+        <div class="details collapse">TODO:
+  - merge this with patternsets: FileSet extends PatternSet !!!
+    requires additional mods to the parsing algo
+        [HL] .... not sure if that really makes so much sense.  I think
+           that perhaps they should use common utility class if there really
+           is that much shared functionality</div>
+        <a href="../classes/AbstractFileSet.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Description" class="element ajax clickable class">
+        <h1>Description<a href="../classes/Description.html">¶</a></h1>
+        <p class="short_description">Description is used to provide a project-wide description element
+(that is, a description that applies to a buildfile as a whole).</p>
+        <div class="details collapse">If present, the &amp;lt;description&amp;gt; element is printed out before the
+target descriptions.
+
+Description has no attributes, only text.  There can only be one
+project description per project.  A second description element will
+overwrite the first.</div>
+        <a href="../classes/Description.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Path" class="element ajax clickable class">
+        <h1>Path<a href="../classes/Path.html">¶</a></h1>
+        <p class="short_description">This object represents a path as used by include_path or PATH
+environment variable.</p>
+        <div class="details collapse">This class has been adopted from the Java Ant equivalent.  The ability have
+path structures in Phing is important; however, because of how PHP classes interact
+the ability to specify CLASSPATHs makes less sense than Java.Rather than providing
+CLASSPATH for any tasks that take classes as parameters, perhaps a better
+solution in PHP is to have an IncludePath task, which prepends paths to PHP&#039;s include_path
+INI variable. This gets around the problem that simply using a path to load the initial
+PHP class is not enough (in most cases the loaded class may assume that it is on the global
+PHP include_path, and will try to load dependent classes accordingly).  The other option is
+to provide a way for this class to add paths to the include path, if desired -- or to create
+an IncludePath subclass.  Once added, though, when would a path be removed from the include path?
+
+&lt;p&gt;
+&lt;code&gt;
+&amp;lt;sometask&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;lt;somepath&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;pathelement location=&quot;/path/to/file&quot; /&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;pathelement path=&quot;/path/to/class2;/path/to/class3&quot; /&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;pathelement location=&quot;/path/to/file3&quot; /&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;lt;/somepath&amp;gt;&lt;br&gt;
+&amp;lt;/sometask&amp;gt;&lt;br&gt;
+&lt;/code&gt;
+&lt;p&gt;
+The object implemention &lt;code&gt;sometask&lt;/code&gt; must provide a method called
+&lt;code&gt;createSomepath&lt;/code&gt; which returns an instance of &lt;code&gt;Path&lt;/code&gt;.
+Nested path definitions are handled by the Path object and must be labeled
+&lt;code&gt;pathelement&lt;/code&gt;.&lt;p&gt;
+
+The path element takes a parameter &lt;code&gt;path&lt;/code&gt; which will be parsed
+and split into single elements. It will usually be used
+to define a path from an environment variable.</div>
+        <a href="../classes/Path.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PathElement" class="element ajax clickable class">
+        <h1>PathElement<a href="../classes/PathElement.html">¶</a></h1>
+        <p class="short_description">Helper class, holds the nested &lt;code&gt;&amp;lt;pathelement&amp;gt;&lt;/code&gt; values.</p>
+        <div class="details collapse"></div>
+        <a href="../classes/PathElement.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PatternSet" class="element ajax clickable class">
+        <h1>PatternSet<a href="../classes/PatternSet.html">¶</a></h1>
+        <p class="short_description">The patternset storage component. Carries all necessary data and methods
+for the patternset stuff.</p>
+        <div class="details collapse">This class handles the common description attribute and provides
+a default implementation for reference handling and checking for
+circular references that is appropriate for types that can not be
+nested inside elements of the same type (i.e. patternset but not path)</div>
+        <a href="../classes/PatternSet.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PatternSetNameEntry" class="element ajax clickable class">
+        <h1>PatternSetNameEntry<a href="../classes/PatternSetNameEntry.html">¶</a></h1>
+        <p class="short_description">&quot;Internal&quot; class for holding an include/exclude pattern.</p>
+        <div class="details collapse"></div>
+        <a href="../classes/PatternSetNameEntry.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="FileList" class="element ajax clickable class">
+        <h1>FileList<a href="../classes/FileList.html">¶</a></h1>
+        <p class="short_description">FileList represents an explicitly named list of files. FileLists
+are useful when you want to capture a list of files regardless of
+whether they currently exist.</p>
+        <div class="details collapse">&lt;filelist
+   id=&quot;docfiles&quot;
+  dir=&quot;${phing.docs.dir}&quot;
+  files=&quot;chapters/Installation.html,chapters/Setup.html&quot;/&gt;
+
+OR
+
+&lt;filelist
+        dir=&quot;${doc.src.dir}&quot;
+        listfile=&quot;${phing.docs.dir}/PhingGuide.book&quot;/&gt;
+
+(or a mixture of files=&quot;&quot; and listfile=&quot;&quot; can be used)</div>
+        <a href="../classes/FileList.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Commandline" class="element ajax clickable class">
+        <h1>Commandline<a href="../classes/Commandline.html">¶</a></h1>
+        <p class="short_description">Commandline objects help handling command lines specifying processes to
+execute.</p>
+        <div class="details collapse">The class can be used to define a command line as nested elements or as a
+helper to define a command line by an application.
+&lt;p&gt;
+&lt;code&gt;
+&amp;lt;someelement&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;lt;acommandline executable=&quot;/executable/to/run&quot;&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;argument value=&quot;argument 1&quot; /&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;argument line=&quot;argument_1 argument_2 argument_3&quot; /&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;argument value=&quot;argument 4&quot; /&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;lt;/acommandline&amp;gt;&lt;br&gt;
+&amp;lt;/someelement&amp;gt;&lt;br&gt;
+&lt;/code&gt;
+The element &lt;code&gt;someelement&lt;/code&gt; must provide a method
+&lt;code&gt;createAcommandline&lt;/code&gt; which returns an instance of this class.</div>
+        <a href="../classes/Commandline.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="CommandlineArgument" class="element ajax clickable class">
+        <h1>CommandlineArgument<a href="../classes/CommandlineArgument.html">¶</a></h1>
+        <p class="short_description">&quot;Inner&quot; class used for nested xml command line definitions.</p>
+        <div class="details collapse"></div>
+        <a href="../classes/CommandlineArgument.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="CommandlineMarker" class="element ajax clickable class">
+        <h1>CommandlineMarker<a href="../classes/CommandlineMarker.html">¶</a></h1>
+        <p class="short_description">Class to keep track of the position of an Argument.</p>
+        <div class="details collapse">&lt;p&gt;This class is there to support the srcfile and targetfile
+elements of &amp;lt;execon&amp;gt; and &amp;lt;transform&amp;gt; - don&#039;t know
+whether there might be additional use cases.&lt;/p&gt; --SB</div>
+        <a href="../classes/CommandlineMarker.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ExcludesNameEntry" class="element ajax clickable class">
+        <h1>ExcludesNameEntry<a href="../classes/ExcludesNameEntry.html">¶</a></h1>
+        <p class="short_description">Class for holding nested excludes elements (file, class, method).</p>
+        <div class="details collapse"></div>
+        <a href="../classes/ExcludesNameEntry.html" class="more">« More »</a>
+    </div>
+
+                            </div>
+            
+    
+        </div>
+    </div>
+    </div>
+
+        <footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
+            <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
+            generated on Thu, 13 Feb 2014 14:22:50 +0100.<br/>
+    </footer>
+    </body>
+</html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>     &raquo; \phing.tasks.ext
+</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+            <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+            <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+        <![endif]-->
+        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+        <script src="../js/template.js" type="text/javascript"></script>
+        <script src="../js/prettify/prettify.min.js" type="text/javascript"></script>
+    
+            <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png"/>
+    </head>
+<body>
+
+        <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> </a>
+                <a class="brand" href="../index.html">Phing API Documentation</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                API Documentation <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                                                                            </ul>
+                        </li>
+                        <li class="dropdown" id="charts-menu">
+                            <a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                Charts <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../graph_class.html">
+                                        <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" id="reports-menu">
+                            <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                Reports <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../errors.html">
+                                        <i class="icon-list-alt"></i>&#160;Errors
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../markers.html">
+                                        <i class="icon-list-alt"></i>&#160;Markers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../deprecated.html">
+                                        <i class="icon-list-alt"></i>&#160;Deprecated
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="go_to_top">
+            <a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>
+        </div>
+    </div>
+    
+    <div id="___" class="container">
+        <noscript>
+            <div class="alert alert-warning">
+                Javascript is disabled; several features are only available if Javascript is enabled.
+            </div>
+        </noscript>
+
+        
+            
+    <div class="row">
+
+        <div class="span4">
+            <div class="btn-group view pull-right" data-toggle="buttons-radio">
+                <button class="btn details" title="Show descriptions and method names">
+                    <i class="icon-list"></i></button><button class="btn simple" title="Show only method names">
+                    <i class="icon-align-justify"></i>
+                </button>
+            </div>
+            <ul class="side-nav nav nav-list">
+                <li class="nav-header">
+                    <i class="icon-map-marker"></i> Packages
+                </li>
+                    
+    
+            </ul>
+        </div>
+
+        <div class="span8 package-contents">
+                
+    
+        <ul class="breadcrumb">
+            <li><a href="../index.html"><i class="icon-th"></i></a></li>
+                
+                
+    
+    <li>
+        <span class="divider">\</span><a href="../packages/default.html"></a>
+    </li>
+
+    
+    <li>
+        <span class="divider">\</span><a href="../packages/phing.tasks.ext.html">phing.tasks.ext</a>
+    </li>
+
+        </ul>
+
+        
+        
+                    <div class="package-indent">
+                <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
+                
+                
+                                        <div id="HttpRequestTask" class="element ajax clickable class">
+        <h1>HttpRequestTask<a href="../classes/HttpRequestTask.html">¶</a></h1>
+        <p class="short_description">A HTTP request task.</p>
+        <div class="details collapse">Making an HTTP request and try to match the response against an provided
+regular expression.</div>
+        <a href="../classes/HttpRequestTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="WikiPublishTask" class="element ajax clickable class">
+        <h1>WikiPublishTask<a href="../classes/WikiPublishTask.html">¶</a></h1>
+        <p class="short_description">Publish Wiki document using Wiki API.</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/WikiPublishTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="S3PutTask" class="element ajax clickable class">
+        <h1>S3PutTask<a href="../classes/S3PutTask.html">¶</a></h1>
+        <p class="short_description">Stores an object on S3</p>
+        <div class="details collapse">Provides common methods and properties to all of the S3 tasks</div>
+        <a href="../classes/S3PutTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="S3GetTask" class="element ajax clickable class">
+        <h1>S3GetTask<a href="../classes/S3GetTask.html">¶</a></h1>
+        <p class="short_description">Downloads an object off S3</p>
+        <div class="details collapse">Provides common methods and properties to all of the S3 tasks</div>
+        <a href="../classes/S3GetTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Service_Amazon_S3" class="element ajax clickable class">
+        <h1>Service_Amazon_S3<a href="../classes/Service_Amazon_S3.html">¶</a></h1>
+        <p class="short_description">Abstract Service_Amazon_S3 class.</p>
+        <div class="details collapse">Provides common methods and properties to all of the S3 tasks</div>
+        <a href="../classes/Service_Amazon_S3.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Service_Amazon" class="element ajax clickable class">
+        <h1>Service_Amazon<a href="../classes/Service_Amazon.html">¶</a></h1>
+        <p class="short_description">Abstract Service_Amazon class.</p>
+        <div class="details collapse">Implements common methods &amp; properties used by all Amazon services</div>
+        <a href="../classes/Service_Amazon.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PatchTask" class="element ajax clickable class">
+        <h1>PatchTask<a href="../classes/PatchTask.html">¶</a></h1>
+        <p class="short_description">Patches a file by applying a &#039;diff&#039; file to it</p>
+        <div class="details collapse">Requires &quot;patch&quot; to be on the execution path.</div>
+        <a href="../classes/PatchTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PhpCodeSnifferTask_Wrapper" class="element ajax clickable class">
+        <h1>PhpCodeSnifferTask_Wrapper<a href="../classes/PhpCodeSnifferTask_Wrapper.html">¶</a></h1>
+        <p class="short_description">Wrapper to disable PHPCS&#039;s destructor</p>
+        <div class="details collapse"></div>
+        <a href="../classes/PhpCodeSnifferTask_Wrapper.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="JslLintTask" class="element ajax clickable class">
+        <h1>JslLintTask<a href="../classes/JslLintTask.html">¶</a></h1>
+        <p class="short_description">A Javascript lint task. Checks syntax of Javascript files.</p>
+        <div class="details collapse">Javascript lint (http://www.javascriptlint.com) must be in the system path.
+This class is based on Knut Urdalen&#039;s PhpLintTask.</div>
+        <a href="../classes/JslLintTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PackageAsPathTask" class="element ajax clickable class">
+        <h1>PackageAsPathTask<a href="../classes/PackageAsPathTask.html">¶</a></h1>
+        <p class="short_description">Convert dot-notation packages to relative paths.</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/PackageAsPathTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ZendCodeAnalyzerTask" class="element ajax clickable class">
+        <h1>ZendCodeAnalyzerTask<a href="../classes/ZendCodeAnalyzerTask.html">¶</a></h1>
+        <p class="short_description">ZendCodeAnalyzerTask analyze PHP source code using the ZendCodeAnalyzer included in Zend Studio 5.1</p>
+        <div class="details collapse">Available warnings:
+&lt;b&gt;zend-error&lt;/b&gt; - %s(line %d): %s
+&lt;b&gt;oneline-comment&lt;/b&gt; - One-line comment ends with  tag.
+&lt;b&gt;bool-assign&lt;/b&gt; - Assignment seen where boolean expression is expected. Did you mean &#039;==&#039; instead of &#039;=&#039;?
+&lt;b&gt;bool-print&lt;/b&gt; - Print statement used when boolean expression is expected.
+&lt;b&gt;bool-array&lt;/b&gt; - Array used when boolean expression is expected.
+&lt;b&gt;bool-object&lt;/b&gt; - Object used when boolean expression is expected.
+&lt;b&gt;call-time-ref&lt;/b&gt; - Call-time reference is deprecated. Define function as accepting parameter by reference instead.
+&lt;b&gt;if-if-else&lt;/b&gt; - In if-if-else construction else relates to the closest if. Use braces to make the code clearer.
+&lt;b&gt;define-params&lt;/b&gt; - define() requires two or three parameters.
+&lt;b&gt;define-const&lt;/b&gt; - First parameter for define() should be string. Maybe you forgot quotes?
+&lt;b&gt;break-var&lt;/b&gt; - Break/continue with variable is dangerous - break level can be out of scope.
+&lt;b&gt;break-depth&lt;/b&gt; - Break/continue with depth more than current nesting level.
+&lt;b&gt;var-once&lt;/b&gt; - Variable &#039;%s&#039; encountered only once. May be a typo?
+&lt;b&gt;var-arg-unused&lt;/b&gt; - Function argument &#039;%s&#039; is never used.
+&lt;b&gt;var-global-unused&lt;/b&gt; - Global variable &#039;%s&#039; is defined but never used.
+&lt;b&gt;var-use-before-def&lt;/b&gt; - Variable &#039;%s&#039; is used before it was assigned.
+&lt;b&gt;var-use-before-def-global&lt;/b&gt; - Global variable &#039;%s&#039; is used without being assigned. You are probably relying on register_globals feature of PHP. Note that this feature is off by default.
+&lt;b&gt;var-no-global&lt;/b&gt; - PHP global variable &#039;%s&#039; is used as local. Maybe you wanted to define &#039;%s&#039; as global?
+&lt;b&gt;var-value-unused&lt;/b&gt; - Value assigned to variable &#039;%s&#039; is never used
+&lt;b&gt;var-ref-notmodified&lt;/b&gt; - Function parameter &#039;%s&#039; is passed by reference but never modified. Consider passing by value.
+&lt;b&gt;return-empty-val&lt;/b&gt; - Function &#039;%s&#039; has both empty return and return with value.
+&lt;b&gt;return-empty-used&lt;/b&gt; - Function &#039;%s&#039; has empty return but return value is used.
+&lt;b&gt;return-noref&lt;/b&gt; - Function &#039;%s&#039; returns reference but the value is not assigned by reference. Maybe you meant &#039;=&amp;&#039; instead of &#039;=&#039;?
+&lt;b&gt;return-end-used&lt;/b&gt; - Control reaches the end of function &#039;%s&#039;(file %s, line %d) but return value is used.
+&lt;b&gt;sprintf-miss-args&lt;/b&gt; - Missing arguments for sprintf: format reqires %d arguments but %d are supplied.
+&lt;b&gt;sprintf-extra-args&lt;/b&gt; - Extra arguments for sprintf: format reqires %d arguments but %d are supplied.
+&lt;b&gt;unreach-code&lt;/b&gt; - Unreachable code in function &#039;%s&#039;.
+&lt;b&gt;include-var&lt;/b&gt; - include/require with user-accessible variable can be dangerous. Consider using constant instead.
+&lt;b&gt;non-object&lt;/b&gt; - Variable &#039;%s&#039; used as object, but has different type.
+&lt;b&gt;bad-escape&lt;/b&gt; - Bad escape sequence: \%c, did you mean \\%c?
+&lt;b&gt;empty-cond&lt;/b&gt; - Condition without a body
+&lt;b&gt;expr-unused&lt;/b&gt; - Expression result is never used</div>
+        <a href="../classes/ZendCodeAnalyzerTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="GrowlNotifyTask" class="element ajax clickable class">
+        <h1>GrowlNotifyTask<a href="../classes/GrowlNotifyTask.html">¶</a></h1>
+        <p class="short_description">Growl notification task for Phing, the PHP build tool.</p>
+        <div class="details collapse">PHP version 5</div>
+        <a href="../classes/GrowlNotifyTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="CapsuleTask" class="element ajax clickable class">
+        <h1>CapsuleTask<a href="../classes/CapsuleTask.html">¶</a></h1>
+        <p class="short_description">A phing task for generating output by using Capsule.</p>
+        <div class="details collapse">This is based on the interface to TexenTask from Apache&#039;s Velocity engine.</div>
+        <a href="../classes/CapsuleTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="AssignedVar" class="element ajax clickable class">
+        <h1>AssignedVar<a href="../classes/AssignedVar.html">¶</a></h1>
+        <p class="short_description">An &quot;inner&quot; class for holding assigned var values.</p>
+        <div class="details collapse">May be need to expand beyond name/value in the future.</div>
+        <a href="../classes/AssignedVar.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="FileSizeTask" class="element ajax clickable class">
+        <h1>FileSizeTask<a href="../classes/FileSizeTask.html">¶</a></h1>
+        <p class="short_description">fileHash</p>
+        <div class="details collapse">Calculate either MD5 or SHA hash value of a specified file and retun the
+value in a property</div>
+        <a href="../classes/FileSizeTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PhpCodeSnifferTask" class="element ajax clickable class">
+        <h1>PhpCodeSnifferTask<a href="../classes/PhpCodeSnifferTask.html">¶</a></h1>
+        <p class="short_description">A PHP code sniffer task. Checking the style of one or more PHP source files.</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/PhpCodeSnifferTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PhpCodeSnifferTask_FormatterElement" class="element ajax clickable class">
+        <h1>PhpCodeSnifferTask_FormatterElement<a href="../classes/PhpCodeSnifferTask_FormatterElement.html">¶</a></h1>
+        <p class="short_description">Base class for those classes that can appear inside the build file
+as stand alone data types.</p>
+        <div class="details collapse">This class handles the common description attribute and provides
+a default implementation for reference handling and checking for
+circular references that is appropriate for types that can not be
+nested inside elements of the same type (i.e. patternset but not path)</div>
+        <a href="../classes/PhpCodeSnifferTask_FormatterElement.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PearPackage2Task" class="element ajax clickable class">
+        <h1>PearPackage2Task<a href="../classes/PearPackage2Task.html">¶</a></h1>
+        <p class="short_description">A task to create a PEAR package.xml version 2.0 file.</p>
+        <div class="details collapse">This class uses the PEAR_PackageFileManager2 class to perform the work.
+
+This class is designed to be very flexible -- i.e. account for changes to the package.xml w/o
+requiring changes to this class.  We&#039;ve accomplished this by having generic &lt;option&gt; and &lt;mapping&gt;
+nested elements.  All options are set using PEAR_PackageFileManager2::setOptions().
+
+The &lt;option&gt; tag is used to set a simple option value.
+&lt;code&gt;
+&lt;option name=&quot;option_name&quot; value=&quot;option_value&quot;/&gt;
+or &lt;option name=&quot;option_name&quot;&gt;option_value&lt;/option&gt;
+&lt;/code&gt;
+
+The &lt;mapping&gt; tag represents a complex data type.  You can use nested &lt;element&gt; (and nested &lt;element&gt; with
+&lt;element&gt; tags) to represent the full complexity of the structure.  Bear in mind that what you are creating
+will be mapped to an associative array that will be passed in via PEAR_PackageFileManager2::setOptions().
+&lt;code&gt;
+&lt;mapping name=&quot;option_name&quot;&gt;
+ &lt;element key=&quot;key_name&quot; value=&quot;key_val&quot;/&gt;
+ &lt;element key=&quot;key_name&quot; value=&quot;key_val&quot;/&gt;
+&lt;/mapping&gt;
+&lt;/code&gt;
+
+Here&#039;s an over-simple example of how this could be used:
+&lt;code&gt;
+&lt;pearpkg2 name=&quot;phing&quot; dir=&quot;${build.src.dir}&quot;&gt;
+ &lt;fileset dir=&quot;src&quot;&gt;
+     &lt;include name=&quot;**&quot;/&gt;
+ &lt;/fileset&gt;
+ &lt;option name=&quot;outputdirectory&quot; value=&quot;./build&quot;/&gt;
+ &lt;option name=&quot;packagefile&quot; value=&quot;package2.xml&quot;/&gt;
+ &lt;option name=&quot;packagedirectory&quot; value=&quot;./${build.dist.dir}&quot;/&gt;
+ &lt;option name=&quot;baseinstalldir&quot; value=&quot;${pkg.prefix}&quot;/&gt;
+ &lt;option name=&quot;channel&quot; value=&quot;my.pear-channel.com&quot;/&gt;
+ &lt;option name=&quot;summary&quot; value=&quot;${pkg.summary}&quot;/&gt;
+ &lt;option name=&quot;description&quot; value=&quot;${pkg.description}&quot;/&gt;
+ &lt;option name=&quot;apiversion&quot; value=&quot;${pkg.version}&quot;/&gt;
+ &lt;option name=&quot;apistability&quot; value=&quot;beta&quot;/&gt;
+ &lt;option name=&quot;releaseversion&quot; value=&quot;${pkg.version}&quot;/&gt;
+ &lt;option name=&quot;releasestability&quot; value=&quot;beta&quot;/&gt;
+ &lt;option name=&quot;license&quot; value=&quot;none&quot;/&gt;
+ &lt;option name=&quot;phpdep&quot; value=&quot;5.0.0&quot;/&gt;
+ &lt;option name=&quot;pearinstallerdep&quot; value=&quot;1.4.6&quot;/&gt;
+ &lt;option name=&quot;packagetype&quot; value=&quot;php&quot;/&gt;
+ &lt;option name=&quot;notes&quot; value=&quot;${pkg.relnotes}&quot;/&gt;
+ &lt;mapping name=&quot;maintainers&quot;&gt;
+  &lt;element&gt;
+   &lt;element key=&quot;handle&quot; value=&quot;hlellelid&quot;/&gt;
+   &lt;element key=&quot;name&quot; value=&quot;Hans&quot;/&gt;
+   &lt;element key=&quot;email&quot; value=&quot;hans@xmpl.org&quot;/&gt;
+   &lt;element key=&quot;role&quot; value=&quot;lead&quot;/&gt;
+   &lt;element key=&quot;active&quot; value=&quot;yes&quot;/&gt;
+  &lt;/element&gt;
+ &lt;/mapping&gt;
+&lt;/pearpkg2&gt;
+&lt;/code&gt;
+
+Look at the build.xml in the Phing base directory (assuming you have the full distro / CVS version of Phing) to
+see a more complete example of how to call this script.</div>
+        <a href="../classes/PearPackage2Task.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="XmlLintTask" class="element ajax clickable class">
+        <h1>XmlLintTask<a href="../classes/XmlLintTask.html">¶</a></h1>
+        <p class="short_description">A XML lint task. Checking syntax of one or more XML files against an XML Schema using the DOM extension.</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/XmlLintTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="JsMinTask" class="element ajax clickable class">
+        <h1>JsMinTask<a href="../classes/JsMinTask.html">¶</a></h1>
+        <p class="short_description">Task to minify javascript files.</p>
+        <div class="details collapse">Requires JSMin which can be found at http://code.google.com/p/jsmin-php/ but
+is bundled with Phing so no additional install of JsMin is required.</div>
+        <a href="../classes/JsMinTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Ssh2MethodParam" class="element ajax clickable class">
+        <h1>Ssh2MethodParam<a href="../classes/Ssh2MethodParam.html">¶</a></h1>
+        <p class="short_description">Class that holds parameters for an ssh2_connect $methods parameter
+This corresponds to the optional $methods parameter
+for the ssh2_connect function</p>
+        <div class="details collapse">This class handles the common description attribute and provides
+a default implementation for reference handling and checking for
+circular references that is appropriate for types that can not be
+nested inside elements of the same type (i.e. patternset but not path)</div>
+        <a href="../classes/Ssh2MethodParam.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="SshTask" class="element ajax clickable class">
+        <h1>SshTask<a href="../classes/SshTask.html">¶</a></h1>
+        <p class="short_description">Execute commands on a remote host using ssh.</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/SshTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="Ssh2MethodConnectionParam" class="element ajax clickable class">
+        <h1>Ssh2MethodConnectionParam<a href="../classes/Ssh2MethodConnectionParam.html">¶</a></h1>
+        <p class="short_description">Class that holds parameters for an ssh2_connect $methods parameter
+This corresponds to the client_to_server and server_to_client keys of the optional $methods parameter
+for the ssh2_connect function</p>
+        <div class="details collapse"></div>
+        <a href="../classes/Ssh2MethodConnectionParam.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ScpTask" class="element ajax clickable class">
+        <h1>ScpTask<a href="../classes/ScpTask.html">¶</a></h1>
+        <p class="short_description">Copy files to and from a remote host using scp.</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/ScpTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="HttpTask" class="element ajax clickable class">
+        <h1>HttpTask<a href="../classes/HttpTask.html">¶</a></h1>
+        <p class="short_description">Base class for HTTP_Request2-backed tasks</p>
+        <div class="details collapse">Handles nested &lt;config /&gt; and &lt;header /&gt; tags, contains a method for
+HTTP_Request2 instance creation</div>
+        <a href="../classes/HttpTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PhpLintTask" class="element ajax clickable class">
+        <h1>PhpLintTask<a href="../classes/PhpLintTask.html">¶</a></h1>
+        <p class="short_description">A PHP lint task. Checking syntax of one or more PHP source file.</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/PhpLintTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="FileSyncTask" class="element ajax clickable class">
+        <h1>FileSyncTask<a href="../classes/FileSyncTask.html">¶</a></h1>
+        <p class="short_description">The FileSyncTask class copies files either to or from a remote host, or locally
+on the current host. It allows rsync to transfer the differences between two
+sets of files across the network connection, using an efficient checksum-search
+algorithm.</p>
+        <div class="details collapse">There are 4 different ways of using FileSyncTask:
+
+  1. For copying local files.
+  2. For copying from the local machine to a remote machine using a remote
+     shell program as the transport (ssh).
+  3. For copying from a remote machine to the local machine using a remote
+     shell program.
+  4. For listing files on a remote machine.
+
+This is extended from Federico&#039;s original code, all his docs are kept in here below.</div>
+        <a href="../classes/FileSyncTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ComposerTask" class="element ajax clickable class">
+        <h1>ComposerTask<a href="../classes/ComposerTask.html">¶</a></h1>
+        <p class="short_description">Composer Task
+Run composer straight from phing</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/ComposerTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="rSTTask" class="element ajax clickable class">
+        <h1>rSTTask<a href="../classes/rSTTask.html">¶</a></h1>
+        <p class="short_description">reStructuredText rendering task for Phing, the PHP build tool.</p>
+        <div class="details collapse">PHP version 5</div>
+        <a href="../classes/rSTTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="TarTask" class="element ajax clickable class">
+        <h1>TarTask<a href="../classes/TarTask.html">¶</a></h1>
+        <p class="short_description">Creates a tar archive using PEAR Archive_Tar.</p>
+        <div class="details collapse">This is very closely based on the ANT class of the same name.</div>
+        <a href="../classes/TarTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="TarFileSet" class="element ajax clickable class">
+        <h1>TarFileSet<a href="../classes/TarFileSet.html">¶</a></h1>
+        <p class="short_description">This is a FileSet with the option to specify permissions.</p>
+        <div class="details collapse">Permissions are currently not implemented by PEAR Archive_Tar,
+but hopefully they will be in the future.</div>
+        <a href="../classes/TarFileSet.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="SmartyTask" class="element ajax clickable class">
+        <h1>SmartyTask<a href="../classes/SmartyTask.html">¶</a></h1>
+        <p class="short_description">A phing task for generating output by using Smarty.</p>
+        <div class="details collapse">This is based on the TexenTask from Apache&#039;s Velocity engine.  This class
+was originally proted in order to provide a template compiling system for
+Torque.
+
+TODO:
+       - Add Path / useClasspath support?</div>
+        <a href="../classes/SmartyTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="FtpDeployTask" class="element ajax clickable class">
+        <h1>FtpDeployTask<a href="../classes/FtpDeployTask.html">¶</a></h1>
+        <p class="short_description">FtpDeployTask</p>
+        <div class="details collapse">Deploys a set of files to a remote FTP server.
+
+
+Example usage:
+&lt;ftpdeploy host=&quot;host&quot; port=&quot;21&quot; username=&quot;user&quot; password=&quot;password&quot; dir=&quot;public_html&quot; mode=&quot;ascii&quot; clearfirst=&quot;true&quot; depends=&quot;false&quot; filemode=&quot;&quot; dirmode=&quot;&quot;&gt;
+  &lt;fileset dir=&quot;.&quot;&gt;
+    &lt;include name=&quot;**&quot;/&gt;
+    &lt;exclude name=&quot;phing&quot;/&gt;
+    &lt;exclude name=&quot;build.xml&quot;/&gt;
+    &lt;exclude name=&quot;images/**.png&quot;/&gt;
+    &lt;exclude name=&quot;images/**.gif&quot;/&gt;
+    &lt;exclude name=&quot;images/**.jpg&quot;/&gt;
+  &lt;/fileset&gt;
+&lt;/ftpdeploy&gt;</div>
+        <a href="../classes/FtpDeployTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="XmlPropertyTask" class="element ajax clickable class">
+        <h1>XmlPropertyTask<a href="../classes/XmlPropertyTask.html">¶</a></h1>
+        <p class="short_description">Task for setting properties from an XML file in buildfiles.</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/XmlPropertyTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ManifestTask" class="element ajax clickable class">
+        <h1>ManifestTask<a href="../classes/ManifestTask.html">¶</a></h1>
+        <p class="short_description">ManifestTask</p>
+        <div class="details collapse">Generates a simple Manifest file with optional checksums.
+
+
+Manifest schema:
+...
+path/to/file     CHECKSUM    [CHECKSUM2]     [CHECKSUM3]
+path/to/secondfile       CHECKSUM    [CHECKSUM2]     [CHECKSUM3]
+...
+
+Example usage:
+&lt;manifest checksum=&quot;crc32&quot; file=&quot;${dir_build}/Manifest&quot;&gt;
+     &lt;fileset refid=&quot;files_build&quot; /&gt;
+&lt;/manifest&gt;
+
+&lt;manifest checksum=&quot;md5,adler32,sha256&quot; file=&quot;${dir_build}/Manifest&quot;&gt;
+     &lt;fileset refid=&quot;files_build&quot; /&gt;
+&lt;/manifest&gt;</div>
+        <a href="../classes/ManifestTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PearPackageTask" class="element ajax clickable class">
+        <h1>PearPackageTask<a href="../classes/PearPackageTask.html">¶</a></h1>
+        <p class="short_description">A task to create PEAR package.xml file.</p>
+        <div class="details collapse">This class uses the PEAR_PackageFileMaintainer class to perform the work.
+
+This class is designed to be very flexible -- i.e. account for changes to the package.xml w/o
+requiring changes to this class.  We&#039;ve accomplished this by having generic &lt;option&gt; and &lt;mapping&gt;
+nested elements.  All options are set using PEAR_PackageFileMaintainer::setOptions().
+
+The &lt;option&gt; tag is used to set a simple option value.
+&lt;code&gt;
+&lt;option name=&quot;option_name&quot; value=&quot;option_value&quot;/&gt;
+or &lt;option name=&quot;option_name&quot;&gt;option_value&lt;/option&gt;
+&lt;/code&gt;
+
+The &lt;mapping&gt; tag represents a complex data type.  You can use nested &lt;element&gt; (and nested &lt;element&gt; with
+&lt;element&gt; tags) to represent the full complexity of the structure.  Bear in mind that what you are creating
+will be mapped to an associative array that will be passed in via PEAR_PackageFileMaintainer::setOptions().
+&lt;code&gt;
+&lt;mapping name=&quot;option_name&quot;&gt;
+ &lt;element key=&quot;key_name&quot; value=&quot;key_val&quot;/&gt;
+ &lt;element key=&quot;key_name&quot; value=&quot;key_val&quot;/&gt;
+&lt;/mapping&gt;
+&lt;/code&gt;
+
+Here&#039;s an over-simple example of how this could be used:
+&lt;code&gt;
+&lt;pearpkg name=&quot;phing&quot; dir=&quot;${build.src.dir}&quot; destFile=&quot;${build.base.dir}/package.xml&quot;&gt;
+ &lt;fileset&gt;
+  &lt;include name=&quot;**&quot;/&gt;
+ &lt;/fileset&gt;
+ &lt;option name=&quot;notes&quot;&gt;Sample release notes here.&lt;/option&gt;
+ &lt;option name=&quot;description&quot;&gt;Package description&lt;/option&gt;
+ &lt;option name=&quot;summary&quot;&gt;Short description&lt;/option&gt;
+ &lt;option name=&quot;version&quot; value=&quot;2.0.0b1&quot;/&gt;
+ &lt;option name=&quot;state&quot; value=&quot;beta&quot;/&gt;
+ &lt;mapping name=&quot;maintainers&quot;&gt;
+  &lt;element&gt;
+   &lt;element key=&quot;handle&quot; value=&quot;hlellelid&quot;/&gt;
+   &lt;element key=&quot;name&quot; value=&quot;Hans&quot;/&gt;
+   &lt;element key=&quot;email&quot; value=&quot;hans@xmpl.org&quot;/&gt;
+   &lt;element key=&quot;role&quot; value=&quot;lead&quot;/&gt;
+  &lt;/element&gt;
+ &lt;/mapping&gt;
+&lt;/pearpkg&gt;
+&lt;/code&gt;
+
+Look at the build.xml in the Phing base directory (assuming you have the full distro / CVS version of Phing) to
+see a more complete example of how to call this script.</div>
+        <a href="../classes/PearPackageTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PearPkgOption" class="element ajax clickable class">
+        <h1>PearPkgOption<a href="../classes/PearPkgOption.html">¶</a></h1>
+        <p class="short_description">Generic option class is used for non-complex options.</p>
+        <div class="details collapse"></div>
+        <a href="../classes/PearPkgOption.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PearPkgMapping" class="element ajax clickable class">
+        <h1>PearPkgMapping<a href="../classes/PearPkgMapping.html">¶</a></h1>
+        <p class="short_description">Handles complex options &lt;mapping&gt; elements which are hashes (assoc arrays).</p>
+        <div class="details collapse"></div>
+        <a href="../classes/PearPkgMapping.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PearPkgMappingElement" class="element ajax clickable class">
+        <h1>PearPkgMappingElement<a href="../classes/PearPkgMappingElement.html">¶</a></h1>
+        <p class="short_description">Sub-element of &lt;mapping&gt;.</p>
+        <div class="details collapse"></div>
+        <a href="../classes/PearPkgMappingElement.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PearPkgRole" class="element ajax clickable class">
+        <h1>PearPkgRole<a href="../classes/PearPkgRole.html">¶</a></h1>
+        <p class="short_description">Encapsulates file roles</p>
+        <div class="details collapse"></div>
+        <a href="../classes/PearPkgRole.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ParallelTask" class="element ajax clickable class">
+        <h1>ParallelTask<a href="../classes/ParallelTask.html">¶</a></h1>
+        <p class="short_description">Uses the DocBlox_Parallel library to run nested Phing tasks concurrently.</p>
+        <div class="details collapse">WARNING: this task is highly experimental!</div>
+        <a href="../classes/ParallelTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="SymlinkTask" class="element ajax clickable class">
+        <h1>SymlinkTask<a href="../classes/SymlinkTask.html">¶</a></h1>
+        <p class="short_description">Generates symlinks based on a target / link combination.</p>
+        <div class="details collapse">Can also symlink contents of a directory, individually
+
+Single target symlink example:
+&lt;code&gt;
+    &lt;symlink target=&quot;/some/shared/file&quot; link=&quot;${project.basedir}/htdocs/my_file&quot; /&gt;
+&lt;/code&gt;
+
+Symlink entire contents of directory
+
+This will go through the contents of &quot;/my/shared/library/*&quot;
+and create a symlink for each entry into ${project.basedir}/library/
+&lt;code&gt;
+    &lt;symlink link=&quot;${project.basedir}/library&quot;&gt;
+        &lt;fileset dir=&quot;/my/shared/library&quot;&gt;
+            &lt;include name=&quot;*&quot; /&gt;
+        &lt;/fileset&gt;
+    &lt;/symlink&gt;
+&lt;/code&gt;</div>
+        <a href="../classes/SymlinkTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="MailTask" class="element ajax clickable class">
+        <h1>MailTask<a href="../classes/MailTask.html">¶</a></h1>
+        <p class="short_description">Send an e-mail message</p>
+        <div class="details collapse">&lt;mail tolist=&quot;user@example.org&quot; subject=&quot;build complete&quot;&gt;The build process is a success...&lt;/mail&gt;</div>
+        <a href="../classes/MailTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ZipTask" class="element ajax clickable class">
+        <h1>ZipTask<a href="../classes/ZipTask.html">¶</a></h1>
+        <p class="short_description">Creates a zip archive using PHP ZipArchive extension/</p>
+        <div class="details collapse">This is very closely based on the ANT class of the same name.</div>
+        <a href="../classes/ZipTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ZipFileSet" class="element ajax clickable class">
+        <h1>ZipFileSet<a href="../classes/ZipFileSet.html">¶</a></h1>
+        <p class="short_description">This is a FileSet with the to specify permissions.</p>
+        <div class="details collapse">Permissions are currently not implemented by PEAR Archive_Tar,
+but hopefully they will be in the future.</div>
+        <a href="../classes/ZipFileSet.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ExportPropertiesTask" class="element ajax clickable class">
+        <h1>ExportPropertiesTask<a href="../classes/ExportPropertiesTask.html">¶</a></h1>
+        <p class="short_description">Saves currently defined properties into a specified file</p>
+        <div class="details collapse">Use {@link Project#createTask} to register a new Task.</div>
+        <a href="../classes/ExportPropertiesTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="UnzipTask" class="element ajax clickable class">
+        <h1>UnzipTask<a href="../classes/UnzipTask.html">¶</a></h1>
+        <p class="short_description">Extracts one or several zip archives using ZipArchive class.</p>
+        <div class="details collapse">This is very closely based on the ANT class of the same name.</div>
+        <a href="../classes/UnzipTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="VersionTask" class="element ajax clickable class">
+        <h1>VersionTask<a href="../classes/VersionTask.html">¶</a></h1>
+        <p class="short_description">VersionTask</p>
+        <div class="details collapse">Increments a three-part version number from a given file
+and writes it back to the file.
+Incrementing is based on given releasetype, which can be one
+of Major, Minor and Bugfix.
+Resulting version number is also published under supplied property.</div>
+        <a href="../classes/VersionTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="ExtractBaseTask" class="element ajax clickable class">
+        <h1>ExtractBaseTask<a href="../classes/ExtractBaseTask.html">¶</a></h1>
+        <p class="short_description">Base class for extracting tasks such as Unzip and Untar.</p>
+        <div class="details collapse">This is very closely based on the ANT class of the same name.</div>
+        <a href="../classes/ExtractBaseTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="PharPackageTask" class="element ajax clickable class">
+        <h1>PharPackageTask<a href="../classes/PharPackageTask.html">¶</a></h1>
+        <p class="short_description">Package task for {@link http://www.php.net/manual/en/book.phar.php Phar technology}.</p>
+        <div class="details collapse">This is very closely based on the ANT class of the same name.</div>
+        <a href="../classes/PharPackageTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="FileHashTask" class="element ajax clickable class">
+        <h1>FileHashTask<a href="../classes/FileHashTask.html">¶</a></h1>
+        <p class="short_description">fileHash</p>
+        <div class="details collapse">Calculate either MD5 or SHA hash value of a specified file and retun the
+value in a property</div>
+        <a href="../classes/FileHashTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="HttpGetTask" class="element ajax clickable class">
+        <h1>HttpGetTask<a href="../classes/HttpGetTask.html">¶</a></h1>
+        <p class="short_description">A HTTP download task.</p>
+        <div class="details collapse">Downloads a file via HTTP GET method and saves it to a specified directory</div>
+        <a href="../classes/HttpGetTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="UntarTask" class="element ajax clickable class">
+        <h1>UntarTask<a href="../classes/UntarTask.html">¶</a></h1>
+        <p class="short_description">Extracts one or several tar archives using PEAR Archive_Tar</p>
+        <div class="details collapse">This is very closely based on the ANT class of the same name.</div>
+        <a href="../classes/UntarTask.html" class="more">« More »</a>
+    </div>
+
+                                        <div id="LoadFileTask" class="element ajax clickable class">
+        <h1>LoadFileTask<a href="../classes/LoadFileTask.html">¶</a></h1>
+        <p class="short_description">LoadFileTask</p>
+        <div class="details collapse">Loads a (text) file and stores the contents in a property.
+Supports filterchains.</div>
+        <a href="../classes/LoadFileTask.html" class="more">« More »</a>
+    </div>
+
+                            </div>
+            
+    
+        </div>
+    </div>
+    </div>
+
+        <footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
+            <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
+            generated on Thu, 13 Feb 2014 14:22:50 +0100.<br/>
+    </footer>
+    </body>
+</html>

@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>    Phing API Documentation &raquo; \UnknownElement
+</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+            <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+            <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+        <![endif]-->
+        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+        <script src="../js/template.js" type="text/javascript"></script>
+        <script src="../js/prettify/prettify.min.js" type="text/javascript"></script>
+    
+            <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png"/>
+    </head>
+<body>
+
+        <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> </a>
+                <a class="brand" href="../index.html">Phing API Documentation</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                API Documentation <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                                                                            </ul>
+                        </li>
+                        <li class="dropdown" id="charts-menu">
+                            <a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                Charts <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../graph_class.html">
+                                        <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" id="reports-menu">
+                            <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                Reports <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../errors.html">
+                                        <i class="icon-list-alt"></i>&#160;Errors
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../markers.html">
+                                        <i class="icon-list-alt"></i>&#160;Markers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../deprecated.html">
+                                        <i class="icon-list-alt"></i>&#160;Deprecated
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="go_to_top">
+            <a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>
+        </div>
+    </div>
+    
+    <div id="___" class="container">
+        <noscript>
+            <div class="alert alert-warning">
+                Javascript is disabled; several features are only available if Javascript is enabled.
+            </div>
+        </noscript>
+
+        
+            <style>
+        .deprecated h2 {
+            text-decoration: line-through;
+        }
+    </style>
+    <div class="row">
+        <div class="span4">
+                    <div class="btn-group view pull-right" data-toggle="buttons-radio">
+        <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button>
+        <button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+    </div>
+    <div class="btn-group visibility" data-toggle="buttons-checkbox">
+        <button class="btn public active" title="Show public elements">Public</button>
+        <button class="btn protected" title="Show protected elements">Protected</button>
+        <button class="btn private" title="Show private elements">Private</button>
+        <button class="btn inherited active" title="Show inherited elements">Inherited</button>
+    </div>
+
+        <ul class="side-nav nav nav-list">
+        <li class="nav-header">
+            <i class="icon-custom icon-method"></i> Methods
+            <ul>
+                                                                                                    <li class="method public">
+        <a href="#method___construct" title="__construct :: Constructs a UnknownElement object">
+            <span class="description">Constructs a UnknownElement object</span><pre>__construct</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getTag" title="getTag :: Return the XML element name that this &lt;code&gt;UnnownElement&lt;/code&gt;
+handles.">
+            <span class="description">Return the XML element name that this &lt;code&gt;UnnownElement&lt;/code&gt;
+handles.</span><pre>getTag</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_maybeConfigure" title="maybeConfigure :: Configure this task if it hasn&#039;t been done already.">
+            <span class="description">Configure this task if it hasn&#039;t been done already.</span><pre>maybeConfigure</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_main" title="main :: Called by the project to let the task do it&#039;s work. This method may be
+ called more than once, if the task is invoked more than once. For
+ example, if target1 and target2 both depend on target3, then running
+ &lt;em&gt;phing target1 target2&lt;/em&gt; will run all tasks in target3 twice.">
+            <span class="description">Called by the project to let the task do it&#039;s work. This method may be
+ called more than once, if the task is invoked more than once. For
+ example, if target1 and target2 both depend on target3, then running
+ &lt;em&gt;phing target1 target2&lt;/em&gt; will run all tasks in target3 twice.</span><pre>main</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_addChild" title="addChild :: Add a child element to the unknown element">
+            <span class="description">Add a child element to the unknown element</span><pre>addChild</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_handleChildren" title="handleChildren :: Handle child elemets of the unknown element, if any.">
+            <span class="description">Handle child elemets of the unknown element, if any.</span><pre>handleChildren</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_handleChild" title="handleChild :: ">
+            <span class="description"></span><pre>handleChild</pre>
+        </a>
+    </li>
+
+                                                                                                                                                                                                                        <li class="method public inherited">
+        <a href="#method_getTaskName" title="getTaskName :: Returns the name of task, used only for log messages">
+            <span class="description">Returns the name of task, used only for log messages</span><pre>getTaskName</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_setOwningTarget" title="setOwningTarget :: Sets the owning target this task belongs to.">
+            <span class="description">Sets the owning target this task belongs to.</span><pre>setOwningTarget</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_getOwningTarget" title="getOwningTarget :: Returns the owning target of this task.">
+            <span class="description">Returns the owning target of this task.</span><pre>getOwningTarget</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_setTaskName" title="setTaskName :: Sets the name of this task for log messages">
+            <span class="description">Sets the name of this task for log messages</span><pre>setTaskName</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_getTaskType" title="getTaskType :: Returns the name of the task under which it was invoked,
+usually the XML tagname">
+            <span class="description">Returns the name of the task under which it was invoked,
+usually the XML tagname</span><pre>getTaskType</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_setTaskType" title="setTaskType :: Sets the type of the task. Usually this is the name of the XML tag">
+            <span class="description">Sets the type of the task. Usually this is the name of the XML tag</span><pre>setTaskType</pre>
+        </a>
+    </li>
+
+                                                                                                                                                                <li class="method public inherited">
+        <a href="#method_log" title="log :: Logs a message with the given priority.">
+            <span class="description">Logs a message with the given priority.</span><pre>log</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_setDescription" title="setDescription :: Sets a textual description of the task">
+            <span class="description">Sets a textual description of the task</span><pre>setDescription</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_getDescription" title="getDescription :: Returns the textual description of the task">
+            <span class="description">Returns the textual description of the task</span><pre>getDescription</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_init" title="init :: Called by the parser to let the task initialize properly.">
+            <span class="description">Called by the parser to let the task initialize properly.</span><pre>init</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_getLocation" title="getLocation :: Returns the location within the buildfile this task occurs. Used
+by {@link BuildException} to give detailed error messages.">
+            <span class="description">Returns the location within the buildfile this task occurs. Used
+by {@link BuildException} to give detailed error messages.</span><pre>getLocation</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_setLocation" title="setLocation :: Sets the location within the buildfile this task occurs. Called by
+the parser to set location information.">
+            <span class="description">Sets the location within the buildfile this task occurs. Called by
+the parser to set location information.</span><pre>setLocation</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_getRuntimeConfigurableWrapper" title="getRuntimeConfigurableWrapper :: Returns the wrapper object for runtime configuration">
+            <span class="description">Returns the wrapper object for runtime configuration</span><pre>getRuntimeConfigurableWrapper</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_setRuntimeConfigurableWrapper" title="setRuntimeConfigurableWrapper :: Sets the wrapper object this task should use for runtime
+ configurable elements.">
+            <span class="description">Sets the wrapper object this task should use for runtime
+ configurable elements.</span><pre>setRuntimeConfigurableWrapper</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_perform" title="perform :: Perfrom this task">
+            <span class="description">Perfrom this task</span><pre>perform</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_setProject" title="setProject :: References the project to the current component.">
+            <span class="description">References the project to the current component.</span><pre>setProject</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_getProject" title="getProject :: Returns a reference to current project">
+            <span class="description">Returns a reference to current project</span><pre>getProject</pre>
+        </a>
+    </li>
+
+                                                </ul>
+        </li>
+        <li class="nav-header protected">» Protected
+            <ul>
+                                                                                                                                                                                                                                                                                                                                        <li class="method protected">
+                            <a href="#method_makeObject" title="makeObject :: Creates a named task or data type. If the real object is a task,
+it is configured up to the init() stage.">
+                                <span class="description">Creates a named task or data type. If the real object is a task,
+it is configured up to the init() stage.</span><pre>makeObject</pre>
+                            </a>
+                        </li>
+                                                                                <li class="method protected">
+                            <a href="#method_makeTask" title="makeTask :: Create a named task and configure it up to the init() stage.">
+                                <span class="description">Create a named task and configure it up to the init() stage.</span><pre>makeTask</pre>
+                            </a>
+                        </li>
+                                                                                                                                                                                                                                                                                                        <li class="method protected inherited">
+                            <a href="#method_getRegisterSlot" title="getRegisterSlot :: Returns a name">
+                                <span class="description">Returns a name</span><pre>getRegisterSlot</pre>
+                            </a>
+                        </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            </ul>
+        </li>
+        <li class="nav-header private">» Private
+            <ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </ul>
+        </li>
+        <li class="nav-header">
+            <i class="icon-custom icon-constant"></i> Constants
+            <ul>
+                            </ul>
+        </li>
+    </ul>
+
+
+        </div>
+
+        <div class="span8">
+            <div class="element class">
+                <h1>UnknownElement</h1>
+                <small style="display: block; text-align: right">
+                                            Extends <a href="../classes/Task.html">\Task</a>
+                                                        </small>
+                <p class="short_description">Wrapper class that holds all information necessary to create a task
+that did not exist when Phing started.</p>
+                <div class="details">
+                    <div class="long_description">
+                        <em> This has something to do with phing encountering an task XML element
+it is not aware of at start time. This is a situation where special steps
+need to be taken so that the element is then known.</em>
+                    </div>
+                    <table class="table table-bordered">
+                                                                                    <tr>
+                                    <th>
+                                        author
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>Andreas Aderhold <andi@binarycloud.com></p>
+                                    </td>
+                                </tr>
+                                                            <tr>
+                                    <th>
+                                        author
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>Hans Lellelid <hans@xmpl.org></p>
+                                    </td>
+                                </tr>
+                                                                                                                <tr>
+                                    <th>
+                                        version
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>$Id: 0964cd287c41f5b88d5f8f0910d4c0f2f3469d0b $</p>
+                                    </td>
+                                </tr>
+                                                                                                                <tr>
+                                    <th>
+                                        package
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>phing</p>
+                                    </td>
+                                </tr>
+                                                                                                                                                                                                                                    </table>
+
+                    <h3><i class="icon-custom icon-method"></i> Methods</h3>
+                                                                <a id="method___construct"></a>
+                        <div class="element clickable method public  method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+                            <h2>Constructs a UnknownElement object</h2>
+                            <pre>__construct($elementName) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    access
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>public</p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$elementName</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_getTag"></a>
+                        <div class="element clickable method public  method_getTag" data-toggle="collapse" data-target=".method_getTag .collapse">
+                            <h2>Return the XML element name that this &lt;code&gt;UnnownElement&lt;/code&gt;
+handles.</h2>
+                            <pre>getTag() : string</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>string</code><p><p>The XML element name that is unknown</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_maybeConfigure"></a>
+                        <div class="element clickable method public  method_maybeConfigure inherited" data-toggle="collapse" data-target=".method_maybeConfigure .collapse">
+                            <h2>Configure this task if it hasn&#039;t been done already.</h2>
+                            <pre>maybeConfigure() </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_main"></a>
+                        <div class="element clickable method public  method_main inherited" data-toggle="collapse" data-target=".method_main .collapse">
+                            <h2>Called by the project to let the task do it&#039;s work. This method may be
+ called more than once, if the task is invoked more than once. For
+ example, if target1 and target2 both depend on target3, then running
+ &lt;em&gt;phing target1 target2&lt;/em&gt; will run all tasks in target3 twice.</h2>
+                            <pre>main() </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>Should throw a BuildException if someting goes wrong with the build</p>
+<p> This is abstract here. Must be overloaded by real tasks.</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_addChild"></a>
+                        <div class="element clickable method public  method_addChild" data-toggle="collapse" data-target=".method_addChild .collapse">
+                            <h2>Add a child element to the unknown element</h2>
+                            <pre>addChild(\UnknownElement $child) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$child</h4>
+                                                <code><a href="../classes/UnknownElement.html">\UnknownElement</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_handleChildren"></a>
+                        <div class="element clickable method public  method_handleChildren" data-toggle="collapse" data-target=".method_handleChildren .collapse">
+                            <h2>Handle child elemets of the unknown element, if any.</h2>
+                            <pre>handleChildren($parent, object $parentWrapper) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>@param object $parent The parent object the unkown element belongs to</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$parent</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$parentWrapper</h4>
+                                                <code>object</code><p><p>The parent wrapper object</p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_handleChild"></a>
+                        <div class="element clickable method public  method_handleChild" data-toggle="collapse" data-target=".method_handleChild .collapse">
+                            <h2>handleChild</h2>
+                            <pre>handleChild(\IntrospectionHelper $ih, $parent, \UnknownElement $child, \RuntimeConfigurable $childWrapper) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$ih</h4>
+                                                <code><a href="../classes/IntrospectionHelper.html">\IntrospectionHelper</a></code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$parent</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$child</h4>
+                                                <code><a href="../classes/UnknownElement.html">\UnknownElement</a></code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$childWrapper</h4>
+                                                <code><a href="../classes/RuntimeConfigurable.html">\RuntimeConfigurable</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_makeObject"></a>
+                        <div class="element clickable method protected  method_makeObject" data-toggle="collapse" data-target=".method_makeObject .collapse">
+                            <h2>Creates a named task or data type. If the real object is a task,
+it is configured up to the init() stage.</h2>
+                            <pre>makeObject(\UnknownElement $ue, \RuntimeConfigurable $w) : object</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$ue</h4>
+                                                <code><a href="../classes/UnknownElement.html">\UnknownElement</a></code><p><p>The unknown element to create the real object for.</p>
+<pre><code>      Must not be &lt;code&gt;null&lt;/code&gt;.</code></pre></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$w</h4>
+                                                <code><a href="../classes/RuntimeConfigurable.html">\RuntimeConfigurable</a></code><p><p>Ignored in this implementation.</p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>object</code><p><p>The Task or DataType represented by the given unknown element.</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_makeTask"></a>
+                        <div class="element clickable method protected  method_makeTask" data-toggle="collapse" data-target=".method_makeTask .collapse">
+                            <h2>Create a named task and configure it up to the init() stage.</h2>
+                            <pre>makeTask(\UnknownElement $ue, \RuntimeConfigurable $w, boolean $onTopLevel = false) : \Task</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$ue</h4>
+                                                <code><a href="../classes/UnknownElement.html">\UnknownElement</a></code><p><p>The unknwon element to create a task from</p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$w</h4>
+                                                <code><a href="../classes/RuntimeConfigurable.html">\RuntimeConfigurable</a></code><p><p>The wrapper object</p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$onTopLevel</h4>
+                                                <code>boolean</code><p><p>Whether to treat this task as if it is top-level.</p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Task.html">\Task</a></code><p><p>The freshly created task</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_getTaskName"></a>
+                        <div class="element clickable method public  method_getTaskName inherited" data-toggle="collapse" data-target=".method_getTaskName .collapse">
+                            <h2>Returns the name of task, used only for log messages</h2>
+                            <pre>getTaskName() : string</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>string</code><p><p>Name of this task</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_setOwningTarget"></a>
+                        <div class="element clickable method public  method_setOwningTarget inherited" data-toggle="collapse" data-target=".method_setOwningTarget .collapse">
+                            <h2>Sets the owning target this task belongs to.</h2>
+                            <pre>setOwningTarget(\Target $target) </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$target</h4>
+                                                <code><a href="../classes/Target.html">\Target</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_getOwningTarget"></a>
+                        <div class="element clickable method public  method_getOwningTarget inherited" data-toggle="collapse" data-target=".method_getOwningTarget .collapse">
+                            <h2>Returns the owning target of this task.</h2>
+                            <pre>getOwningTarget() : \Target</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Target.html">\Target</a></code><p><p>The target object that owns this task</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_setTaskName"></a>
+                        <div class="element clickable method public  method_setTaskName inherited" data-toggle="collapse" data-target=".method_setTaskName .collapse">
+                            <h2>Sets the name of this task for log messages</h2>
+                            <pre>setTaskName(string $name) : string</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$name</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>string</code><p><p>A string representing the name of this task for log</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_getTaskType"></a>
+                        <div class="element clickable method public  method_getTaskType inherited" data-toggle="collapse" data-target=".method_getTaskType .collapse">
+                            <h2>Returns the name of the task under which it was invoked,
+usually the XML tagname</h2>
+                            <pre>getTaskType() : string</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>string</code><p><p>The type of this task (XML Tag)</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_setTaskType"></a>
+                        <div class="element clickable method public  method_setTaskType inherited" data-toggle="collapse" data-target=".method_setTaskType .collapse">
+                            <h2>Sets the type of the task. Usually this is the name of the XML tag</h2>
+                            <pre>setTaskType($name) </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$name</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_getRegisterSlot"></a>
+                        <div class="element clickable method protected  method_getRegisterSlot inherited" data-toggle="collapse" data-target=".method_getRegisterSlot .collapse">
+                            <h2>Returns a name</h2>
+                            <pre>getRegisterSlot(string $slotName) </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$slotName</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_log"></a>
+                        <div class="element clickable method public  method_log inherited" data-toggle="collapse" data-target=".method_log .collapse">
+                            <h2>Logs a message with the given priority.</h2>
+                            <pre>log(string $msg, integer $level = \Project::MSG_INFO) </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$msg</h4>
+                                                <code>string</code><p><p>The message to be logged.</p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$level</h4>
+                                                <code>integer</code><p><p>The message's priority at this message should have</p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_setDescription"></a>
+                        <div class="element clickable method public  method_setDescription inherited" data-toggle="collapse" data-target=".method_setDescription .collapse">
+                            <h2>Sets a textual description of the task</h2>
+                            <pre>setDescription(string $desc) </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$desc</h4>
+                                                <code>string</code><p><p>The text describing the task</p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_getDescription"></a>
+                        <div class="element clickable method public  method_getDescription inherited" data-toggle="collapse" data-target=".method_getDescription .collapse">
+                            <h2>Returns the textual description of the task</h2>
+                            <pre>getDescription() : string</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>string</code><p><p>The text description of the task</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_init"></a>
+                        <div class="element clickable method public  method_init inherited" data-toggle="collapse" data-target=".method_init .collapse">
+                            <h2>Called by the parser to let the task initialize properly.</h2>
+                            <pre>init() </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>Should throw a BuildException if something goes wrong with the build</p>
+<p>This is abstract here, but may not be overloaded by subclasses.</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    throws
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_getLocation"></a>
+                        <div class="element clickable method public  method_getLocation inherited" data-toggle="collapse" data-target=".method_getLocation .collapse">
+                            <h2>Returns the location within the buildfile this task occurs. Used
+by {@link BuildException} to give detailed error messages.</h2>
+                            <pre>getLocation() : \Location</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Location.html">\Location</a></code><p><p>The location object describing the position of this</p>
+<pre><code>             task within the buildfile.</code></pre></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_setLocation"></a>
+                        <div class="element clickable method public  method_setLocation inherited" data-toggle="collapse" data-target=".method_setLocation .collapse">
+                            <h2>Sets the location within the buildfile this task occurs. Called by
+the parser to set location information.</h2>
+                            <pre>setLocation(\Location $location) </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$location</h4>
+                                                <code><a href="../classes/Location.html">\Location</a></code><p><p>The location object describing the position of this</p>
+<pre><code>                      task within the buildfile.</code></pre></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_getRuntimeConfigurableWrapper"></a>
+                        <div class="element clickable method public  method_getRuntimeConfigurableWrapper inherited" data-toggle="collapse" data-target=".method_getRuntimeConfigurableWrapper .collapse">
+                            <h2>Returns the wrapper object for runtime configuration</h2>
+                            <pre>getRuntimeConfigurableWrapper() : \RuntimeConfigurable</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/RuntimeConfigurable.html">\RuntimeConfigurable</a></code><p><p>The wrapper object used by this task</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_setRuntimeConfigurableWrapper"></a>
+                        <div class="element clickable method public  method_setRuntimeConfigurableWrapper inherited" data-toggle="collapse" data-target=".method_setRuntimeConfigurableWrapper .collapse">
+                            <h2>Sets the wrapper object this task should use for runtime
+ configurable elements.</h2>
+                            <pre>setRuntimeConfigurableWrapper(\RuntimeConfigurable $wrapper) </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$wrapper</h4>
+                                                <code><a href="../classes/RuntimeConfigurable.html">\RuntimeConfigurable</a></code><p><p>The wrapper object this task should use</p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_perform"></a>
+                        <div class="element clickable method public  method_perform inherited" data-toggle="collapse" data-target=".method_perform .collapse">
+                            <h2>Perfrom this task</h2>
+                            <pre>perform() </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_setProject"></a>
+                        <div class="element clickable method public  method_setProject inherited" data-toggle="collapse" data-target=".method_setProject .collapse">
+                            <h2>References the project to the current component.</h2>
+                            <pre>setProject(\Project $project) </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$project</h4>
+                                                <code><a href="../classes/Project.html">\Project</a></code><p><p>The reference to the current project</p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_getProject"></a>
+                        <div class="element clickable method public  method_getProject inherited" data-toggle="collapse" data-target=".method_getProject .collapse">
+                            <h2>Returns a reference to current project</h2>
+                            <pre>getProject() : \Project</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Project.html">\Project</a></code><p><p>Reference to current porject object</p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                    
+                    
+                                                                <h3><i class="icon-custom icon-property"></i> Properties</h3>
+                                                    <a id="property_elementName"> </a>
+                            <div class="element clickable property  private property_elementName" data-toggle="collapse" data-target=".property_elementName .collapse">
+                                <h2>elementName</h2>
+                                <pre>elementName : </pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_realThing"> </a>
+                            <div class="element clickable property  private property_realThing" data-toggle="collapse" data-target=".property_realThing .collapse">
+                                <h2>realThing</h2>
+                                <pre>realThing : </pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_children"> </a>
+                            <div class="element clickable property  private property_children" data-toggle="collapse" data-target=".property_children .collapse">
+                                <h2>children</h2>
+                                <pre>children : </pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_target"> </a>
+                            <div class="element clickable property  protected property_target inherited" data-toggle="collapse" data-target=".property_target .collapse">
+                                <h2>Owning Target object</h2>
+                                <pre>target : \Target</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Target.html">\Target</a></code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_description"> </a>
+                            <div class="element clickable property  protected property_description inherited" data-toggle="collapse" data-target=".property_description .collapse">
+                                <h2>Description of the task</h2>
+                                <pre>description : string</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>string</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_taskType"> </a>
+                            <div class="element clickable property  protected property_taskType inherited" data-toggle="collapse" data-target=".property_taskType .collapse">
+                                <h2>Internal taskname (req)</h2>
+                                <pre>taskType : string</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>string</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_taskName"> </a>
+                            <div class="element clickable property  protected property_taskName inherited" data-toggle="collapse" data-target=".property_taskName .collapse">
+                                <h2>Taskname for logger</h2>
+                                <pre>taskName : string</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>string</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_location"> </a>
+                            <div class="element clickable property  protected property_location inherited" data-toggle="collapse" data-target=".property_location .collapse">
+                                <h2>Stored buildfile location</h2>
+                                <pre>location : \Location</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Location.html">\Location</a></code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_wrapper"> </a>
+                            <div class="element clickable property  protected property_wrapper inherited" data-toggle="collapse" data-target=".property_wrapper .collapse">
+                                <h2>Wrapper of the task</h2>
+                                <pre>wrapper : \RuntimeConfigurable</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/RuntimeConfigurable.html">\RuntimeConfigurable</a></code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_project"> </a>
+                            <div class="element clickable property  protected property_project inherited" data-toggle="collapse" data-target=".property_project .collapse">
+                                <h2>Holds a reference to the project that a project component
+(a task, a target, etc.) belongs to</h2>
+                                <pre>project : \Project</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    <p>A reference to the current project instance</p>
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Project.html">\Project</a></code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                            </div>
+            </div>
+            <a id="\UnknownElement"></a>
+            <ul class="breadcrumb">
+                <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
+                    
+    
+    <li><span class="divider">\</span><a href="../namespaces/default.html">\</a></li>
+
+                <li class="active"><span class="divider">\</span><a href="../classes/UnknownElement.html">UnknownElement</a></li>
+            </ul>
+        </div>
+    </div>
+
+    </div>
+
+        <footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
+            <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
+            generated on Thu, 13 Feb 2014 14:23:05 +0100.<br/>
+    </footer>
+    </body>
+</html>

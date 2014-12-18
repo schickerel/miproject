@@ -1,0 +1,6 @@
+# Sqlfile -> Database map
+Person.schema.sql=migrationstreams
+Migration.schema.sql=migrationstreams
+Country.schema.sql=migrationstreams
+ProfessionalCategory.schema.sql=migrationstreams
+Denomination.schema.sql=migrationstreams

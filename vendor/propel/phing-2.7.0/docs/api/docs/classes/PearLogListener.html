@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>    Phing API Documentation &raquo; \PearLogListener
+</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+            <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+            <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+        <![endif]-->
+        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+        <script src="../js/template.js" type="text/javascript"></script>
+        <script src="../js/prettify/prettify.min.js" type="text/javascript"></script>
+    
+            <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png"/>
+    </head>
+<body>
+
+        <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> </a>
+                <a class="brand" href="../index.html">Phing API Documentation</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                API Documentation <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                                                                            </ul>
+                        </li>
+                        <li class="dropdown" id="charts-menu">
+                            <a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                Charts <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../graph_class.html">
+                                        <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" id="reports-menu">
+                            <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                Reports <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../errors.html">
+                                        <i class="icon-list-alt"></i>&#160;Errors
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../markers.html">
+                                        <i class="icon-list-alt"></i>&#160;Markers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../deprecated.html">
+                                        <i class="icon-list-alt"></i>&#160;Deprecated
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="go_to_top">
+            <a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>
+        </div>
+    </div>
+    
+    <div id="___" class="container">
+        <noscript>
+            <div class="alert alert-warning">
+                Javascript is disabled; several features are only available if Javascript is enabled.
+            </div>
+        </noscript>
+
+        
+            <style>
+        .deprecated h2 {
+            text-decoration: line-through;
+        }
+    </style>
+    <div class="row">
+        <div class="span4">
+                    <div class="btn-group view pull-right" data-toggle="buttons-radio">
+        <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button>
+        <button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+    </div>
+    <div class="btn-group visibility" data-toggle="buttons-checkbox">
+        <button class="btn public active" title="Show public elements">Public</button>
+        <button class="btn protected" title="Show protected elements">Protected</button>
+        <button class="btn private" title="Show private elements">Private</button>
+        <button class="btn inherited active" title="Show inherited elements">Inherited</button>
+    </div>
+
+        <ul class="side-nav nav nav-list">
+        <li class="nav-header">
+            <i class="icon-custom icon-method"></i> Methods
+            <ul>
+                                                                                                                                                                                                                    <li class="method public">
+        <a href="#method_buildStarted" title="buildStarted :: Sets the start-time when the build started. Used for calculating
+ the build-time.">
+            <span class="description">Sets the start-time when the build started. Used for calculating
+ the build-time.</span><pre>buildStarted</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_buildFinished" title="buildFinished :: Logs whether the build succeeded or failed, and any errors that
+ occured during the build. Also outputs the total build-time.">
+            <span class="description">Logs whether the build succeeded or failed, and any errors that
+ occured during the build. Also outputs the total build-time.</span><pre>buildFinished</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_targetStarted" title="targetStarted :: Logs the current target name">
+            <span class="description">Logs the current target name</span><pre>targetStarted</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_targetFinished" title="targetFinished :: Fired when a target has finished. We don&#039;t need specific action on this
+ event. So the methods are empty.">
+            <span class="description">Fired when a target has finished. We don&#039;t need specific action on this
+ event. So the methods are empty.</span><pre>targetFinished</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_taskStarted" title="taskStarted :: Fired when a task is started. We don&#039;t need specific action on this
+ event. So the methods are empty.">
+            <span class="description">Fired when a task is started. We don&#039;t need specific action on this
+ event. So the methods are empty.</span><pre>taskStarted</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_taskFinished" title="taskFinished :: Fired when a task has finished. We don&#039;t need specific action on this
+ event. So the methods are empty.">
+            <span class="description">Fired when a task has finished. We don&#039;t need specific action on this
+ event. So the methods are empty.</span><pre>taskFinished</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_messageLogged" title="messageLogged :: Logs a message to the configured PEAR logger.">
+            <span class="description">Logs a message to the configured PEAR logger.</span><pre>messageLogged</pre>
+        </a>
+    </li>
+
+                                                </ul>
+        </li>
+        <li class="nav-header protected">» Protected
+            <ul>
+                                                                            <li class="method protected">
+                            <a href="#method_configureLogging" title="configureLogging :: Configure the logger.">
+                                <span class="description">Configure the logger.</span><pre>configureLogging</pre>
+                            </a>
+                        </li>
+                                                                                <li class="method protected">
+                            <a href="#method_logger" title="logger :: Get the configured PEAR logger to use.">
+                                <span class="description">Get the configured PEAR logger to use.</span><pre>logger</pre>
+                            </a>
+                        </li>
+                                                                                                                                                                                                                                                                                                            </ul>
+        </li>
+        <li class="nav-header private">» Private
+            <ul>
+                                                                                                                                                                                                                                                                                                                                                                                </ul>
+        </li>
+        <li class="nav-header">
+            <i class="icon-custom icon-constant"></i> Constants
+            <ul>
+                                <li class="constant ">
+                    <a href="#constant_LEFT_COLUMN_SIZE" title="LEFT_COLUMN_SIZE :: Size of the left column in output. The default char width is 12.">
+                        <span class="description">Size of the left column in output. The default char width is 12.</span><pre>LEFT_COLUMN_SIZE</pre>
+                    </a>
+                </li>
+                            </ul>
+        </li>
+    </ul>
+
+
+        </div>
+
+        <div class="span8">
+            <div class="element class">
+                <h1>PearLogListener</h1>
+                <small style="display: block; text-align: right">
+                                                                Implements <a href="../classes/BuildListener.html">\BuildListener</a>
+                                    </small>
+                <p class="short_description">Writes build messages to PEAR Log.</p>
+                <div class="details">
+                    <div class="long_description">
+                        <p>By default it will log to file in current directory w/ name 'phing.log'.  You can customize
+this behavior by setting properties:</p>
+<ul>
+<li>pear.log.type</li>
+<li>pear.log.name</li>
+<li>pear.log.ident (note that this class changes ident to project name)</li>
+<li>pear.log.conf (note that array values are currently unsupported in Phing property files)</li>
+</ul>
+<code>
+ phing -f build.xml -logger phing.listener.PearLogger -Dpear.log.type=file -Dpear.log.name=/path/to/log.log
+</code>
+                    </div>
+                    <table class="table table-bordered">
+                                                                                    <tr>
+                                    <th>
+                                        author
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>Hans Lellelid <hans@xmpl.org></p>
+                                    </td>
+                                </tr>
+                                                                                                                <tr>
+                                    <th>
+                                        version
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>$Id$</p>
+                                    </td>
+                                </tr>
+                                                                                                                <tr>
+                                    <th>
+                                        see
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                
+                                    </td>
+                                </tr>
+                                                                                                                <tr>
+                                    <th>
+                                        package
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>phing.listener</p>
+                                    </td>
+                                </tr>
+                                                                                                                                                                                                                                    </table>
+
+                    <h3><i class="icon-custom icon-method"></i> Methods</h3>
+                                                                <a id="method_configureLogging"></a>
+                        <div class="element clickable method protected  method_configureLogging" data-toggle="collapse" data-target=".method_configureLogging .collapse">
+                            <h2>Configure the logger.</h2>
+                            <pre>configureLogging() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_logger"></a>
+                        <div class="element clickable method protected  method_logger" data-toggle="collapse" data-target=".method_logger .collapse">
+                            <h2>Get the configured PEAR logger to use.</h2>
+                            <pre>logger() : \Log</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>This method just ensures that logging has been configured and returns the configured logger.</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Log</code><p></p>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_buildStarted"></a>
+                        <div class="element clickable method public  method_buildStarted" data-toggle="collapse" data-target=".method_buildStarted .collapse">
+                            <h2>Sets the start-time when the build started. Used for calculating
+ the build-time.</h2>
+                            <pre>buildStarted(\BuildEvent $event) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code><a href="../classes/BuildEvent.html">\BuildEvent</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_buildFinished"></a>
+                        <div class="element clickable method public  method_buildFinished" data-toggle="collapse" data-target=".method_buildFinished .collapse">
+                            <h2>Logs whether the build succeeded or failed, and any errors that
+ occured during the build. Also outputs the total build-time.</h2>
+                            <pre>buildFinished(\BuildEvent $event) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    see
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                            <a href="../classes/BuildEvent.html#method_getException">\BuildEvent::getException()</a>
+                                                                                                                
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code><a href="../classes/BuildEvent.html">\BuildEvent</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_targetStarted"></a>
+                        <div class="element clickable method public  method_targetStarted" data-toggle="collapse" data-target=".method_targetStarted .collapse">
+                            <h2>Logs the current target name</h2>
+                            <pre>targetStarted(\BuildEvent $event) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    see
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                            <a href="../classes/BuildEvent.html#method_getTarget">\BuildEvent::getTarget()</a>
+                                                                                                                
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code><a href="../classes/BuildEvent.html">\BuildEvent</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_targetFinished"></a>
+                        <div class="element clickable method public  method_targetFinished" data-toggle="collapse" data-target=".method_targetFinished .collapse">
+                            <h2>Fired when a target has finished. We don&#039;t need specific action on this
+ event. So the methods are empty.</h2>
+                            <pre>targetFinished(\BuildEvent $event) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>@param  BuildEvent  The BuildEvent</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    access
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>public
+ @see    BuildEvent::getException()</p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code><a href="../classes/BuildEvent.html">\BuildEvent</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_taskStarted"></a>
+                        <div class="element clickable method public  method_taskStarted" data-toggle="collapse" data-target=".method_taskStarted .collapse">
+                            <h2>Fired when a task is started. We don&#039;t need specific action on this
+ event. So the methods are empty.</h2>
+                            <pre>taskStarted(\BuildEvent $event) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>@param  BuildEvent  The BuildEvent</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    access
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>public
+ @see    BuildEvent::getTask()</p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code><a href="../classes/BuildEvent.html">\BuildEvent</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_taskFinished"></a>
+                        <div class="element clickable method public  method_taskFinished" data-toggle="collapse" data-target=".method_taskFinished .collapse">
+                            <h2>Fired when a task has finished. We don&#039;t need specific action on this
+ event. So the methods are empty.</h2>
+                            <pre>taskFinished(\BuildEvent $event) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    see
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                            <a href="../classes/BuildEvent.html#method_getException">\BuildEvent::getException()</a>
+                                                                                                                
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code><a href="../classes/BuildEvent.html">\BuildEvent</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                                            <a id="method_messageLogged"></a>
+                        <div class="element clickable method public  method_messageLogged" data-toggle="collapse" data-target=".method_messageLogged .collapse">
+                            <h2>Logs a message to the configured PEAR logger.</h2>
+                            <pre>messageLogged(\BuildEvent $event) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    see
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                            <a href="../classes/BuildEvent.html#method_getMessage">\BuildEvent::getMessage()</a>
+                                                                                                                
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code><a href="../classes/BuildEvent.html">\BuildEvent</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+                        </div>
+                    
+                                            <h3><i class="icon-custom icon-constant"></i> Constants</h3>
+                                                    <a id="constant_LEFT_COLUMN_SIZE"> </a>
+                            <div class="element clickable constant  constant_LEFT_COLUMN_SIZE" data-toggle="collapse" data-target=".constant_LEFT_COLUMN_SIZE .collapse">
+                                <h2>Size of the left column in output. The default char width is 12.</h2>
+                                <pre>LEFT_COLUMN_SIZE</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"><p>@var int</p></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                            
+                                                                <h3><i class="icon-custom icon-property"></i> Properties</h3>
+                                                    <a id="property_startTime"> </a>
+                            <div class="element clickable property  protected property_startTime" data-toggle="collapse" data-target=".property_startTime .collapse">
+                                <h2>Time that the build started</h2>
+                                <pre>startTime : </pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"><p>@var int</p></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_levelMap"> </a>
+                            <div class="element clickable property  protected property_levelMap" data-toggle="collapse" data-target=".property_levelMap .collapse">
+                                <h2>Maps Phing Project::MSG_* constants to PEAR_LOG_* constants.</h2>
+                                <pre>levelMap : array</pre>
+                                <div class="labels">
+                                                                        <span class="label">static</span>                                </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>array</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_logConfigured"> </a>
+                            <div class="element clickable property  protected property_logConfigured" data-toggle="collapse" data-target=".property_logConfigured .collapse">
+                                <h2>Whether logging has been configured.</h2>
+                                <pre>logConfigured : boolean</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>boolean</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_logger"> </a>
+                            <div class="element clickable property  protected property_logger" data-toggle="collapse" data-target=".property_logger .collapse">
+                                <h2>PEAR Log object.</h2>
+                                <pre>logger : \Log</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    <p>PEAR Log object.</p>
+                                                                                                            </td>
+                                                </tr>
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>\Log</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                            </div>
+            </div>
+            <a id="\PearLogListener"></a>
+            <ul class="breadcrumb">
+                <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
+                    
+    
+    <li><span class="divider">\</span><a href="../namespaces/default.html">\</a></li>
+
+                <li class="active"><span class="divider">\</span><a href="../classes/PearLogListener.html">PearLogListener</a></li>
+            </ul>
+        </div>
+    </div>
+
+    </div>
+
+        <footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
+            <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
+            generated on Thu, 13 Feb 2014 14:23:01 +0100.<br/>
+    </footer>
+    </body>
+</html>
