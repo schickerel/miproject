@@ -119,28 +119,73 @@ namespace Migration
 		}
 
 		public function getCentreOfLifeMigrations($startYear, $endYear) {
-			$persons = MigrationQuery::create()
+			$centreOfLifeMigrations = array();
+			$migrationsByPersonIds = MigrationQuery::create()
 				->groupByPersonId()
 				->find();
-			foreach ($persons as $person) {
-				$centreOfLifeMigrations = MigrationQuery::create()
-					->filterByPersonId($person->getPersonId())
-					->filterByYear(array('min' => $startYear, 'max' => $endYear))
+			foreach ($migrationsByPersonIds as $migrationByPersonIds) {
+				$migrationId = 0;
+				$migrationDuration = 0;
+				$maxMigrationId = 0;
+				$maxMigrationDuration = 0;
+				$person = $migrationByPersonIds->getPerson();
+				$personId = $migrationByPersonIds->getPersonId();
+				$personYear = date("Y");
+				$personDayOfDeath = $person->getDayOfDeath();
+				$migrationsByPerson = MigrationQuery::create()
+					->filterByPersonId($personId)
 					->orderByYear()
 					->orderByMonth()
 					->find();
-
-				$arrayObject = new ArrayObject($centreOfLifeMigrations);
+				$arrayObject = new \ArrayObject($migrationsByPerson);
 				$iterator = $arrayObject->getIterator();
 
-				while($iterator->valid()) {
-					echo $iterator->key() . ' => ' . $iterator->current();
+				if($personDayOfDeath != "") {
+					$personYear = date("Y" ,strtotime($personDayOfDeath));
 				}
 
+				while($iterator->valid()) {
+					$currentElement = $iterator->current();
+					$currentYear = $currentElement->getYear();
+
+					$iterator->next();
+					if($iterator->valid()) {
+						$nextElement = $iterator->current();
+						$nextYear = $nextElement->getYear();
+
+						if($startYear <= $currentYear) {
+							$migrationId = $currentElement->getId();
+							$migrationDuration = $nextYear-$currentYear;
+						} else if ($startYear > $currentYear && $startYear < $nextYear) {
+							$migrationId = $currentElement->getId();
+							$migrationDuration = $nextYear-$startYear;
+						}
+						if($endYear < $nextYear) {
+							$migrationId = $currentElement->getId();
+							$migrationDuration = $endYear-$currentYear;
+						}
+					} else {
+						if($currentYear < $endYear){
+							$migrationId = $currentElement->getId();
+							if($personYear < $endYear) {
+								$migrationDuration = $personYear-$currentYear;
+							} else {
+								$migrationDuration = $endYear-$currentYear;
+							}
+
+						}
+					}
+					if($migrationDuration >= $maxMigrationDuration){
+						$maxMigrationId = $migrationId;
+						$maxMigrationDuration = $migrationDuration;
+					}
+				}
+				$centreOfLifeMigration = MigrationQuery::create()->findPk($maxMigrationId);
+				array_push($centreOfLifeMigrations, $centreOfLifeMigration->toArray());
 			}
 
-			//$migrationsJson = json_encode($lastMigration);
-			return null;
+			$migrationsJson = json_encode($centreOfLifeMigrations);
+			return $migrationsJson;
 		}
 
         public function getMigrationsByCountryId($countryId) {
