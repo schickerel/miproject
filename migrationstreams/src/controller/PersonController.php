@@ -6,7 +6,6 @@ namespace Person
 	use Silex\ControllerProviderInterface;
 	use Symfony\Component\HttpFoundation\Request;
 	use Symfony\Component\HttpFoundation\Response;
-	use Symfony\Component\HttpFoundation\JsonResponse;
 
 	class PersonController implements ControllerProviderInterface {
 
@@ -14,37 +13,65 @@ namespace Person
 			$factory = $app['controllers_factory'];
 
 			$factory->get(
-					'',
-					''
+				'/persons',
+				'Person\PersonController::getPersons'
 			);
 
 			$factory->get(
-					'',
-					''
+				'/{id}',
+				'Person\PersonController::getPersonById'
 			);
 
 			return $factory;
 		}
 
-	 	public function getFirst(Application $app) {
-        	return null;
-        }
+		public function getPersonById(Application $app, $id) {
+			$person = PersonQuery::create()
+				->findPK($id);
+			$personJson = $person->toJSON(true, true);
 
-        public function getById(Application $app, $id) {
-        	$author = new \Bookstore\AuthorQuery();
-			$author = AuthorQuery::create()->findPK($id);
-			$result = $author->toJSON();
+			return  new Response($personJson, 200, ['Content-Type' => 'application/json']);
+		}
 
-		    return  new Response($result, 200, ['Content-Type' => 'application/json']);
-        }
+		public function getPersons(Application $app, Request $request) {
+			$personsJson = null;
+			$params = $request->query->all();
 
-		public function getByYear(Application $app, $id) {
-        	$author = new \Bookstore\AuthorQuery();
-			$author = AuthorQuery::create()->findPK($id);
-			$result = $author->toJSON();
+			if (array_key_exists('filter', $params)) {
+				$filter = $params['filter'];
+				if($filter == 'denomination') {
+					$personsJson = $this->getPersonsByDenomination($params['denomination']);
+				} else if ($filter == 'professionalcategory') {
+					$personsJson = $this->getPersonsByProfessionalCategory($params['professionalcategory']);
+				}
+			} else {
+				$persons = PersonQuery::create()
+					->find();
 
-		    return  new Response($result, 200, ['Content-Type' => 'application/json']);
-        }
+				$personsJson = $persons->toJSON(true, true);
+			}
+
+			return new Response($personsJson, 200, ['Content-Type' => 'application/json']);
+		}
+
+		public function getPersonsByDenomination($denominationId) {
+			$persons = PersonQuery::create()
+				->filterByDenominationId($denominationId)
+				->find();
+
+			$personsJson = $persons->toJSON(true, true);
+			return $personsJson;
+		}
+
+		public function getPersonsByProfessionalCategory($professionalCategoryId) {
+			$persons = PersonQuery::create()
+				->filterByProfessionalCategoryId($professionalCategoryId)
+				->find();
+
+			$personsJson = $persons->toJSON(true, true);
+			return $personsJson;
+		}
+
     }
 }
 

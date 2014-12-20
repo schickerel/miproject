@@ -14,64 +14,75 @@ namespace Migration
 			$factory = $app['controllers_factory'];
 
 			$factory->get(
-					'/',
-					'Migration\MigrationController::getAllMigrations'
+				'/migrations',
+				'Migration\MigrationController::getMigrations'
 			);
 
 			$factory->get(
-					'/{id}',
-					'Migration\MigrationController::getMigrationById'
+				'/{id}',
+				'Migration\MigrationController::getMigrationById'
 			);
 
 			return $factory;
 		}
 
-	 	public function getAllMigrations(Application $app, Request $request) {
+		public function getMigrationById(Application $app, $id) {
+			$migration = MigrationQuery::create()
+				->findPK($id);
+			$migrationJson = $migration->toJSON(true, true);
 
+			return  new Response($migrationJson, 200, ['Content-Type' => 'application/json']);
+		}
+
+	 	public function getMigrations(Application $app, Request $request) {
+			$migrationsJson = null;
 			$params = $request->query->all();
 
-			foreach ( $request->attributes as $key => $val ) {
-				$params[ $key ] = $val;
-				echo ($key);
-				echo(" ");
-				echo(" ");
+			if (array_key_exists('filter', $params)) {
+				$filter = $params['filter'];
 
+				if($filter == 'year') {
+					$migrationsJson = $this->getMigrationsByYear($params['year']);
+				} else if($filter == 'period') {
+					$migrationsJson = $this->getMigrationsByPeriod($params['start'], $params['end']);
+				}  else if($filter == 'first') {
+					$migrationsJson = $this->getFirstMigrations();
+				}  else if($filter == 'last') {
+					$migrationsJson = $this->getLastMigrations();
+				}  else if($filter == 'centreoflife') {
+					$migrationsJson = $this->getCentreOfLifeMigrations($params['start'], $params['end']);
+				}  else if($filter == 'country') {
+					$migrationsJson = $this->getMigrationsByCountryId($params['country']);
+				} else if($filter == 'person') {
+					$migrationsJson = $this->getMigrationsByPersonId($params['country']);
+				}
+			} else {
+				$migrations = MigrationQuery::create()
+					->find();
+				$migrationsJson = $migrations->toJSON(true, true);
 			}
 
-        	$migrations = MigrationQuery::create()
-        				 ->find();
-        	$migrationsJson = $migrations->toJSON();
-
-        	return new Response($migrationsJson, 200, ['Content-Type' => 'application/json']);
+			return new Response($migrationsJson, 200, ['Content-Type' => 'application/json']);
         }
 
-        public function getMigrationById(Application $app, $id) {
-			$migration = MigrationQuery::create()
-						->findPK($id);
-			$migrationJson = $migration->toJSON();
-
-		    return  new Response($migrationJson, 200, ['Content-Type' => 'application/json']);
-        }
-
-		public function getMigrationsByYear(Application $app, $year) {
+		public function getMigrationsByYear($year) {
 			$migrations = MigrationQuery::create()
 						->filterByYear($year)
 						->find();
-			$migrationsJson = $migrations->toJSON();
 
-		    return  new Response($migrationsJson, 200, ['Content-Type' => 'application/json']);
+			$migrationsJson = $migrations->toJSON;
+		    return  $migrationsJson;
         }
 
-        public function getMigrationsByPeriod(Application $app, $startYear, $endYear) {
+        public function getMigrationsByPeriod($startYear, $endYear) {
 			$migrations = MigrationQuery::create()
 						->filterByYear(array('min' => $startYear, 'max' => $endYear))
 						->find();
-			$migrationsJson = $migrations->toJSON();
-
-		    return  new Response($migrationsJson, 200, ['Content-Type' => 'application/json']);
+			$migrationsJson = $migrations->toJSON(true, true);
+		    return $migrationsJson;
         }
 
-        public function getFirstMigrations(Application $app) {
+        public function getFirstMigrations() {
         	$firstMigrations = array();
 			$persons = MigrationQuery::create()
 						->groupByPersonId()
@@ -83,22 +94,72 @@ namespace Migration
 								->orderByYear()
 								->orderByMonth()
 								->findOne();
-				echo($firstMigration);
-				array_push($firstMigrations, $firstMigration->toJSON());
+				array_push($firstMigrations, $firstMigration->toArray());
+			}
+			$migrationsJson = json_encode($firstMigrations);
+		    return $migrationsJson;
+        }
+
+		public function getLastMigrations() {
+			$lastMigrations = array();
+			$persons = MigrationQuery::create()
+				->groupByPersonId()
+				->find();
+
+			foreach ($persons as $person) {
+				$lastMigration = MigrationQuery::create()
+					->filterByPersonId($person->getPersonId())
+					->orderByYear('desc')
+					->orderByMonth('desc')
+					->findOne();
+				array_push($lastMigrations, $lastMigration->toArray());
+			}
+			$migrationsJson = json_encode($lastMigrations);
+			return $migrationsJson;
+		}
+
+		public function getCentreOfLifeMigrations($startYear, $endYear) {
+			$persons = MigrationQuery::create()
+				->groupByPersonId()
+				->find();
+			foreach ($persons as $person) {
+				$centreOfLifeMigrations = MigrationQuery::create()
+					->filterByPersonId($person->getPersonId())
+					->filterByYear(array('min' => $startYear, 'max' => $endYear))
+					->orderByYear()
+					->orderByMonth()
+					->find();
+
+				$arrayObject = new ArrayObject($centreOfLifeMigrations);
+				$iterator = $arrayObject->getIterator();
+
+				while($iterator->valid()) {
+					echo $iterator->key() . ' => ' . $iterator->current();
+				}
+
 			}
 
-			$migrationsJson = json_encode($firstMigrations);
+			//$migrationsJson = json_encode($lastMigration);
+			return null;
+		}
 
-		    return  new Response($migrationsJson, 200, ['Content-Type' => 'application/json']);
+        public function getMigrationsByCountryId($countryId) {
+			$migrations = MigrationQuery::create()
+						->filterByCountryId($countryId)
+						->find();
+
+			$migrationsJson = $migrations->toJSON(true, true);
+		    return $migrationsJson;
         }
 
-        public function getMigrationsByCountry(Application $app, $id) {
-			$migration = MigrationQuery::create()
-						->findPK($id);
-			$result = $migration->toJSON();
+		public function getMigrationsByPersonId($personId) {
+			$migrations = MigrationQuery::create()
+				->filterByPersonId($personId)
+				->find();
 
-		    return  new Response($migrationJson, 200, ['Content-Type' => 'application/json']);
-        }
+			$migrationsJson = $migrations->toJSON(true, true);
+			return $migrationsJson;
+		}
     }
 }
 
