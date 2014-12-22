@@ -29,9 +29,15 @@ namespace Migration
 		public function getMigrationById(Application $app, $id) {
 			$migration = MigrationQuery::create()
 				->findPK($id);
-			$migrationJson = $migration->toJSON(true, true);
+			if ($migration == null) {
+				$app->error(function (\Exception $e, $code) {
+					return new Response('We are sorry, but something went terribly wrong.');
+				});
+			} else {
+				$migrationJson = $migration->toJSON(true, true);
+				return  new Response($migrationJson, 200, ['Content-Type' => 'application/json']);
+			}
 
-			return  new Response($migrationJson, 200, ['Content-Type' => 'application/json']);
 		}
 
 	 	public function getMigrations(Application $app, Request $request) {
