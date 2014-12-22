@@ -76,7 +76,7 @@ namespace Migration
 						->filterByYear($year)
 						->find();
 
-			$migrationsJson = $migrations->toJSON;
+			$migrationsJson = $migrations->toJSON(true, true);
 		    return  $migrationsJson;
         }
 
