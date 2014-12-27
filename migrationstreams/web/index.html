@@ -3,8 +3,32 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Test</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 </head>
 <body>
+<input id="allMigrations" type="button" value="Alle Migrationen" />
+<input id="migrationbyPerson" type="button" value="Migration einer Person" />
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#allMigrations").click(function(){
+            $.getJSON("http://localhost/miproject/migrationstreams/src/index.php/migration/migrations", function(json){
+                console.log(json);
+            });
+
+        });
+
+        $("#migrationbyPerson").click(function(){
+            $.getJSON("http://localhost/miproject/migrationstreams/src/index.php/migration/1", function(json){
+                console.log(json);
+            });
+
+        });
+    });
+</script>
+
 
 </body>
 </html>
