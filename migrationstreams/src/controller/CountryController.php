@@ -10,7 +10,6 @@ namespace Country
 
         public function connect(Application $app) {
             $factory = $app['controllers_factory'];
-
             $factory->get(
                 '/countries',
                 'Country\CountryController::getCountries'
