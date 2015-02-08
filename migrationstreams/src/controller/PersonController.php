@@ -37,41 +37,46 @@ namespace Person
 			$personsJson = null;
 			$params = $request->query->all();
 
-			if (array_key_exists('filter', $params)) {
-				$filter = $params['filter'];
-				if($filter == 'denomination') {
-					$personsJson = $this->getPersonsByDenomination($params['denomination']);
-				} else if ($filter == 'professionalcategory') {
-					$personsJson = $this->getPersonsByProfessionalCategory($params['professionalcategory']);
-				}
-			} else {
-				$persons = PersonQuery::create()
-					->find();
+			$persons = PersonQuery::create();
 
-				$personsJson = $persons->toJSON(true, true);
+			if (array_key_exists('denomination', $params)) {
+				$denominationIds = $params['denomination'];
+				$persons = $this ->filterPersonsByDenominationId($persons, $denominationIds);
+			} 
+			if (array_key_exists('professionalCategory', $params)) {
+				$professionalCategoryIds = $params['professionalCategory'];
+				$persons = $this->filterPersonsByProfessionalCategoryId($persons, $professionalCategoryIds);
 			}
+			if (array_key_exists('returnMigration', $params)) {
+				$persons = $this ->filterPersonsByReturnMigration($persons);
+			}
+			$persons = $persons ->find();
 
-			return new Response($personsJson, 200, ['Content-Type' => 'application/json']);
+			return new Response($persons, 200, ['Content-Type' => 'application/json']);
 		}
 
-		public function getPersonsByDenomination($denominationId) {
-			$persons = PersonQuery::create()
-				->filterByDenominationId($denominationId)
-				->find();
-
-			$personsJson = $persons->toJSON(true, true);
-			return $personsJson;
+		public function filterPersonsByDenominationId($persons, $denominationIds) {
+			if (strpos($denominationIds, ';') !== FALSE) {
+				$denominationIds = explode(";", $denominationIds);
+			}
+			$filteredPersons = $persons ->filterByDenominationId($denominationIds);
+			return $filteredPersons;
 		}
 
-		public function getPersonsByProfessionalCategory($professionalCategoryId) {
-			$persons = PersonQuery::create()
-				->filterByProfessionalCategoryId($professionalCategoryId)
-				->find();
-
-			$personsJson = $persons->toJSON(true, true);
-			return $personsJson;
+		public function filterPersonsByProfessionalCategoryId($persons, $professionalCategoryIds) {
+			if (strpos($professionalCategoryIds, ';') !== FALSE) {
+				$professionalCategoryIds = explode(";", $professionalCategoryIds);
+			}
+			$filteredPersons = $persons ->filterByProfessionalCategoryId($professionalCategoryIds);
+			return $filteredPersons;
 		}
 
+		public function	 filterPersonsByReturnMigration($persons) {
+			$filteredPersons = $persons->useMigrationQuery()
+				->filterByCountryId('7')
+				->endUse();
+			return $filteredPersons;
+		}
     }
 }
 

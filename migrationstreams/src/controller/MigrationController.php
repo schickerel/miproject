@@ -63,9 +63,16 @@ namespace Migration
 					$migrationsJson = $this->getMigrationsByPersonId($params['country']);
 				}
 			} else {
+				$migrationCountries = array();
 				$migrations = MigrationQuery::create()
+					->orderByCountryId()
+					->groupByCountryId()
 					->find();
-				$migrationsJson = $migrations->toJSON(true, true);
+				foreach ($migrations as $migration) {
+					$country = $migration->getCountry();
+					array_push($migrationCountries,$country->getCountry());
+				}
+				$migrationsJson = json_encode($migrationCountries);
 			}
 
 			return new Response($migrationsJson, 200, ['Content-Type' => 'application/json']);
