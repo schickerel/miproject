@@ -50,6 +50,14 @@ namespace Person
 			if (array_key_exists('returnMigration', $params)) {
 				$persons = $this ->filterPersonsByReturnMigration($persons);
 			}
+			if (array_key_exists('age', $params)) {
+				$ageRange = $params['age'];
+				$persons = $this ->filterPersonsByAge($persons, $ageRange);
+			}
+			if (array_key_exists('year', $params)) {
+				$year = $params['year'];
+				$persons = $this ->filterPersonsByYear($persons, $year);
+			}
 			$persons = $persons ->find();
 
 			return new Response($persons, 200, ['Content-Type' => 'application/json']);
@@ -73,9 +81,55 @@ namespace Person
 
 		public function	 filterPersonsByReturnMigration($persons) {
 			$filteredPersons = $persons->useMigrationQuery()
-				->filterByCountryId('7')
+					->filterByCountryId('7')
 				->endUse();
 			return $filteredPersons;
+		}
+
+		public function filterPersonsByAge($persons, $ageRange) {
+			$ageRange = explode("-", $ageRange);
+			$ages = array();
+			$personsList = $persons->find();
+			foreach($personsList as $person) {
+				$birthday = $person->getBirthday('Y');
+				$migrations = $person->getMigrations();
+				$minYear = $migrations[0]->getYear();
+				foreach ($migrations as $migration) {
+					$year = $migration->getYear();
+					if($minYear > $year) {
+						$minYear = $year;
+					}
+				}
+				$age = $minYear-$birthday;
+				if($age >= $ageRange[0] && $age <= $ageRange[1]) {
+					array_push($ages, $person->getId());
+				}
+			}
+			$filterPersons = $persons ->filterById($ages);
+			return $filterPersons;
+		}
+
+		public function filterPersonsByYear($persons, $year) {
+			$ages = array();
+			$personsList = $persons->find();
+			foreach($personsList as $person) {
+				$migrations = $person->getMigrations();
+				$minYear = $migrations[0]->getYear();
+				foreach ($migrations as $migration) {
+					$migrationYear = $migration->getYear();
+					if($minYear > $migrationYear) {
+						$minYear = $migrationYear;
+					}
+				}
+
+				if($minYear == $year) {
+					echo "MinYear: ";
+					echo($minYear);
+					array_push($ages, $person->getId());
+				}
+			}
+			$filterPersons = $persons ->filterById($ages);
+			return $filterPersons;
 		}
     }
 }
