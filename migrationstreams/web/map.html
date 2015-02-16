@@ -6,22 +6,106 @@
     <script src="js/jquery-2.1.3.js"></script>
     <script src="js/d3.js"></script>
     <script src="js/topojson.js"></script>
+    <!--datamaps has to be loaded last-->
     <script src="js/datamaps.world.min.js"></script>
 </head>
 <body>
-<div id="container" style="position: relative; width: 500px; height: 300px;"></div>
+<div id="container" style="position: relative; width: 800px; height: 600px;"></div>
 <script type="text/javascript">
 
-    //defining new consructor for datamap
-    var map = new Datamap(
-            //defining the attributes of the Datamap Object
+    var dataset = [
 
+      {name: 'USA', count: 2000},
+      {name: 'IRL', count: 2500},
+
+         ];
+
+    var colorset = new Array();
+
+    calculateColor(dataset);
+
+    //get all countries
+    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+    //defining new constructor for datamap
+    var map = new Datamap(
+
+            //defining the attributes of the Datamap Object
             {element: document.getElementById('container'),//element in which datamap is embedded
              //fill color
-             fills: {
+                fills: {
                     defaultFill: 'rgba(23,48,210,0.9)' //any hex, color name or rgb/rgba value
+                         },
+
+                data: {
+
                 }
             });
+
+
+    var colors = d3.scale.category10();
+    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+
+        var arraytest = ["USA", "GB"];
+        var usacode = arraytest[0];
+        var str = String(usacode);
+        console.log(str);
+
+    //using the country parameter to check values in the colorset array
+    map.updateChoropleth({
+            USA: calculation('USA'), IRL:calculation('IRL')
+        });
+
+
+
+    function calculation(country){
+        var color;
+        $.each(colorset, function(){
+            if (colorset.country == country ){
+                color = colorset.colorcode;
+            }
+        })
+        return 'rgba(153,58,210,200)';
+    }
+
+
+    //function for iteration over complete datamaps array
+    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+    $.each(countries, function( index, value ) {
+        //console.log(countries[index].id, countries[index].properties.name)
+        var country = countries[index].properties.name
+    });
+
+
+    function calculateColor(dataset) {
+        $.each(dataset, function(index, value){
+           var countryName = (dataset[index].name);
+            var count = dataset[index].count;
+            var color;
+            if (count>2001) {
+               color = 'rgba(153,58,210,200';
+            }else{
+                color = 'rgba(13,58,210,200t';
+            }
+            colorset.push( {country: countryName, colorcode: color } );
+       })
+        console.log(colorset);
+    }
+
+//        $.each(dataset, function(index, value ) {
+//            console.log(dataset['name']);
+//            var country = dataset['name'];
+//            var count = dataset['count'];
+//            if (count>2001) {
+//                colorset['country'] = 'rgba(23,48,210,100)';
+//            }else{
+//                colorset['country'] = 'rgba(255,48,210,13)';
+//            }
+//        });
+
+
+
+
+
 </script>
 </body>
 </html>
