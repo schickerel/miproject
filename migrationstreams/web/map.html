@@ -16,7 +16,7 @@
     var dataset = [
 
       {name: 'USA', count: 2000},
-      {name: 'IRL', count: 2500},
+      {name: 'AFG', count: 2900}
 
          ];
 
@@ -42,29 +42,26 @@
             });
 
 
-    var colors = d3.scale.category10();
-    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
 
-        var arraytest = ["USA", "GB"];
-        var usacode = arraytest[0];
-        var str = String(usacode);
-        console.log(str);
 
     //using the country parameter to check values in the colorset array
     map.updateChoropleth({
-            USA: calculation('USA'), IRL:calculation('IRL')
+            USA: calculation('USA'), AFG:calculation('AFG')
         });
 
 
 
     function calculation(country){
-        var color;
-        $.each(colorset, function(){
-            if (colorset.country == country ){
-                color = colorset.colorcode;
+        var color='';
+        $.each(colorset, function(index, value){
+            if (colorset[index].country == country ){
+                color = colorset[index].colorcode;
+                console.log(color);
+                return color;
             }
         })
-        return 'rgba(153,58,210,200)';
+        return color;
+
     }
 
 
@@ -80,11 +77,11 @@
         $.each(dataset, function(index, value){
            var countryName = (dataset[index].name);
             var count = dataset[index].count;
-            var color;
+            var color='';
             if (count>2001) {
-               color = 'rgba(153,58,210,200';
+               color = 'rgba(50,58,100,10)';
             }else{
-                color = 'rgba(13,58,210,200t';
+                color = 'rgba(123,58,210,10)';
             }
             colorset.push( {country: countryName, colorcode: color } );
        })
