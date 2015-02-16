@@ -46,13 +46,13 @@
 
     //using the country parameter to check values in the colorset array
     map.updateChoropleth({
-            USA: calculation('USA'), AFG:calculation('AFG')
+            USA: calculation('USA'), AFG:calculation('AFG'), GBR:calculation('GBR')
         });
 
 
 
     function calculation(country){
-        var color='';
+        var color='rgba(23,48,210,0.9)';
         $.each(colorset, function(index, value){
             if (colorset[index].country == country ){
                 color = colorset[index].colorcode;
