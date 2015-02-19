@@ -56,6 +56,9 @@ namespace Migration
 				} else if ($filter == 'distributionByCountries') {
 					$migrationsJson = $this->getDistributionByCountries($params);
 				}
+
+			} else if (array_key_exists('personId', $params)) {
+				$migrationsJson = $this->getMigrationsByPersonId($params['personId']);
 			} else {
 				$migrationCountries = array();
 				$migrations = MigrationQuery::create()
@@ -63,8 +66,8 @@ namespace Migration
 					->groupByCountryId()
 					->find();
 				foreach ($migrations as $migration) {
-					$country = $migration->getCountry();
-					array_push($migrationCountries,$country->getCountry());
+					$country = $migration->getCountryId();
+					array_push($migrationCountries,$country);
 				}
 				$migrationsJson = json_encode($migrationCountries);
 			}
@@ -223,6 +226,13 @@ namespace Migration
 			}
 			$migrationsJson = json_encode($countryDistribution);
 			return  $migrationsJson;
+		}
+
+		public function getMigrationsByPersonId($personId){
+			$migrations = MigrationQuery::create()
+				->filterByPersonId($personId)
+				->find();
+			return $migrations->toJSON(true, true);
 		}
 
 		private function getPersonIds($params) {

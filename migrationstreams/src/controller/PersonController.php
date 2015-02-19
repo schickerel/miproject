@@ -34,9 +34,7 @@ namespace Person
 		}
 
 		public function getPersons(Application $app, Request $request) {
-			$personsJson = null;
 			$params = $request->query->all();
-
 			$persons = PersonQuery::create();
 
 			if (array_key_exists('denomination', $params)) {
@@ -60,7 +58,8 @@ namespace Person
 			}
 			$persons = $persons ->find();
 
-			return new Response($persons, 200, ['Content-Type' => 'application/json']);
+			$personsJson = $persons->toJSON(true, true);
+			return new Response($personsJson, 200, ['Content-Type' => 'application/json']);
 		}
 
 		public function filterPersonsByDenominationId($persons, $denominationIds) {
