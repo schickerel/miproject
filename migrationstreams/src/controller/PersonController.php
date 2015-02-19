@@ -46,7 +46,9 @@ namespace Person
 				$persons = $this->filterPersonsByProfessionalCategoryId($persons, $professionalCategoryIds);
 			}
 			if (array_key_exists('returnMigration', $params)) {
-				$persons = $this ->filterPersonsByReturnMigration($persons);
+				if($params['returnMigration']) {
+					$persons = $this->filterPersonsByReturnMigration($persons);
+				}
 			}
 			if (array_key_exists('age', $params)) {
 				$ageRange = $params['age'];
