@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="vendor/jquery-2.1.3.js"></script>
+    <script src="vendor/d3.js"></script>
+    <script src="vendor/topojson.js"></script>
+    <!--datamaps has to be loaded last-->
+    <script src="vendor/datamaps.world.min.js"></script>
+</head>
+<body>
+    <div id="container" />
+
+    <script type="text/javascript">
+
+    var dataset = [
+
+      {name: 'USA', count: 2000},
+      {name: 'AFG', count: 2900}
+
+         ];
+
+    //get all countries
+    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+    //defining new constructor for datamap
+    var map = new Datamap({
+        element: document.getElementById('container'),//element in which datamap is embedded
+        // fill color
+        fills: {
+            defaultFill: 'rgba(23,48,210,0.9)' //any hex, color name or rgb/rgba value
+        },
+
+        data: {
+
+        }
+    });
+
+    //using the country parameter to check values in the colorset array
+    map.updateChoropleth({
+        USA: calculation('USA'), AFG:calculation('AFG'), GBR:calculation('GBR')
+    });
+</script>
+</body>
+</html>
