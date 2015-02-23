@@ -13,6 +13,7 @@ CREATE TABLE `countries`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `country` VARCHAR(255) NOT NULL,
+    `code` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 

@@ -44,6 +44,7 @@ class CountryTableMap extends TableMap
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('country', 'Country', 'VARCHAR', true, 255, null);
+        $this->addColumn('code', 'Code', 'VARCHAR', true, 255, null);
         // validators
     } // initialize()
 
