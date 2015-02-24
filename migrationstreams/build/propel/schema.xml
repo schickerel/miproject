@@ -38,6 +38,7 @@
   <table name="countries" phpName="Country" namespace="Country">
   	<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
   	<column name="country" type="varchar" size="255" required="true"/>
+    <column name="code" type="varchar" size="255" required="true"/>
   </table>
   <table name="professional_categories" phpName="ProfessionalCategory" namespace="ProfessionalCategory">
   	<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>

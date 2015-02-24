@@ -25,9 +25,11 @@ use Person\Person;
  *
  * @method CountryQuery orderById($order = Criteria::ASC) Order by the id column
  * @method CountryQuery orderByCountry($order = Criteria::ASC) Order by the country column
+ * @method CountryQuery orderByCode($order = Criteria::ASC) Order by the code column
  *
  * @method CountryQuery groupById() Group by the id column
  * @method CountryQuery groupByCountry() Group by the country column
+ * @method CountryQuery groupByCode() Group by the code column
  *
  * @method CountryQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method CountryQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -45,9 +47,11 @@ use Person\Person;
  * @method Country findOneOrCreate(PropelPDO $con = null) Return the first Country matching the query, or a new Country object populated from the query conditions when no match is found
  *
  * @method Country findOneByCountry(string $country) Return the first Country filtered by the country column
+ * @method Country findOneByCode(string $code) Return the first Country filtered by the code column
  *
  * @method array findById(int $id) Return Country objects filtered by the id column
  * @method array findByCountry(string $country) Return Country objects filtered by the country column
+ * @method array findByCode(string $code) Return Country objects filtered by the code column
  *
  * @package    propel.generator.Country.om
  */
@@ -155,7 +159,7 @@ abstract class BaseCountryQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `country` FROM `countries` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `country`, `code` FROM `countries` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -313,6 +317,35 @@ abstract class BaseCountryQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CountryPeer::COUNTRY, $country, $comparison);
+    }
+
+    /**
+     * Filter the query on the code column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByCode('fooValue');   // WHERE code = 'fooValue'
+     * $query->filterByCode('%fooValue%'); // WHERE code LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $code The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CountryQuery The current query, for fluid interface
+     */
+    public function filterByCode($code = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($code)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $code)) {
+                $code = str_replace('*', '%', $code);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(CountryPeer::CODE, $code, $comparison);
     }
 
     /**
