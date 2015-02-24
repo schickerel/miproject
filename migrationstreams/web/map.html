@@ -20,31 +20,55 @@
 
          ];
 
-    var colorset = new Array();
+//    var colorset = new Array();
+//    calculateColor(dataset);
 
-    calculateColor(dataset);
+    //assign a specific color Value to a Country by using d3 function
+    //maybe different colors for different values
+    //see chloropleth article on Wikipedia for mor details
+    var color = d3.scale.quantize()
+            .range(['rgb(254,240,217)','rgb(253,212,158)','rgb(253,187,132)','rgb(252,141,89)','rgb(227,74,51)','rgb(179,0,0)'])
+            .domain([d3.min(dataset, function(d) { return d['count']; }),
+             d3.max(dataset, function(d) { return d['count']; })
+             ]);
+
+
+    var colorfunction = function (value){
+           return color(value);
+    }
+
+    //console.log(d3.max(dataset, function(d) { return d['count']}));
+    console.log(color(300));
+    //get all countries
+    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+    //defining new constructor for datamap
+    var buildCountryMap = function (dataset) {
+        var countryMap = {};
+        for(var countries in dataset) {
+            var country = dataset[countries];
+            countryMap[country['name']] = colorfunction(country['count']);
+
+            console.log(country['count']);
+        }
+        return countryMap;
+    };
 
     //get all countries
     var countries = Datamap.prototype.worldTopo.objects.world.geometries;
     //defining new constructor for datamap
-    var map = new Datamap(
+    var map = new Datamap({
+        element: document.getElementById('container'),
+        fills: {
+            defaultFill: "#000000"
+        }
+    });
 
-            //defining the attributes of the Datamap Object
-            {element: document.getElementById('container'),//element in which datamap is embedded
-             //fill color
-                fills: {
-                    defaultFill: 'rgba(23,48,210,0.9)' //any hex, color name or rgb/rgba value
-                         },
-
-                data: {
-
-                }
-            });
+    map.updateChoropleth(buildCountryMap(dataset));
 
 
 
 
-    //using the country parameter to check values in the colorset array
+   /* //using the country parameter to check values in the colorset array
     map.updateChoropleth({
             USA: calculation('USA'), AFG:calculation('AFG'), GBR:calculation('GBR')
         });
@@ -86,18 +110,11 @@
             colorset.push( {country: countryName, colorcode: color } );
        })
         console.log(colorset);
-    }
+    }*/
 
-//        $.each(dataset, function(index, value ) {
-//            console.log(dataset['name']);
-//            var country = dataset['name'];
-//            var count = dataset['count'];
-//            if (count>2001) {
-//                colorset['country'] = 'rgba(23,48,210,100)';
-//            }else{
-//                colorset['country'] = 'rgba(255,48,210,13)';
-//            }
-//        });
+
+
+
 
 
 
