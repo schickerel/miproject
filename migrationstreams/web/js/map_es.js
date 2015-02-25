@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
     var map = new Datamap({
         element: document.getElementById('container'),
         fills: {
