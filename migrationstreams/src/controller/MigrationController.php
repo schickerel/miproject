@@ -237,7 +237,7 @@ namespace Migration
 
 		private function getPersonIds($params) {
 			$personIds = array();
-			$returnMigration = false;
+			$returnMigration = 'false';
 			$personMigrations = MigrationQuery::create()
 				->groupByPersonId();
 			if(array_key_exists('denomination', $params)) {
@@ -261,7 +261,7 @@ namespace Migration
 
 			foreach ($filteredPersonMigrations as $filteredPersonMigration) {
 				$personId = $filteredPersonMigration->getPersonId();
-				if($returnMigration){
+				if($returnMigration === 'true'){
 					$migrationsOfPerson = MigrationQuery::create()
 						->filterByPersonId($personId)
 						->filterByCountryId(7)

@@ -46,7 +46,7 @@ namespace Person
 				$persons = $this->filterPersonsByProfessionalCategoryId($persons, $professionalCategoryIds);
 			}
 			if (array_key_exists('returnMigration', $params)) {
-				if($params['returnMigration']) {
+				if($params['returnMigration'] === 'true') {
 					$persons = $this->filterPersonsByReturnMigration($persons);
 				}
 			}
