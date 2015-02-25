@@ -14,7 +14,7 @@ $(document).ready(function(){
 
     var getOverview = function (callback){
         var countryCodes = [];
-        $.getJSON("http://localhost/miproject/migrationstreams/src/index.php/migration/migrations")
+        $.getJSON("../src/index.php/migration/migrations")
             .done(function(json) {
                 $.each( json, function(index, code ) {
                     var countryCode = { code: code};
