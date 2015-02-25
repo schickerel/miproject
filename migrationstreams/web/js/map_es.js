@@ -1,4 +1,4 @@
-$(document).ready(function(){
+ $(document).ready(function(){
     var countries = Datamap.prototype.worldTopo.objects.world.geometries;
     var map = new Datamap({
         element: document.getElementById('container'),
@@ -14,7 +14,7 @@ $(document).ready(function(){
 
     var getOverview = function(){
         var countryIds = [];
-        $.getJSON("http://localhost/miproject/migrationstreams/src/index.php/migration/migrations")
+        $.getJSON("http://localhost/miproject/migrationstreams/src/index.php/migration/migrations" )
             .done(function(json) {
                 $.each( json, function(index, countryId ) {
                     countryIds.push(countryId);
