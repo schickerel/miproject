@@ -24,7 +24,7 @@
 //    calculateColor(dataset);
 
     //assign a specific color Value to a Country by using d3 function
-    //maybe different colors for different values
+    //maybe different colors for different types of questions
     //see chloropleth article on Wikipedia for mor details
     var color = d3.scale.quantize()
             .range(['rgb(254,240,217)','rgb(253,212,158)','rgb(253,187,132)','rgb(252,141,89)','rgb(227,74,51)','rgb(179,0,0)'])
@@ -38,7 +38,7 @@
     }
 
     //console.log(d3.max(dataset, function(d) { return d['count']}));
-    console.log(color(300));
+
     //get all countries
     var countries = Datamap.prototype.worldTopo.objects.world.geometries;
     //defining new constructor for datamap
@@ -64,6 +64,48 @@
     });
 
     map.updateChoropleth(buildCountryMap(dataset));
+
+
+    map.arc([
+        {
+            origin: {
+                latitude: 40.639722,
+                longitude: -73.778889
+            },
+            destination: {
+                latitude: 37.618889,
+                longitude: -122.375
+            }
+        },
+        {
+            origin: {
+                latitude: 30.194444,
+                longitude: -97.67
+            },
+            destination: {
+                latitude: 25.793333,
+                longitude: -80.290556
+            },
+            options: {
+                strokeWidth: 2,
+                strokeColor: 'rgba(100, 10, 200, 0.4)'
+            }
+        },
+        {
+            origin: {
+                latitude: 39.861667,
+                longitude: -104.673056
+            },
+            destination: {
+                latitude: 35.877778,
+                longitude: -78.7875
+            }
+        }
+    ],  {strokeWidth: 13, arcSharpness: 1.4, animationSpeed: 2400});
+
+
+
+
 
 
 
