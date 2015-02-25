@@ -1,5 +1,4 @@
- $(document).ready(function(){
-    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+$(document).ready(function(){
     var map = new Datamap({
         element: document.getElementById('container'),
         fills: {
@@ -8,34 +7,19 @@
     });
 
     $('#overview').click(function(){
-        getOverview();
+        getOverview(updateMap);
 
     });
 
-    var getOverview = function(){
-        var countryIds = [];
-        $.getJSON("http://localhost/miproject/migrationstreams/src/index.php/migration/migrations" )
-            .done(function(json) {
-                $.each( json, function(index, countryId ) {
-                    countryIds.push(countryId);
-                });
-                getCountryCodes(countryIds);
-            });
-    };
-
-    var getCountryCodes = function(countryIds){
+    var getOverview = function (callback){
         var countryCodes = [];
-        $.getJSON("http://localhost/miproject/migrationstreams/src/index.php/country/countries")
-            .done(function(json){
-                $.each( json, function(id, country) {
-                    for(var i = 0; i < countryIds.length; i++){
-                        if(country['Id'] === countryIds[i]){
-                            var countryCode = { code: country['Code']};
-                            countryCodes.push(countryCode);
-                        }
-                    }
+        $.getJSON("../src/index.php/migration/migrations")
+            .done(function(json) {
+                $.each( json, function(index, code ) {
+                    var countryCode = { code: code};
+                    countryCodes.push(countryCode);
                 });
-                updateMap(countryCodes);
+                callback(countryCodes);
             });
     };
 
