@@ -8,34 +8,19 @@ $(document).ready(function(){
     });
 
     $('#overview').click(function(){
-        getOverview();
+        getOverview(updateMap);
 
     });
 
-    var getOverview = function(){
-        var countryIds = [];
+    var getOverview = function (callback){
+        var countryCodes = [];
         $.getJSON("http://localhost/miproject/migrationstreams/src/index.php/migration/migrations")
             .done(function(json) {
-                $.each( json, function(index, countryId ) {
-                    countryIds.push(countryId);
+                $.each( json, function(index, code ) {
+                    var countryCode = { code: code};
+                    countryCodes.push(countryCode);
                 });
-                getCountryCodes(countryIds);
-            });
-    };
-
-    var getCountryCodes = function(countryIds){
-        var countryCodes = [];
-        $.getJSON("http://localhost/miproject/migrationstreams/src/index.php/country/countries")
-            .done(function(json){
-                $.each( json, function(id, country) {
-                    for(var i = 0; i < countryIds.length; i++){
-                        if(country['Id'] === countryIds[i]){
-                            var countryCode = { code: country['Code']};
-                            countryCodes.push(countryCode);
-                        }
-                    }
-                });
-                updateMap(countryCodes);
+                callback(countryCodes);
             });
     };
 

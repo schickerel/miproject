@@ -66,7 +66,7 @@ namespace Migration
 					->groupByCountryId()
 					->find();
 				foreach ($migrations as $migration) {
-					$country = $migration->getCountryId();
+					$country = $migration->getCountry()->getCode();
 					array_push($migrationCountries,$country);
 				}
 				$migrationsJson = json_encode($migrationCountries);
@@ -107,7 +107,7 @@ namespace Migration
 					->orderByYear()
 					->orderByMonth()
 					->findOne();
-				$country = $personMigration->getCountry()->getId();
+				$country = $personMigration->getCountry()->getCode();
 				$count = 1;
 				if(array_key_exists($country, $migrationYear)) {
 					$currentCount = $migrationYear[$country];
@@ -136,14 +136,14 @@ namespace Migration
 				$numberOfMigrations = $personMigrations->count();
 				$migrationCount = 1;
 				$year = $personMigrations[0]->getYear();
-				$countryId = $personMigrations[0]->getCountryId();
+				$countryId = $personMigrations[0]->getCountry()->getCode();
 				$longestPeriod = 0;
 				$longestCountry = 0;
 				foreach($personMigrations as $personMigration) {
 					$lastYear = $year;
 					$year = $personMigration->getYear();
 					$lastCountryId = $countryId;
-					$countryId = $personMigration->getCountryId();
+					$countryId = $personMigration->getCountry()->getCode();
 					$period = 0;
 					$country = 0;
 					if($year !== $lastYear) {
@@ -204,7 +204,7 @@ namespace Migration
 						->filterByPersonId($personId)
 						->findOne()
 						->getPerson();
-					$country = $person->getCountry()->getId();
+					$country = $person->getCountry()->getCode();
 					if(array_key_exists($country, $countryDistribution)) {
 						$currentCount = $countryDistribution[$country];
 						$currentCount++;
@@ -213,7 +213,7 @@ namespace Migration
 						$countryDistribution[$country] = $count;
 					}
 				} else {
-					$country = $personMigrations[0]->getCountryId();
+					$country = $personMigrations[0]->getCountry()->getCode();
 
 					if(array_key_exists($country, $countryDistribution)) {
 						$currentCount = $countryDistribution[$country];
