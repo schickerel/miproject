@@ -14,6 +14,8 @@ CREATE TABLE `countries`
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `country` VARCHAR(255) NOT NULL,
     `code` VARCHAR(255) NOT NULL,
+    `latitude` DOUBLE NOT NULL,
+    `longitude` DOUBLE NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 

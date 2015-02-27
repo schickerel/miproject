@@ -26,10 +26,14 @@ use Person\Person;
  * @method CountryQuery orderById($order = Criteria::ASC) Order by the id column
  * @method CountryQuery orderByCountry($order = Criteria::ASC) Order by the country column
  * @method CountryQuery orderByCode($order = Criteria::ASC) Order by the code column
+ * @method CountryQuery orderByLatitude($order = Criteria::ASC) Order by the latitude column
+ * @method CountryQuery orderByLongitude($order = Criteria::ASC) Order by the longitude column
  *
  * @method CountryQuery groupById() Group by the id column
  * @method CountryQuery groupByCountry() Group by the country column
  * @method CountryQuery groupByCode() Group by the code column
+ * @method CountryQuery groupByLatitude() Group by the latitude column
+ * @method CountryQuery groupByLongitude() Group by the longitude column
  *
  * @method CountryQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method CountryQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -48,10 +52,14 @@ use Person\Person;
  *
  * @method Country findOneByCountry(string $country) Return the first Country filtered by the country column
  * @method Country findOneByCode(string $code) Return the first Country filtered by the code column
+ * @method Country findOneByLatitude(double $latitude) Return the first Country filtered by the latitude column
+ * @method Country findOneByLongitude(double $longitude) Return the first Country filtered by the longitude column
  *
  * @method array findById(int $id) Return Country objects filtered by the id column
  * @method array findByCountry(string $country) Return Country objects filtered by the country column
  * @method array findByCode(string $code) Return Country objects filtered by the code column
+ * @method array findByLatitude(double $latitude) Return Country objects filtered by the latitude column
+ * @method array findByLongitude(double $longitude) Return Country objects filtered by the longitude column
  *
  * @package    propel.generator.Country.om
  */
@@ -159,7 +167,7 @@ abstract class BaseCountryQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `country`, `code` FROM `countries` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `country`, `code`, `latitude`, `longitude` FROM `countries` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -346,6 +354,90 @@ abstract class BaseCountryQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CountryPeer::CODE, $code, $comparison);
+    }
+
+    /**
+     * Filter the query on the latitude column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByLatitude(1234); // WHERE latitude = 1234
+     * $query->filterByLatitude(array(12, 34)); // WHERE latitude IN (12, 34)
+     * $query->filterByLatitude(array('min' => 12)); // WHERE latitude >= 12
+     * $query->filterByLatitude(array('max' => 12)); // WHERE latitude <= 12
+     * </code>
+     *
+     * @param     mixed $latitude The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CountryQuery The current query, for fluid interface
+     */
+    public function filterByLatitude($latitude = null, $comparison = null)
+    {
+        if (is_array($latitude)) {
+            $useMinMax = false;
+            if (isset($latitude['min'])) {
+                $this->addUsingAlias(CountryPeer::LATITUDE, $latitude['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($latitude['max'])) {
+                $this->addUsingAlias(CountryPeer::LATITUDE, $latitude['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CountryPeer::LATITUDE, $latitude, $comparison);
+    }
+
+    /**
+     * Filter the query on the longitude column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByLongitude(1234); // WHERE longitude = 1234
+     * $query->filterByLongitude(array(12, 34)); // WHERE longitude IN (12, 34)
+     * $query->filterByLongitude(array('min' => 12)); // WHERE longitude >= 12
+     * $query->filterByLongitude(array('max' => 12)); // WHERE longitude <= 12
+     * </code>
+     *
+     * @param     mixed $longitude The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CountryQuery The current query, for fluid interface
+     */
+    public function filterByLongitude($longitude = null, $comparison = null)
+    {
+        if (is_array($longitude)) {
+            $useMinMax = false;
+            if (isset($longitude['min'])) {
+                $this->addUsingAlias(CountryPeer::LONGITUDE, $longitude['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($longitude['max'])) {
+                $this->addUsingAlias(CountryPeer::LONGITUDE, $longitude['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CountryPeer::LONGITUDE, $longitude, $comparison);
     }
 
     /**

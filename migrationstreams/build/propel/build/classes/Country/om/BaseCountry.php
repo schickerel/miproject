@@ -68,6 +68,18 @@ abstract class BaseCountry extends BaseObject implements Persistent
     protected $code;
 
     /**
+     * The value for the latitude field.
+     * @var        double
+     */
+    protected $latitude;
+
+    /**
+     * The value for the longitude field.
+     * @var        double
+     */
+    protected $longitude;
+
+    /**
      * @var        PropelObjectCollection|Person[] Collection to store aggregation of Person objects.
      */
     protected $collPersons;
@@ -145,6 +157,28 @@ abstract class BaseCountry extends BaseObject implements Persistent
     }
 
     /**
+     * Get the [latitude] column value.
+     *
+     * @return double
+     */
+    public function getLatitude()
+    {
+
+        return $this->latitude;
+    }
+
+    /**
+     * Get the [longitude] column value.
+     *
+     * @return double
+     */
+    public function getLongitude()
+    {
+
+        return $this->longitude;
+    }
+
+    /**
      * Set the value of [id] column.
      *
      * @param  int $v new value
@@ -208,6 +242,48 @@ abstract class BaseCountry extends BaseObject implements Persistent
     } // setCode()
 
     /**
+     * Set the value of [latitude] column.
+     *
+     * @param  double $v new value
+     * @return Country The current object (for fluent API support)
+     */
+    public function setLatitude($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (double) $v;
+        }
+
+        if ($this->latitude !== $v) {
+            $this->latitude = $v;
+            $this->modifiedColumns[] = CountryPeer::LATITUDE;
+        }
+
+
+        return $this;
+    } // setLatitude()
+
+    /**
+     * Set the value of [longitude] column.
+     *
+     * @param  double $v new value
+     * @return Country The current object (for fluent API support)
+     */
+    public function setLongitude($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (double) $v;
+        }
+
+        if ($this->longitude !== $v) {
+            $this->longitude = $v;
+            $this->modifiedColumns[] = CountryPeer::LONGITUDE;
+        }
+
+
+        return $this;
+    } // setLongitude()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -242,6 +318,8 @@ abstract class BaseCountry extends BaseObject implements Persistent
             $this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->country = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
             $this->code = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->latitude = ($row[$startcol + 3] !== null) ? (double) $row[$startcol + 3] : null;
+            $this->longitude = ($row[$startcol + 4] !== null) ? (double) $row[$startcol + 4] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -251,7 +329,7 @@ abstract class BaseCountry extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 3; // 3 = CountryPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 5; // 5 = CountryPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Country object", $e);
@@ -510,6 +588,12 @@ abstract class BaseCountry extends BaseObject implements Persistent
         if ($this->isColumnModified(CountryPeer::CODE)) {
             $modifiedColumns[':p' . $index++]  = '`code`';
         }
+        if ($this->isColumnModified(CountryPeer::LATITUDE)) {
+            $modifiedColumns[':p' . $index++]  = '`latitude`';
+        }
+        if ($this->isColumnModified(CountryPeer::LONGITUDE)) {
+            $modifiedColumns[':p' . $index++]  = '`longitude`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `countries` (%s) VALUES (%s)',
@@ -529,6 +613,12 @@ abstract class BaseCountry extends BaseObject implements Persistent
                         break;
                     case '`code`':
                         $stmt->bindValue($identifier, $this->code, PDO::PARAM_STR);
+                        break;
+                    case '`latitude`':
+                        $stmt->bindValue($identifier, $this->latitude, PDO::PARAM_STR);
+                        break;
+                    case '`longitude`':
+                        $stmt->bindValue($identifier, $this->longitude, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -689,6 +779,12 @@ abstract class BaseCountry extends BaseObject implements Persistent
             case 2:
                 return $this->getCode();
                 break;
+            case 3:
+                return $this->getLatitude();
+                break;
+            case 4:
+                return $this->getLongitude();
+                break;
             default:
                 return null;
                 break;
@@ -721,6 +817,8 @@ abstract class BaseCountry extends BaseObject implements Persistent
             $keys[0] => $this->getId(),
             $keys[1] => $this->getCountry(),
             $keys[2] => $this->getCode(),
+            $keys[3] => $this->getLatitude(),
+            $keys[4] => $this->getLongitude(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -777,6 +875,12 @@ abstract class BaseCountry extends BaseObject implements Persistent
             case 2:
                 $this->setCode($value);
                 break;
+            case 3:
+                $this->setLatitude($value);
+                break;
+            case 4:
+                $this->setLongitude($value);
+                break;
         } // switch()
     }
 
@@ -804,6 +908,8 @@ abstract class BaseCountry extends BaseObject implements Persistent
         if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
         if (array_key_exists($keys[1], $arr)) $this->setCountry($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setCode($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setLatitude($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setLongitude($arr[$keys[4]]);
     }
 
     /**
@@ -818,6 +924,8 @@ abstract class BaseCountry extends BaseObject implements Persistent
         if ($this->isColumnModified(CountryPeer::ID)) $criteria->add(CountryPeer::ID, $this->id);
         if ($this->isColumnModified(CountryPeer::COUNTRY)) $criteria->add(CountryPeer::COUNTRY, $this->country);
         if ($this->isColumnModified(CountryPeer::CODE)) $criteria->add(CountryPeer::CODE, $this->code);
+        if ($this->isColumnModified(CountryPeer::LATITUDE)) $criteria->add(CountryPeer::LATITUDE, $this->latitude);
+        if ($this->isColumnModified(CountryPeer::LONGITUDE)) $criteria->add(CountryPeer::LONGITUDE, $this->longitude);
 
         return $criteria;
     }
@@ -883,6 +991,8 @@ abstract class BaseCountry extends BaseObject implements Persistent
     {
         $copyObj->setCountry($this->getCountry());
         $copyObj->setCode($this->getCode());
+        $copyObj->setLatitude($this->getLatitude());
+        $copyObj->setLongitude($this->getLongitude());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1505,6 +1615,8 @@ abstract class BaseCountry extends BaseObject implements Persistent
         $this->id = null;
         $this->country = null;
         $this->code = null;
+        $this->latitude = null;
+        $this->longitude = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
