@@ -7,7 +7,7 @@ $(document).ready(function(){
         element: document.getElementById('container'),
         fills: {
             defaultFill: "#000000"
-        }
+                    }
     });
 
     var color;
@@ -19,6 +19,9 @@ $(document).ready(function(){
     //see chloropleth article on Wikipedia for mor details
     //needs to be loaded when array is up
 
+    var updateMap = function (data) {
+        map.updateChoropleth(data);
+    };
 
     $('#overview').click(function(){
         getOverview(updateMap);
@@ -28,6 +31,15 @@ $(document).ready(function(){
     $('#distribution').click(function(){
         getDistribution(updateMap);
     });
+
+    $('#firstMigration').click(function(){
+        getfirstMigrations(updateMap);
+    });
+
+    $('#destination').click(function(){
+        getDestinations(updateMap);
+    });
+
 
     var getOverview = function (callback){
         var countryMap = {};
@@ -42,9 +54,20 @@ $(document).ready(function(){
             });
     };
 
-    var updateMap = function (data) {
-        map.updateChoropleth(data);
-    };
+    function getfirstMigrations(callback) {
+        $.getJSON("../src/index.php/migration/migrations?filter=firstMigration")
+            .done(function (json) {
+                calculateMap(json, callback)
+            });
+    }
+
+    function getDestinations(callback) {
+        $.getJSON("../src/index.php/migration/migrations?filter=targetCountryMigration")
+            .done(function (json) {
+                calculateMap(json, callback)
+            });
+    }
+
 
     function getDistribution(callback) {
            $.getJSON("../src/index.php/migration/migrations?filter=distributionByCountries&year=1933")
