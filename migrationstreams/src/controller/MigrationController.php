@@ -51,8 +51,8 @@ namespace Migration
 					$migrationsJson = $this->getOverview($params);
 				} else if($filter == 'firstMigration') {
 					$migrationsJson = $this->getFirstMigrations($params);
-				} else if ($filter == 'lastMigration') {
-					$migrationsJson = $this->getLastMigrations($params);
+				} else if ($filter == 'targetCountryMigration') {
+					$migrationsJson = $this->getTargetCountryMigrations($params);
 				} else if ($filter == 'distributionByCountries') {
 					$migrationsJson = $this->getDistributionByCountries($params);
 				}
@@ -76,7 +76,7 @@ namespace Migration
         }
 
 		public function getOverview($params) {
-			$migrationYear = array();
+			$migrationsYearAmount = array();
 			$personIds = $this->getPersonIds($params);
 			foreach($personIds as $personId) {
 				$personMigration = MigrationQuery::create()
@@ -85,21 +85,32 @@ namespace Migration
 					->orderByMonth()
 					->findOne();
 				$year = $personMigration->getYear();
-				$count = 1;
-				if(array_key_exists($year,$migrationYear)){
-					$currentCount = $migrationYear[$year];
-					$currentCount++;
-					$migrationYear[$year] = $currentCount;
+				$amount = 1;
+				if(empty($migrationsYearAmount)){
+					$migration = array("year"=>$year, "amount"=>$amount);
+					array_push($migrationsYearAmount, $migration);
 				} else {
-					$migrationYear[$year] = $count;
+					$exists = false;
+					foreach($migrationsYearAmount as $key => $value){
+						if($migrationsYearAmount[$key]["year"] === $year) {
+							$currentAmount = $migrationsYearAmount[$key]["amount"];
+							$currentAmount++;
+							$migrationsYearAmount[$key]["amount"] = $currentAmount;
+							$exists = true;
+						}
+					}
+					if(!$exists){
+						$migration = array("year"=>$year, "amount"=>$amount);
+						array_push($migrationsYearAmount, $migration);
+					}
 				}
 			}
-			$migrationsJson = json_encode($migrationYear);
-			return  $migrationsJson;
+			$migrationsJson = json_encode($migrationsYearAmount);
+			return $migrationsJson;
 		}
 
 		public function getFirstMigrations($params) {
-			$migrationYear = array();
+			$migrationsCountryAmount = array();
 			$personIds = $this->getPersonIds($params);
 			foreach ($personIds as $personId) {
 				$personMigration = MigrationQuery::create()
@@ -108,23 +119,34 @@ namespace Migration
 					->orderByMonth()
 					->findOne();
 				$country = $personMigration->getCountry()->getCode();
-				$count = 1;
-				if(array_key_exists($country, $migrationYear)) {
-					$currentCount = $migrationYear[$country];
-					$currentCount++;
-					$migrationYear[$country] = $currentCount;
+				$amount = 1;
+				if(empty($migrationsCountryAmount)){
+					$migrationToCountry = array("country"=>$country, "amount"=>$amount);
+					array_push($migrationsCountryAmount, $migrationToCountry);
 				} else {
-					$migrationYear[$country] = $count;
+					$exists = false;
+					foreach($migrationsCountryAmount as $key => $value){
+						if($migrationsCountryAmount[$key]["country"] === $country) {
+							$currentAmount = $migrationsCountryAmount[$key]["amount"];
+							$currentAmount++;
+							$migrationsCountryAmount[$key]["amount"] = $currentAmount;
+							$exists = true;
+						}
+					}
+					if(!$exists){
+						$migrationToCountry = array("country"=>$country, "amount"=>$amount);
+						array_push($migrationsCountryAmount, $migrationToCountry);
+					}
 				}
 			}
-			$migrationsJson = json_encode($migrationYear);
+			$migrationsJson = json_encode($migrationsCountryAmount);
 			return  $migrationsJson;
 		}
 
-		public function getLastMigrations($params) {
+		public function getTargetCountryMigrations($params) {
 			$startYear = 1933;
 			$endYear = 1945;
-			$longestStay = array();
+			$targetCountries = array();
 			$personIds = $this->getPersonIds($params);
 			foreach($personIds as $personId) {
 				$personMigrations = MigrationQuery::create()
@@ -174,25 +196,36 @@ namespace Migration
 					}
 					++$migrationCount;
 				}
-				$count = 1;
-				if(array_key_exists($longestCountry, $longestStay)) {
-					$currentCount = $longestStay[$longestCountry];
-					$currentCount++;
-					$longestStay[$longestCountry] = $currentCount;
+				$amount = 1;
+				if(empty($targetCountries)){
+					$targetCountry = array("country"=>$longestCountry, "amount"=>$amount);
+					array_push($targetCountries, $targetCountry);
 				} else {
-					$longestStay[$longestCountry] = $count;
+					$exists = false;
+					foreach($targetCountries as $key => $value){
+						if($targetCountries[$key]["country"] === $longestCountry) {
+							$currentAmount = $targetCountries[$key]["amount"];
+							$currentAmount++;
+							$targetCountries[$key]["amount"] = $currentAmount;
+							$exists = true;
+						}
+					}
+					if(!$exists){
+						$targetCountry = array("country"=>$longestCountry, "amount"=>$amount);
+						array_push($targetCountries, $targetCountry);
+					}
 				}
 			}
-			$migrationsJson = json_encode($longestStay);
+			$migrationsJson = json_encode($targetCountries);
 			return  $migrationsJson;
 		}
 
 		public function getDistributionByCountries($params) {
 			$year = $params['year'];
-			$countryDistribution = array();
+			$countryDistributions = array();
 			$personIds = $this->getPersonIds($params);
 			foreach($personIds as $personId) {
-				$count = 1;
+				$amount = 1;
 				$personMigrations = MigrationQuery::create()
 					->filterByPersonId($personId)
 					->filterByYear(array('max' => $year))
@@ -205,26 +238,47 @@ namespace Migration
 						->findOne()
 						->getPerson();
 					$country = $person->getCountry()->getCode();
-					if(array_key_exists($country, $countryDistribution)) {
-						$currentCount = $countryDistribution[$country];
-						$currentCount++;
-						$countryDistribution[$country] = $currentCount;
+					if(empty($countryDistributions)){
+						$countryDistribution = array("country"=>$country, "amount"=>$amount);
+						array_push($countryDistributions, $countryDistribution);
 					} else {
-						$countryDistribution[$country] = $count;
+						$exists = false;
+						foreach($countryDistributions as $key => $value){
+							if($countryDistributions[$key]["country"] === $country) {
+								$currentAmount = $countryDistributions[$key]["amount"];
+								$currentAmount++;
+								$countryDistributions[$key]["amount"] = $currentAmount;
+								$exists = true;
+							}
+						}
+						if(!$exists){
+							$countryDistribution = array("country"=>$country, "amount"=>$amount);
+							array_push($countryDistributions, $countryDistribution);
+						}
 					}
 				} else {
 					$country = $personMigrations[0]->getCountry()->getCode();
-
-					if(array_key_exists($country, $countryDistribution)) {
-						$currentCount = $countryDistribution[$country];
-						$currentCount++;
-						$countryDistribution[$country] = $currentCount;
+					if(empty($countryDistributions)){
+						$countryDistribution = array("country"=>$country, "amount"=>$amount);
+						array_push($countryDistributions, $countryDistribution);
 					} else {
-						$countryDistribution[$country] = $count;
+						$exists = false;
+						foreach($countryDistributions as $key => $value){
+							if($countryDistributions[$key]["country"] === $country) {
+								$currentAmount = $countryDistributions[$key]["amount"];
+								$currentAmount++;
+								$countryDistributions[$key]["amount"] = $currentAmount;
+								$exists = true;
+							}
+						}
+						if(!$exists){
+							$countryDistribution = array("country"=>$country, "amount"=>$amount);
+							array_push($countryDistributions, $countryDistribution);
+						}
 					}
 				}
 			}
-			$migrationsJson = json_encode($countryDistribution);
+			$migrationsJson = json_encode($countryDistributions);
 			return  $migrationsJson;
 		}
 
