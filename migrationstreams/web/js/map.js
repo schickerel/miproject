@@ -30,15 +30,15 @@ $(document).ready(function(){
     });
 
     var getOverview = function (callback){
-        var countryCodes = [];
+        var countryMap = {};
         $.getJSON("../src/index.php/migration/migrations")
             .done(function(json) {
                 //console.log(d3.min(json, function(d) { return parseInt(d.amount); }));
-                $.each( json, function(index, code ) {
-                    var countryCode = { code: code};
-                    countryCodes.push(countryCode);
-                });
-                callback(countryCodes);
+                for (var country in json)  {
+                    var currentCountry = json[country];
+                    countryMap[currentCountry] = '#ce2834';
+                }
+                callback(countryMap);
             });
     };
 
