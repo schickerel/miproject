@@ -49,7 +49,7 @@ mouseProto._mouseInit = function() {
     this.element.bind( 'touchstart.' + this.widgetName, function(event) {
         self._touchActive = true;
         return self._mouseDown(makeMouseEvent(event));
-    })
+    });
 
     var self = this;
     // these delegates are required to keep context
@@ -70,7 +70,7 @@ mouseProto._mouseInit = function() {
         .bind('touchend.' + this.widgetName, this._mouseUpDelegate);
 
     _mouseInit.apply(this);
-}
+};
 
 /**
  * Simple implementation of jQuery like getters/setters
@@ -519,7 +519,7 @@ $.widget( "ui.iviewer", $.ui.mouse, {
         var closest_rate = this.find_closest_zoom_rate(this.current_zoom);
 
         var next_rate = closest_rate + delta;
-        var next_zoom = this.options.zoom_base * Math.pow(this.options.zoom_delta, next_rate)
+        var next_zoom = this.options.zoom_base * Math.pow(this.options.zoom_delta, next_rate);
         if(delta > 0 && next_zoom < this.current_zoom)
         {
             next_zoom *= this.options.zoom_delta;
@@ -571,9 +571,12 @@ $.widget( "ui.iviewer", $.ui.mouse, {
             return 0;
         }
 
-        function div(val1,val2) { return val1 / val2 };
-        function mul(val1,val2) { return val1 * val2 };
-
+        function div(val1, val2) {
+            return val1 / val2
+        }
+        function mul(val1, val2) {
+            return val1 * val2
+        }
         var func = (value > this.options.zoom_base)?mul:div;
         var sgn = (value > this.options.zoom_base)?1:-1;
 
@@ -810,7 +813,7 @@ $.ui.iviewer.ImageObject = function(do_anim) {
             .removeAttr("width")
             .removeAttr("height")
             .removeAttr("style")
-            .css({ position: "absolute", top :"0px", left: "0px"})
+            .css({ position: "absolute", top :"0px", left: "0px"});
 
         this.angle(0);
     };
@@ -888,8 +891,7 @@ $.ui.iviewer.ImageObject = function(do_anim) {
                 var verticalMod = this._swapDimensions ? -1 : 1;
                 this.x(this.x() - verticalMod * this.display_diff() / 2, true);
                 this.y(this.y() + verticalMod * this.display_diff() / 2, true);
-            };
-
+            }
             var cssVal = 'rotate(' + deg + 'deg)',
                 img = this._img;
 
@@ -922,9 +924,9 @@ $.ui.iviewer.ImageObject = function(do_anim) {
      */
     this.toOriginalCoords = function(point) {
         switch (this.angle()) {
-            case 0: return { x: point.x, y: point.y }
-            case 90: return { x: point.y, y: this.display_width() - point.x }
-            case 180: return { x: this.display_width() - point.x, y: this.display_height() - point.y }
+            case 0: return { x: point.x, y: point.y };
+            case 90: return { x: point.y, y: this.display_width() - point.x };
+            case 180: return { x: this.display_width() - point.x, y: this.display_height() - point.y };
             case 270: return { x: this.display_height() - point.y, y: point.x }
         }
     };
@@ -940,9 +942,9 @@ $.ui.iviewer.ImageObject = function(do_anim) {
      */
     this.toRealCoords = function(point) {
         switch (this.angle()) {
-            case 0: return { x: this.x() + point.x, y: this.y() + point.y }
-            case 90: return { x: this.x() + this.display_width() - point.y, y: this.y() + point.x}
-            case 180: return { x: this.x() + this.display_width() - point.x, y: this.y() + this.display_height() - point.y}
+            case 0: return { x: this.x() + point.x, y: this.y() + point.y };
+            case 90: return { x: this.x() + this.display_width() - point.y, y: this.y() + point.x};
+            case 180: return { x: this.x() + this.display_width() - point.x, y: this.y() + this.display_height() - point.y};
             case 270: return { x: this.x() + point.y, y: this.y() + this.display_height() - point.x}
         }
     };

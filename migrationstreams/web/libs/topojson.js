@@ -414,9 +414,8 @@
     }
 
     return topology;
-  };
-
-  function cartesianRingArea(ring) {
+  }
+    function cartesianRingArea(ring) {
     var i = -1,
         n = ring.length,
         a,

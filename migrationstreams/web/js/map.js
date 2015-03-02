@@ -3,6 +3,8 @@
  */
 $(document).ready(function(){
 
+    var first = true;
+
     var map = new Datamap({
         element: document.getElementById('container'),
         fills: {
@@ -10,9 +12,23 @@ $(document).ready(function(){
                     }
     });
 
+
+
+    var xScale = d3.scale.ordinal();
+
+    var yScale = d3.scale.linear();
+
     var color;
 
     var colorfunction;
+
+    var colorScale = d3.scale.linear();
+
+    var dataset;
+
+    var svg;
+
+    var key;
 
     //assign a specific color Value to a Country by using d3 function
     //maybe different colors for different types of questions
@@ -58,13 +74,21 @@ $(document).ready(function(){
         $.getJSON("../src/index.php/migration/migrations?filter=firstMigration")
             .done(function (json) {
                 calculateMap(json, callback)
+                if (first){
+                calculateBarchart(json);
+                first = false;}
+                else{
+                recalculateBarchart(json);
+                }
+
             });
     }
 
     function getDestinations(callback) {
         $.getJSON("../src/index.php/migration/migrations?filter=targetCountryMigration")
             .done(function (json) {
-                calculateMap(json, callback)
+                calculateMap(json, callback);
+                recalculateBarchart(json);
             });
     }
 
@@ -86,7 +110,7 @@ $(document).ready(function(){
             ]);
         colorfunction = function (value){
             return color(value);
-        }
+        };
         for (var country in json) {
             var currentCountry = json[country];
             countryMap[currentCountry['country']] = colorfunction(currentCountry.amount);
@@ -96,12 +120,139 @@ $(document).ready(function(){
 
     }
 
+    function calculateBarchart(json) {
+        dataset = json;
+        var w = 250;
+        var h = 150;
+        svg = d3.select("#barcontainer")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+        xScale.domain(d3.range(dataset.length))
+         .rangeRoundBands([0, w], 0.05);
+
+        yScale.domain([0, d3.max(dataset, function (d) {
+                return parseInt(d.amount);
+            })])
+            .range([0, h]);
+
+
+        colorScale.domain([0, d3.max(dataset, function (d) {
+                return parseInt(d.amount);
+            })])
+            .range([0, 255]);
+
+        key = function (d) {
+            return d.country;
+        };
+
+        svg.selectAll("rect")
+            .data(dataset, key)    //Bind data with custom key function
+            .enter()
+            .append("rect")
+            .attr("x", function (d, i) {
+                return xScale(i);
+            })
+            .attr("y", function (d) {
+                return h - yScale(parseInt(d.amount));
+            })
+            .attr("width", xScale.rangeBand())
+            .attr("height", function (d) {
+                return yScale(parseInt(d.amount));
+            })
+            .attr("fill", function (d) {
+                return "rgb(0, 0, " + Math.round(colorScale(parseInt(d.amount))) + ")";
+            })
+
+            .on("mouseout", function () {
+                //# steht für IDs
+                //d3.select("#tooltip").remove();
+            });
+    }
+        function recalculateBarchart(json) {
+            dataset = json;
+            console.log(dataset);
+            var w = 250;
+            var h = 150;
+            xScale.domain(d3.range(dataset.length));
+
+            yScale.domain([0, d3.max(dataset, function (d) {
+                return d.amount;
+            })]);
+
+            colorScale.domain([0, d3.max(dataset, function (d) {
+                return d.amount;
+            })]);
+
+            key = function (d) {
+                return d.country;
+            };
+
+
+            var datas = svg.selectAll("rect")
+                .data(dataset, key);
+
+            datas.enter()
+
+                .append("rect")
+                .attr("x", function (d, i) {
+                    return xScale(i);
+                })
+                .attr("y", function (d) {
+                    return h - yScale(d.amount);
+                })
+                .attr("width", xScale.rangeBand())
+                .attr("height", function (d) {
+                    return yScale(d.amount);
+                })
+                .attr("fill", function (d) {
+                    return "rgb(0, 0, " + Math.round(colorScale(d.amount)) + ")";
+                })
+
+                .on("mouseout", function () {
+                    //# steht für IDs
+                    //d3.select("#tooltip").remove()
+                });
+
+
+            //nur die Dinge neu schreiben, die sich durch die neu hinzugekommenen Werte ändern
+            datas.transition()
+                .duration(1000)
+                .attr("x", function (d, i) {
+                    return xScale(i);
+                })
+                .attr("y", function (d) {
+                    return h - yScale(d.amount);
+                })
+                .attr("width", xScale.rangeBand())
+                .attr("height", function (d) {
+                    return yScale(d.amount);
+                })
+                .attr("fill", function (d) {
+                    return "rgb(0, 0, " + Math.round(colorScale(d.amount)) + ")";
+                });
+
+
+            // .attr("fill", function(d) {
+            // return "rgb(0, 0, " + Math.round(colorScale(d.count)) + ")";
+            // });
+
+
+            //. attrTween("d", tweenPie);
+            datas.exit()
+                .transition()
+                .duration(500)
+                .remove();
+
+        }});
+
 
         //get all countries
-        var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+       // var countries = Datamap.prototype.worldTopo.objects.world.geometries;
         //defining new constructor for datamap
 
-
+/*
         map.arc([
             {
                 origin: {
@@ -137,6 +288,6 @@ $(document).ready(function(){
                     longitude: -78.7875
                 }
             }
-        ], {strokeWidth: 5, arcSharpness: 1.2, animationSpeed: 3400});
-    })
+        ], {strokeWidth: 5, arcSharpness: 1.2, animationSpeed: 3400});*/
+
 
