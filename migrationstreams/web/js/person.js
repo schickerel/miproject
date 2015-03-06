@@ -102,11 +102,12 @@ $(document).ready(function(){
             }
         };
         arcs.push(arc);
-        map.arc(arcs);
+        map.arc(arcs,{strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
 
-        var index = 0;
-        loop();
-
+        if(longsLats.length > 1) {
+            var index = 0;
+            loop();
+        }
         function loop () {
             setTimeout(function () {
                 arc = {
@@ -120,7 +121,7 @@ $(document).ready(function(){
                     }
                 }
                 arcs.push(arc);
-                map.arc(arcs);
+                map.arc(arcs, {strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
                 index++;
                 if(index < longsLats.length - 1) {
                     loop();
