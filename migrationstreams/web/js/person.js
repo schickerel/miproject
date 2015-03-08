@@ -62,10 +62,71 @@ $(document).ready(function(){
     $('#person-list').on('click', 'li', function(){
         var personId = $(this).val();
         $.getJSON("../src/index.php/migration/migrations?personId=" + personId)
-            .done(function(json) {
-                $.each(json, function(index, migration){
-                    console.log(migration);
-                });
+            .done(function(migrations) {
+                getCountries(migrations, showPersonMigrations);
             });
     });
+
+        var getCountries = function(migrations, callback){
+        $.getJSON("../src/index.php/country/countries")
+            .done(function(countries) {
+                callback(migrations, countries);
+            });
+    };
+
+    var showPersonMigrations = function(migrations, countries){
+        var longitudeStart = 0;
+        var latitudeStart = 0;
+        var longsLats = [];
+        var arcs = [];
+        $.each(migrations, function(index, migration){
+            $.each(countries, function(index, country){
+                if(country['Id'] === 7){
+                    longitudeStart = country['Longitude'];
+                    latitudeStart = country['Latitude'];
+                }
+                if(migration['CountryId'] === country['Id']) {
+                    var longLat = {longitude: country['Longitude'], latitude: country['Latitude']};
+                    longsLats.push(longLat);
+                }
+            });
+        });
+        var arc = {
+            origin: {
+                latitude: latitudeStart,
+                longitude: longitudeStart
+            },
+            destination: {
+                latitude: longsLats[0]['latitude'],
+                longitude: longsLats[0]['longitude']
+            }
+        };
+        arcs.push(arc);
+        map.arc(arcs,{strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
+
+        if(longsLats.length > 1) {
+            var index = 0;
+            loop();
+        }
+        function loop () {
+            setTimeout(function () {
+                arc = {
+                    origin: {
+                        latitude: longsLats[index]['latitude'],
+                        longitude: longsLats[index]['longitude']
+                    },
+                    destination: {
+                        latitude: longsLats[index + 1]['latitude'],
+                        longitude: longsLats[index + 1]['longitude']
+                    }
+                }
+                arcs.push(arc);
+                map.arc(arcs, {strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
+                index++;
+                if(index < longsLats.length - 1) {
+                    loop();
+                }
+            }, 3000)
+        }
+    }
 });
