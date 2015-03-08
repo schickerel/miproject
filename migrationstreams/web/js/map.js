@@ -69,7 +69,20 @@ $(document).ready(function(){
                     var currentCountry = json[country];
                     countryMap[currentCountry] = '#ce2834';
                 }
-                callback(countryMap);
+                callback(countryMap);})
+                $.getJSON("../src/index.php/migration/migrations?filter=overview")
+                    .done(function(json) {
+
+                key = function (d) {
+                    return d.year;
+                };
+                if (first){
+                    calculateBarchart(json);
+                    first = false;}
+                else{
+                    recalculateBarchart(json);
+                }
+
             });
     };
 
@@ -77,6 +90,9 @@ $(document).ready(function(){
         $.getJSON("../src/index.php/migration/migrations?filter=firstMigration")
             .done(function (json) {
                 calculateMap(json, callback)
+                key = function (d) {
+                    return d.country;
+                };
                 if (first){
                 calculateBarchart(json);
                 first = false;}
@@ -91,7 +107,15 @@ $(document).ready(function(){
         $.getJSON("../src/index.php/migration/migrations?filter=targetCountryMigration")
             .done(function (json) {
                 calculateMap(json, callback);
-                recalculateBarchart(json);
+                key = function (d) {
+                    return d.country;
+                };
+                if (first){
+                    calculateBarchart(json);
+                    first = false;}
+                else{
+                    recalculateBarchart(json);
+                }
             });
     }
 
@@ -99,7 +123,16 @@ $(document).ready(function(){
     function getDistribution(callback) {
            $.getJSON("../src/index.php/migration/migrations?filter=distributionByCountries&year=1933&month=3")
                 .done(function (json) {
-                    calculateMap(json, callback)
+                    calculateMap(json, callback);
+                   key = function (d) {
+                       return d.country;
+                   };
+                   if (first){
+                       calculateBarchart(json);
+                       first = false;}
+                   else{
+                       recalculateBarchart(json);
+                   }
                 });
         }
 
@@ -134,6 +167,7 @@ $(document).ready(function(){
                 countryMap[id] = "#000000";
             }
         })
+
         updateMap(countryMap);
     }
 
@@ -160,9 +194,7 @@ $(document).ready(function(){
             })])
             .range([0, 255]);
 
-        key = function (d) {
-            return d.country;
-        };
+
 
         svg.selectAll("rect")
             .data(dataset, key)    //Bind data with custom key function
@@ -201,10 +233,6 @@ $(document).ready(function(){
             colorScale.domain([0, d3.max(dataset, function (d) {
                 return d.amount;
             })]);
-
-            key = function (d) {
-                return d.country;
-            };
 
 
             var datas = svg.selectAll("rect")
