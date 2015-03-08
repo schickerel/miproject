@@ -97,7 +97,7 @@ $(document).ready(function(){
 
 
     function getDistribution(callback) {
-           $.getJSON("../src/index.php/migration/migrations?filter=distributionByCountries&year=1933")
+           $.getJSON("../src/index.php/migration/migrations?filter=distributionByCountries&year=1933&month=3")
                 .done(function (json) {
                     calculateMap(json, callback)
                 });
