@@ -24,6 +24,9 @@ $(document).ready(function(){
 
     var colorScale = d3.scale.linear();
 
+
+    var colormap;
+
     var dataset;
 
     var svg;
@@ -102,7 +105,8 @@ $(document).ready(function(){
 
     //function for calculating the color values and assigning it to the map
     function calculateMap(json, callback){
-        var countryMap = {};
+        var countryMap ={};
+        invalidateMap();
         color = d3.scale.quantize()
             .range(['rgb(254,240,217)','rgb(253,212,158)','rgb(253,187,132)','rgb(252,141,89)','rgb(227,74,51)','rgb(179,0,0)'])
             .domain([d3.min(json, function(d) { return parseInt(d.amount); }),
@@ -118,6 +122,19 @@ $(document).ready(function(){
         console.log(countryMap);
         callback(countryMap);
 
+    }
+    //Funktion zur Invalidierung??
+    function invalidateMap(){
+        var countryMap = {};
+        var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+
+        $.each(countries, function(index){
+            var id = countries[index].id;
+            if (id != -99){
+                countryMap[id] = "#000000";
+            }
+        })
+        updateMap(countryMap);
     }
 
     function calculateBarchart(json) {
