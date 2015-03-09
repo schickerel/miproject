@@ -6,6 +6,8 @@ $(document).ready(function(){
         }
     });
 
+    var isDrawing = false;
+
     $('#filter').click(function(){
         var denominationIds = "";
         var professionalCategoryIds = "";
@@ -60,11 +62,18 @@ $(document).ready(function(){
     };
 
     $('#person-list').on('click', 'li', function(){
-        var personId = $(this).val();
-        $.getJSON("../src/index.php/migration/migrations?personId=" + personId)
-            .done(function(migrations) {
-                getCountries(migrations, showPersonMigrations);
-            });
+        if(isDrawing) {
+            $('#person-list').addClass('not-clickable');
+            $('#error-message').show();
+        } else {
+            $('#person-list').removeClass('not-clickable');
+            $('#error-message').hide();
+            var personId = $(this).val();
+            $.getJSON("../src/index.php/migration/migrations?personId=" + personId)
+                .done(function (migrations) {
+                    getCountries(migrations, showPersonMigrations);
+                });
+        }
     });
 
         var getCountries = function(migrations, callback){
@@ -75,10 +84,12 @@ $(document).ready(function(){
     };
 
     var showPersonMigrations = function(migrations, countries){
+        isDrawing = true;
         var longitudeStart = 0;
         var latitudeStart = 0;
-        var longsLats = [];
+        var migrationInfo = [];
         var arcs = [];
+        var bubbles = [];
         $.each(migrations, function(index, migration){
             $.each(countries, function(index, country){
                 if(country['Id'] === 7){
@@ -86,8 +97,7 @@ $(document).ready(function(){
                     latitudeStart = country['Latitude'];
                 }
                 if(migration['CountryId'] === country['Id']) {
-                    var longLat = {longitude: country['Longitude'], latitude: country['Latitude']};
-                    longsLats.push(longLat);
+                    migrationInfo.push({longitude: country['Longitude'], latitude: country['Latitude'], year: migration['Year']});
                 }
             });
         });
@@ -97,14 +107,14 @@ $(document).ready(function(){
                 longitude: longitudeStart
             },
             destination: {
-                latitude: longsLats[0]['latitude'],
-                longitude: longsLats[0]['longitude']
+                latitude: migrationInfo[0]['latitude'],
+                longitude: migrationInfo[0]['longitude']
             }
         };
         arcs.push(arc);
         map.arc(arcs,{strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
 
-        if(longsLats.length > 1) {
+        if(migrationInfo.length > 1) {
             var index = 0;
             loop();
         }
@@ -112,19 +122,23 @@ $(document).ready(function(){
             setTimeout(function () {
                 arc = {
                     origin: {
-                        latitude: longsLats[index]['latitude'],
-                        longitude: longsLats[index]['longitude']
+                        latitude: migrationInfo[index]['latitude'],
+                        longitude: migrationInfo[index]['longitude']
                     },
                     destination: {
-                        latitude: longsLats[index + 1]['latitude'],
-                        longitude: longsLats[index + 1]['longitude']
+                        latitude: migrationInfo[index + 1]['latitude'],
+                        longitude: migrationInfo[index + 1]['longitude']
                     }
                 }
                 arcs.push(arc);
                 map.arc(arcs, {strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
                 index++;
-                if(index < longsLats.length - 1) {
+                if(index < migrationInfo.length - 1) {
                     loop();
+                } else if (index === migrationInfo.length - 1) {
+                    $('#person-list').removeClass('not-clickable');
+                    $('#error-message').hide();
+                    isDrawing = false;
                 }
             }, 3000)
         }
