@@ -89,7 +89,6 @@ $(document).ready(function(){
         var latitudeStart = 0;
         var migrationInfo = [];
         var arcs = [];
-        var bubbles = [];
         $.each(migrations, function(index, migration){
             $.each(countries, function(index, country){
                 if(country['Id'] === 7){
