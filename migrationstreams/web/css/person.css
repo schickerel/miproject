@@ -26,10 +26,10 @@
 }
 
 #person-list.not-clickable li {
-    cursor: default;
+    cursor: wait;
 }
 
-#error-message{
+#error-message {
     position: relative;
     display: none;
     float: left;

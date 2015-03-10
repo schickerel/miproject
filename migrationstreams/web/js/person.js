@@ -64,7 +64,6 @@ $(document).ready(function(){
     $('#person-list').on('click', 'li', function(){
         if(isDrawing) {
             $('#person-list').addClass('not-clickable');
-            $('#error-message').show();
         } else {
             $('#person-list').removeClass('not-clickable');
             $('#error-message').hide();
@@ -116,6 +115,9 @@ $(document).ready(function(){
         if(migrationInfo.length > 1) {
             var index = 0;
             loop();
+        } else {
+            $('#person-list').removeClass('not-clickable');
+            isDrawing = false;
         }
         function loop () {
             setTimeout(function () {
@@ -136,7 +138,6 @@ $(document).ready(function(){
                     loop();
                 } else if (index === migrationInfo.length - 1) {
                     $('#person-list').removeClass('not-clickable');
-                    $('#error-message').hide();
                     isDrawing = false;
                 }
             }, 3000)
