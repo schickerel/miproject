@@ -5,12 +5,27 @@ $(document).ready(function(){
 
     var first = true;
 
-    var map = new Datamap({
+    var map;
+    map = new Datamap({
         element: document.getElementById('container'),
         fills: {
             defaultFill: "#000000"
-                    }
-    });
+        },
+        geographyConfig: {
+            dataUrl: null, //if not null, datamaps will fetch the map JSON (currently only supports topojson)
+            hideAntarctica: true,
+            borderWidth: 1,
+            borderColor: '#FDFDFD',
+            popupTemplate: function(geography, data) { //this function should just return a string
+                return '<div class="test"><strong>' + geography.properties.name + '</strong></div>';
+            },
+            popupOnHover: true, //disable the popup while hovering
+            highlightOnHover: true,
+            highlightFillColor: '#FC8D59',
+            highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+            highlightBorderWidth: 5
+        }
+        });
 
 
 
@@ -141,7 +156,7 @@ $(document).ready(function(){
         var countryMap ={};
         invalidateMap();
         color = d3.scale.quantize()
-            .range(['rgb(254,240,217)','rgb(253,212,158)','rgb(253,187,132)','rgb(252,141,89)','rgb(227,74,51)','rgb(179,0,0)'])
+            .range(['rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(165,15,21)','rgb(103,0,13)'])
             .domain([d3.min(json, function(d) { return parseInt(d.amount); }),
                 d3.max(json, function(d) { return parseInt(d.amount); })
             ]);
