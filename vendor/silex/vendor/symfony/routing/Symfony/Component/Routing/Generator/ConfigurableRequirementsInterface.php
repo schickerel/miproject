@@ -22,7 +22,7 @@ namespace Symfony\Component\Routing\Generator;
  *   is mostly useful in development environment.
  * - setStrictRequirements(false): Don't throw an exception but return null as URL for
  *   mismatching requirements and log the problem. Useful when you cannot control all
- *   params because they come from third party libs but don't want to have a 404 in
+ *   params because they come from third party vendor but don't want to have a 404 in
  *   production environment. It should log the mismatch so one can review it.
  * - setStrictRequirements(null): Return the URL with the given parameters without
  *   checking the requirements at all. When generating a URL you should either trust

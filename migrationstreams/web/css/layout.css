@@ -1,0 +1,136 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+a {
+	color: #ccc;
+	text-decoration: none;
+}
+
+body {
+    background-color:#212121;
+    color: #FFF;
+	margin: 0;
+	min-height: 700px;
+	font-family: KarbidWeb, sans-serif;
+	min-width: 1240px;
+}
+
+
+.header {
+    background: #363636;
+	padding-bottom: 10px;
+	z-index: 10;
+	position: relative;
+	height: 60px;
+}
+
+.header h1 {
+	padding-top: 12px;
+	font-weight: 200;
+	text-transform: uppercase;
+	font-size: 17px;
+	letter-spacing: 1px;
+	color: #A8A8A8;
+	width: 500px;
+	float: left;
+}
+
+h1 {
+	display: block;
+	-webkit-margin-before: 0.67em;
+	-webkit-margin-after: 0.67em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+
+.menu a:hover {
+	background-color: #800032;
+	color: #fff;
+}
+
+.header .menu a {
+	float: left;
+	display: block;
+	padding: 22px 20px;
+	text-decoration: none;
+}
+
+.header .menu {
+	float: right;
+}
+
+.header span {
+	font-size: 17px;
+	font-weight: 500;
+	color: #FFFFFF;
+}
+
+.header .menu a {
+	float: left;
+	display: block;
+	padding: 22px 20px;
+	color: #cecece;
+	text-decoration: none;
+}
+
+.header .menu a , .header h1 { line-height: 27px; }
+
+
+.container {
+	width: 1200px;
+	margin: auto;
+}
+
+.subheader {
+padding-top: 10px;
+/*background-color: rgba(41, 41, 41, 0.95);*/
+background: #000000 url("ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
+padding-bottom: 0px;
+z-index: 10;
+position: relative;
+height: 100px;
+/*box-shadow: 0 0 0 0 transparent;*/
+}
+
+/*#tooltip {
+        pointer-events:none;
+    }*/
+
+/*button {
+  background: transparent;
+    position: relative;
+    border:1px solid #222;
+
+}*/
+
+/*button a {
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    height: 30px;
+    padding: 13px 13px 13px;
+    position: relative;
+    text-shadow: 1px 1px 1px #000000;
+    font-family: KarbidWeb, sans-serif;
+    font-size: 18px;
+	font-weight: 500;
+	text-align: center;
+}
+
+button:hover > a {
+    background-color: #800032;
+	color: #fff;
+}
+
+option:hover < select{
+	background-color: select>option:hover;
+	color: #fff;
+
+}*/
+
+select {
+		width: 200px;
+	}
+

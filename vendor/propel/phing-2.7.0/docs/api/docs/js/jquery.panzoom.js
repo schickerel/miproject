@@ -57,7 +57,7 @@
 			clickandhold			: 	true
   };
 
-	var settings = {}
+	var settings = {};
 
   var methods = {
 		'init': function (options) {
@@ -206,11 +206,11 @@
 			window.clearInterval(data.mousedown_interval);
 		}
 
-  }
+  };
 
 	function setupBindings() {
 
-		eventData = { target: this }
+		eventData = { target: this };
 
 		// bind up controls
 		if (settings.zoomIn) {
@@ -347,7 +347,7 @@
 
 		if (settings.aspect) {
 			target = data.target_dimensions.ratio;
-			current = getCurrentAspectRatio.apply(this)
+			current = getCurrentAspectRatio.apply(this);
 			if (current > target) {
 				new_width = getHeight.apply(this) * target;
 				diff = getWidth.apply(this) - new_width;
@@ -377,7 +377,7 @@
 			'left': Math.round(left_offset),
 			'width': Math.round(width),
 			'height': Math.round(height)
-		}
+		};
 
 		if (data.loaded && settings.animate) {
 			applyAnimate.apply(this, [ properties ]);
@@ -448,7 +448,7 @@
 				x: (settings.pan_step/100 * data.viewport_dimensions.x),
 				y: (settings.pan_step/100 * data.viewport_dimensions.y)
 			}
-		}
+		};
 		return ret;
 	}
 

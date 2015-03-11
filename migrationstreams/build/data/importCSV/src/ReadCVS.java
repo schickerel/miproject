@@ -32,8 +32,8 @@ public class ReadCVS {
   }
   
   public void run() throws SQLException {
-	// change path  
-    String csvFile = "..\\..\\data\\data.csv";
+	  
+    String csvFile = "C:\\xampp\\htdocs\\miproject\\migrationstreams\\build\\data\\data.csv";
     
     BufferedReader br = null;
     String line = "";
@@ -60,6 +60,9 @@ public class ReadCVS {
             String profession = splittedRow[6];
             String placeOfBirth = splittedRow[7];
             String countryOfBirth = splittedRow[8];
+            String countryofBirthCode = splittedRow[9];
+            String countryofBirthLatitude = splittedRow[10];
+            String countryofBirthLongitude = splittedRow[11];
             
             denominationId = getDenominationId(denomination);
             
@@ -78,7 +81,7 @@ public class ReadCVS {
             countryOfBirthId = getCountryId(countryOfBirth);
         	
             if(countryOfBirthId == -1) {
-            	createNewCountry(countryOfBirth);
+            	createNewCountry(countryOfBirth, countryofBirthCode, countryofBirthLatitude, countryofBirthLongitude);
             	countryOfBirthId = getCountryId(countryOfBirth);
             }
             
@@ -99,17 +102,20 @@ public class ReadCVS {
       	  		personId = resultPerson.getInt(1);
       	  	}
 
-            for(int j = 9; j < splittedRow.length; j=j+4) {
+            for(int j = 12; j < splittedRow.length; j=j+7) {
             	int migrationCountryId;
             	String migrationCountry = splittedRow[j];
-            	String migrationCity = splittedRow[j+1];
-            	String migrationMonth  = splittedRow[j+2];
-            	String migrationYear  = splittedRow[j+3];
+            	String migrationCountryCode = splittedRow[j+1];
+            	String migrationCountryLatitude = splittedRow[j+2];
+            	String migrationCountryLongitude = splittedRow[j+3];
+            	String migrationCity = splittedRow[j+4];
+            	int migrationMonth  = (int)(Math.random() * 12 + 1);;
+            	String migrationYear  = splittedRow[j+6];
             	
             	migrationCountryId = getCountryId(migrationCountry);
             	
                 if(migrationCountryId == -1) {
-                	createNewCountry(migrationCountry);
+                	createNewCountry(migrationCountry, migrationCountryCode, migrationCountryLatitude, migrationCountryLongitude);
                 	migrationCountryId = getCountryId(migrationCountry);
                 }
             	
@@ -117,7 +123,7 @@ public class ReadCVS {
           	  	PreparedStatement prepareInsertMigration = conn.prepareStatement(insertMigration);
           	  	prepareInsertMigration.setString(1, migrationCity);
           	  	prepareInsertMigration.setInt(2, migrationCountryId);
-          	  	prepareInsertMigration.setInt(3, Integer.parseInt(migrationMonth));
+          	  	prepareInsertMigration.setInt(3, migrationMonth);
           	  	prepareInsertMigration.setInt(4, Integer.parseInt(migrationYear));
           	  	prepareInsertMigration.setInt(5, personId);
           	  	prepareInsertMigration.executeUpdate();
@@ -154,10 +160,13 @@ public class ReadCVS {
 	  }
   }
  
-  public void createNewCountry (String country) throws SQLException {
-	  String insertCountry = "INSERT INTO countries(country) VALUES (?)";
+  public void createNewCountry (String country, String code, String countryOfBirthLatitude, String countryOfBirthLongitude) throws SQLException {
+	  String insertCountry = "INSERT INTO countries(country, code, latitude, longitude) VALUES (?, ?, ?, ?)";
 	  PreparedStatement prepareInsertCountry = conn.prepareStatement(insertCountry);
 	  prepareInsertCountry.setString(1, country);
+	  prepareInsertCountry.setString(2, code);
+	  prepareInsertCountry.setDouble(3, Double.parseDouble(countryOfBirthLatitude));
+	  prepareInsertCountry.setDouble(4, Double.parseDouble(countryOfBirthLongitude));
   	  prepareInsertCountry.executeUpdate();
   }
   
