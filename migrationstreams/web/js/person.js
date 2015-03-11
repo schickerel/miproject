@@ -1,6 +1,10 @@
 $(document).ready(function(){
     var map = new Datamap({
         element: document.getElementById('map-wrapper'),
+        geographyConfig: {
+            popupOnHover: false,
+            highlightOnHover: false
+        },
         fills: {
             defaultFill: "#000000"
         }
@@ -65,6 +69,7 @@ $(document).ready(function(){
         if(isDrawing) {
             $('#person-list').addClass('not-clickable');
         } else {
+            invalidateMap();
             $('#person-list').removeClass('not-clickable');
             $('#error-message').hide();
             var personId = $(this).val();
@@ -75,7 +80,20 @@ $(document).ready(function(){
         }
     });
 
-        var getCountries = function(migrations, callback){
+    var invalidateMap = function (){
+        var countryMap = {};
+        var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+
+        $.each(countries, function(index){
+            var id = countries[index].id;
+            if (id != -99){
+                countryMap[id] = "#000000";
+            }
+        })
+        map.updateChoropleth(countryMap);
+    }
+
+    var getCountries = function(migrations, callback){
         $.getJSON("../src/index.php/country/countries")
             .done(function(countries) {
                 callback(migrations, countries);
@@ -86,16 +104,19 @@ $(document).ready(function(){
         isDrawing = true;
         var longitudeStart = 0;
         var latitudeStart = 0;
+        var codeStart = "";
         var migrationInfo = [];
         var arcs = [];
+        var colorCountries = {};
         $.each(migrations, function(index, migration){
             $.each(countries, function(index, country){
                 if(country['Id'] === 7){
                     longitudeStart = country['Longitude'];
                     latitudeStart = country['Latitude'];
+                    codeStart = country['Code'];
                 }
                 if(migration['CountryId'] === country['Id']) {
-                    migrationInfo.push({longitude: country['Longitude'], latitude: country['Latitude'], year: migration['Year']});
+                    migrationInfo.push({code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude'], year: migration['Year']});
                 }
             });
         });
@@ -111,6 +132,9 @@ $(document).ready(function(){
         };
         arcs.push(arc);
         map.arc(arcs,{strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
+        colorCountries[codeStart] = "#FF4D4D";
+        colorCountries[migrationInfo[0]['code']] = "#99796B";
+        map.updateChoropleth(colorCountries);
 
         if(migrationInfo.length > 1) {
             var index = 0;
@@ -133,6 +157,8 @@ $(document).ready(function(){
                 }
                 arcs.push(arc);
                 map.arc(arcs, {strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
+                colorCountries[migrationInfo[index + 1]['code']] = "#99796B";
+                map.updateChoropleth(colorCountries);
                 index++;
                 if(index < migrationInfo.length - 1) {
                     loop();
