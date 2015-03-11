@@ -10,7 +10,9 @@ $(document).ready(function(){
         fills: {
             defaultFill: "#000000"
                     }
-    });
+
+
+    })
 
 
 
@@ -89,7 +91,8 @@ $(document).ready(function(){
     function getfirstMigrations(callback) {
         $.getJSON("../src/index.php/migration/migrations?filter=firstMigration")
             .done(function (json) {
-                calculateMap(json, callback)
+                map.setProjection();
+                 calculateMap(json, callback)
                 key = function (d) {
                     return d.country;
                 };
