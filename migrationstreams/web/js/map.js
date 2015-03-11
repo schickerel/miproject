@@ -208,7 +208,7 @@ $(document).ready(function(){
             })
             .attr("width", xScale.rangeBand())
             .attr("height", function (d) {
-                return yScale(parseInt(d.amount));
+                return yScale(parseInt(d.amount))-4;
             })
             .attr("fill", function (d) {
                 return "rgb(0, 0, " + Math.round(colorScale(parseInt(d.amount))) + ")";
@@ -218,6 +218,14 @@ $(document).ready(function(){
                 //# steht für IDs
                 //d3.select("#tooltip").remove();
             });
+
+             svg.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text") 
+                .text(function(d) { return "key";})                                     
+                .attr("x", function(d, i) {return i * (w / dataset.length); })
+                .attr("y", function(d) {return h- yScale(d.amount)-5 });
     }
         function recalculateBarchart(json) {
             dataset = json;
