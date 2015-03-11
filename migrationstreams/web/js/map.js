@@ -25,7 +25,7 @@ $(document).ready(function(){
             highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
             highlightBorderWidth: 5
         }
-        });
+    });
 
 
 
@@ -85,8 +85,8 @@ $(document).ready(function(){
                     countryMap[currentCountry] = '#ce2834';
                 }
                 callback(countryMap);})
-                $.getJSON("../src/index.php/migration/migrations?filter=overview")
-                    .done(function(json) {
+        $.getJSON("../src/index.php/migration/migrations?filter=overview")
+            .done(function(json) {
 
                 key = function (d) {
                     return d.year;
@@ -109,10 +109,10 @@ $(document).ready(function(){
                     return d.country;
                 };
                 if (first){
-                calculateBarchart(json);
-                first = false;}
+                    calculateBarchart(json);
+                    first = false;}
                 else{
-                recalculateBarchart(json);
+                    recalculateBarchart(json);
                 }
 
             });
@@ -136,20 +136,20 @@ $(document).ready(function(){
 
 
     function getDistribution(callback) {
-           $.getJSON("../src/index.php/migration/migrations?filter=distributionByCountries&year=1933&month=3")
-                .done(function (json) {
-                    calculateMap(json, callback);
-                   key = function (d) {
-                       return d.country;
-                   };
-                   if (first){
-                       calculateBarchart(json);
-                       first = false;}
-                   else{
-                       recalculateBarchart(json);
-                   }
-                });
-        }
+        $.getJSON("../src/index.php/migration/migrations?filter=distributionByCountries&year=1933&month=3")
+            .done(function (json) {
+                calculateMap(json, callback);
+                key = function (d) {
+                    return d.country;
+                };
+                if (first){
+                    calculateBarchart(json);
+                    first = false;}
+                else{
+                    recalculateBarchart(json);
+                }
+            });
+    }
 
     //function for calculating the color values and assigning it to the map
     function calculateMap(json, callback){
@@ -196,17 +196,17 @@ $(document).ready(function(){
             .attr("height", h);
 
         xScale.domain(d3.range(dataset.length))
-         .rangeRoundBands([0, w], 0.05);
+            .rangeRoundBands([0, w], 0.05);
 
         yScale.domain([0, d3.max(dataset, function (d) {
-                return parseInt(d.amount);
-            })])
+            return parseInt(d.amount);
+        })])
             .range([0, h]);
 
 
         colorScale.domain([0, d3.max(dataset, function (d) {
-                return parseInt(d.amount);
-            })])
+            return parseInt(d.amount);
+        })])
             .range([0, 255]);
 
 
@@ -242,120 +242,120 @@ $(document).ready(function(){
                 .attr("x", function(d, i) {return i * (w / dataset.length); })
                 .attr("y", function(d) {return h- yScale(d.amount)-5 });
     }
-        function recalculateBarchart(json) {
-            dataset = json;
-            console.log(dataset);
-            var w = 250;
-            var h = 150;
-            xScale.domain(d3.range(dataset.length));
+    function recalculateBarchart(json) {
+        dataset = json;
+        console.log(dataset);
+        var w = 250;
+        var h = 150;
+        xScale.domain(d3.range(dataset.length));
 
-            yScale.domain([0, d3.max(dataset, function (d) {
-                return d.amount;
-            })]);
+        yScale.domain([0, d3.max(dataset, function (d) {
+            return d.amount;
+        })]);
 
-            colorScale.domain([0, d3.max(dataset, function (d) {
-                return d.amount;
-            })]);
-
-
-            var datas = svg.selectAll("rect")
-                .data(dataset, key);
-
-            datas.enter()
-
-                .append("rect")
-                .attr("x", function (d, i) {
-                    return xScale(i);
-                })
-                .attr("y", function (d) {
-                    return h - yScale(d.amount);
-                })
-                .attr("width", xScale.rangeBand())
-                .attr("height", function (d) {
-                    return yScale(d.amount);
-                })
-                .attr("fill", function (d) {
-                    return "rgb(0, 0, " + Math.round(colorScale(d.amount)) + ")";
-                })
-
-                .on("mouseout", function () {
-                    //# steht für IDs
-                    //d3.select("#tooltip").remove()
-                });
+        colorScale.domain([0, d3.max(dataset, function (d) {
+            return d.amount;
+        })]);
 
 
-            //nur die Dinge neu schreiben, die sich durch die neu hinzugekommenen Werte ändern
-            datas.transition()
-                .duration(1000)
-                .attr("x", function (d, i) {
-                    return xScale(i);
-                })
-                .attr("y", function (d) {
-                    return h - yScale(d.amount);
-                })
-                .attr("width", xScale.rangeBand())
-                .attr("height", function (d) {
-                    return yScale(d.amount);
-                })
-                .attr("fill", function (d) {
-                    return "rgb(0, 0, " + Math.round(colorScale(d.amount)) + ")";
-                });
+        var datas = svg.selectAll("rect")
+            .data(dataset, key);
+
+        datas.enter()
+
+            .append("rect")
+            .attr("x", function (d, i) {
+                return xScale(i);
+            })
+            .attr("y", function (d) {
+                return h - yScale(d.amount);
+            })
+            .attr("width", xScale.rangeBand())
+            .attr("height", function (d) {
+                return yScale(d.amount);
+            })
+            .attr("fill", function (d) {
+                return "rgb(0, 0, " + Math.round(colorScale(d.amount)) + ")";
+            })
+
+            .on("mouseout", function () {
+                //# steht für IDs
+                //d3.select("#tooltip").remove()
+            });
 
 
-            // .attr("fill", function(d) {
-            // return "rgb(0, 0, " + Math.round(colorScale(d.count)) + ")";
-            // });
+        //nur die Dinge neu schreiben, die sich durch die neu hinzugekommenen Werte ändern
+        datas.transition()
+            .duration(1000)
+            .attr("x", function (d, i) {
+                return xScale(i);
+            })
+            .attr("y", function (d) {
+                return h - yScale(d.amount);
+            })
+            .attr("width", xScale.rangeBand())
+            .attr("height", function (d) {
+                return yScale(d.amount);
+            })
+            .attr("fill", function (d) {
+                return "rgb(0, 0, " + Math.round(colorScale(d.amount)) + ")";
+            });
 
 
-            //. attrTween("d", tweenPie);
-            datas.exit()
-                .transition()
-                .duration(500)
-                .remove();
-
-        }});
+        // .attr("fill", function(d) {
+        // return "rgb(0, 0, " + Math.round(colorScale(d.count)) + ")";
+        // });
 
 
-        //get all countries
-       // var countries = Datamap.prototype.worldTopo.objects.world.geometries;
-        //defining new constructor for datamap
+        //. attrTween("d", tweenPie);
+        datas.exit()
+            .transition()
+            .duration(500)
+            .remove();
+
+    }});
+
+
+//get all countries
+// var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+//defining new constructor for datamap
 
 /*
-        map.arc([
-            {
-                origin: {
-                    latitude: 40.639722,
-                    longitude: -73.778889
-                },
-                destination: {
-                    latitude: 37.618889,
-                    longitude: -122.375
-                }
-            },
-            {
-                origin: {
-                    latitude: 30.194444,
-                    longitude: -97.67
-                },
-                destination: {
-                    latitude: 25.793333,
-                    longitude: -80.290556
-                },
-                options: {
-                    strokeWidth: 2,
-                    strokeColor: 'rgba(100, 10, 200, 0.4)'
-                }
-            },
-            {
-                origin: {
-                    latitude: 39.861667,
-                    longitude: -104.673056
-                },
-                destination: {
-                    latitude: 35.877778,
-                    longitude: -78.7875
-                }
-            }
-        ], {strokeWidth: 5, arcSharpness: 1.2, animationSpeed: 3400});*/
+ map.arc([
+ {
+ origin: {
+ latitude: 40.639722,
+ longitude: -73.778889
+ },
+ destination: {
+ latitude: 37.618889,
+ longitude: -122.375
+ }
+ },
+ {
+ origin: {
+ latitude: 30.194444,
+ longitude: -97.67
+ },
+ destination: {
+ latitude: 25.793333,
+ longitude: -80.290556
+ },
+ options: {
+ strokeWidth: 2,
+ strokeColor: 'rgba(100, 10, 200, 0.4)'
+ }
+ },
+ {
+ origin: {
+ latitude: 39.861667,
+ longitude: -104.673056
+ },
+ destination: {
+ latitude: 35.877778,
+ longitude: -78.7875
+ }
+ }
+ ], {strokeWidth: 5, arcSharpness: 1.2, animationSpeed: 3400});*/
 
 
