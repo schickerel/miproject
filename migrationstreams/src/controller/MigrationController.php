@@ -273,6 +273,7 @@ namespace Migration
 		public function getMigrationsByPersonId($personId){
 			$migrations = MigrationQuery::create()
 				->filterByPersonId($personId)
+				->orderByYear()
 				->find();
 			return $migrations->toJSON(true, true);
 		}
