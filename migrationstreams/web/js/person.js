@@ -110,7 +110,7 @@ $(document).ready(function(){
             }
         };
         arcs.push(arc);
-        map.arc(arcs,{strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
+        map.arc(arcs,{strokeWidth: 4, strokeColor: 'rgba(61, 127, 184, 0.9)', animationSpeed: 2000});
 
         if(migrationInfo.length > 1) {
             var index = 0;
@@ -132,7 +132,7 @@ $(document).ready(function(){
                     }
                 }
                 arcs.push(arc);
-                map.arc(arcs, {strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
+                map.arc(arcs, {strokeWidth: 4, strokeColor: 'rgba(61, 127, 184, 0.9)', animationSpeed: 2000});
                 index++;
                 if(index < migrationInfo.length - 1) {
                     loop();
