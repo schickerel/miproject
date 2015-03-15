@@ -29,15 +29,15 @@ $(document).ready(function(){
 
 
 
-    var xScale = d3.scale.ordinal();
+    var xScale;
 
-    var yScale = d3.scale.linear();
+    var yScale;
 
     var color;
 
     var colorfunction;
 
-    var colorScale = d3.scale.linear();
+    var colorScale;
 
     var keyValue;
 
@@ -312,35 +312,6 @@ $(document).ready(function(){
     }
 
 
-/*    var regroup = function regroup(data){
-     var dataArray = [];
-     var subarrayOne = [];
-     var subarrayTwo =[];
-     $.each (data, function(index, value){
-     var subObject ={};
-     var subObjectTwo ={};
-     subObject.country = data[index].country
-     subObjectTwo.country = data[index].country
-     if (data[index].denomAmount){
-     subObject.amount = data[index].totalAmount - data[index].denomAmount;
-     subObjectTwo.amount = data[index].denomAmount;
-     }else{
-     subObject.amount = data[index].totalAmount;
-     subObjectTwo.amount = 0;
-     }
-     subarrayOne.push(subObject);
-     subarrayTwo.push(subObjectTwo);
-
-     })
-
-     dataArray.push(subarrayOne);
-     dataArray.push(subarrayTwo);
-     return dataArray
-     }*/
-
-
-
-
 
 
     //function for calculating the color values and assigning it to the map
@@ -381,67 +352,70 @@ $(document).ready(function(){
     function calculateBarchart(json) {
         dataset = json;
 
-        var w = 250;
+        var w = 650;
         var h = 150;
         svg = d3.select("#barcontainer")
             .append("svg")
             .attr("width", w)
             .attr("height", h);
 
-        xScale.domain(d3.range(dataset.length))
-            .rangeRoundBands([0, w], 0.05);
+        xScale = d3.scale.linear()
+            .domain([0, d3.max(dataset, function (d) {
+                return d.amount;
+                })])
+            .range([0, w]);
 
-        yScale.domain([0, d3.max(dataset, function (d) {
-            return parseInt(d.amount);
-        })])
-            .range([0, h]);
+        yScale = d3.scale.ordinal()
+            .domain(d3.range(dataset.length))
+            .rangeBands([0, h]);
+
+        colorScale = d3.scale.quantize()
+            .range(['rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(165,15,21)','rgb(103,0,13)'])
+            .domain([d3.min(json, function(d) { return parseInt(d.amount); }),
+                d3.max(json, function(d) { return parseInt(d.amount); })
+            ]);
+
+        console.log(colorScale(d3.min(dataset, function (d) {
+            return d.amount;})));
 
 
-        colorScale.domain([0, d3.max(dataset, function (d) {
-            return parseInt(d.amount);
-        })])
-            .range([0, 255]);
+        var datas = svg.selectAll("rect")
+            .data(dataset, key);
 
-
-
-        svg.selectAll("rect")
-            .data(dataset, key)    //Bind data with custom key function
-            .enter()
+        datas.enter()
             .append("rect")
-            .attr("x", function (d, i) {
-                return xScale(i);
+            .attr("x", 0)
+            .attr("y", function(d,i){
+                return yScale(i);
             })
-            .attr("y", function (d) {
-                return h - yScale(parseInt(d.amount));
+            .attr("width", function(d){
+                return xScale(d.amount);
             })
-            .attr("width", xScale.rangeBand())
             .attr("height", function (d) {
-                return yScale(parseInt(d.amount));
+                return yScale.rangeBand();
             })
             .attr("fill", function (d) {
-                return "rgb(0, 0, " + Math.round(colorScale(parseInt(d.amount))) + ")";
+                return (colorScale(d.amount));
             })
-
-            .on("mouseout", function () {
-                //# steht für IDs
-                //d3.select("#tooltip").remove();
-            });
     }
     function recalculateBarchart(json) {
         dataset = json;
         dataset = dataset.sort(function (a,b) {return d3.ascending(a.value, b.value); });
 
-        var w = 250;
+        var w = 650;
         var h = 150;
-        xScale.domain(d3.range(dataset.length));
-
-        yScale.domain([0, d3.max(dataset, function (d) {
+        xScale.domain([0, d3.max(dataset, function (d) {
             return d.amount;
-        })]);
+        })])
+
+        yScale.domain(d3.range(dataset.length))
 
         colorScale.domain([0, d3.max(dataset, function (d) {
             return d.amount;
-        })]);
+            })])
+            .domain([d3.min(json, function(d) { return parseInt(d.amount); }),
+                d3.max(json, function(d) { return parseInt(d.amount); })
+            ]);
 
 
         var datas = svg.selectAll("rect")
@@ -450,42 +424,37 @@ $(document).ready(function(){
         datas.enter()
 
             .append("rect")
-            .attr("x", function (d, i) {
-                return xScale(i);
+            .attr("x", 0)
+            .attr("y", function(d,i){
+                return yScale(i);
             })
-            .attr("y", function (d) {
-                return h - yScale(d.amount);
+            .attr("width", function(d){
+                return xScale(d.amount);
             })
-            .attr("width", xScale.rangeBand())
             .attr("height", function (d) {
-                return yScale(d.amount);
+                return yScale.rangeBand();
             })
             .attr("fill", function (d) {
-                return "rgb(0, 0, " + Math.round(colorScale(d.amount)) + ")";
+                return colorScale(d.amount);
             })
-
-            .on("mouseout", function () {
-                //# steht für IDs
-                //d3.select("#tooltip").remove()
-            });
 
 
         //nur die Dinge neu schreiben, die sich durch die neu hinzugekommenen Werte ändern
         datas.transition()
             .duration(1000)
-            .attr("x", function (d, i) {
-                return xScale(i);
+            .attr("x", 0)
+            .attr("y", function(d,i){
+                return yScale(i);
             })
-            .attr("y", function (d) {
-                return h - yScale(d.amount);
+            .attr("width", function(d){
+                return xScale(d.amount);
             })
-            .attr("width", xScale.rangeBand())
             .attr("height", function (d) {
-                return yScale(d.amount);
+                return yScale.rangeBand();
             })
             .attr("fill", function (d) {
-                return "rgb(0, 0, " + Math.round(colorScale(d.amount)) + ")";
-            });
+                return colorScale(d.amount);
+            })
 
 
         // .attr("fill", function(d) {
