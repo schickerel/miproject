@@ -5,6 +5,7 @@
     <title></title>
     <script src="libs/jquery-2.1.3.js"></script>
     <script src="libs/d3.js"></script>
+    <script src="libs/c3.js"></script>
     <script src="libs/topojson.js"></script>
     <!--datamaps has to be loaded last-->
     <script src="libs/datamaps.world.min.js"></script>
@@ -15,9 +16,12 @@
     <input id="distribution" type="button" value="Distribution" name="d"/>
     <input id="firstMigration" type="button" value="firstMigration" name="f"/>
     <input id="destination" type="button" value="destination" name="d"/>
+    <input id="professional" type="button" value="professional" name="d"/>
 </div>
 <div id="container" style="position: absolute; top: 10px; width: 1200px; height: 800px;"></div>
 <div id="barcontainer" style="position: relative; top: 550px; left: 70px; width: 250px; height: 150px;"></div>
+<div id="barcontainertwo" style="position: relative; top: 550px; left: 70px; width: 960px; height: 500px;"></div>
+<div id="chart"></div>
 
 <script src="js/map.js"></script>
 </body>

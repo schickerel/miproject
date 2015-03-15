@@ -49,8 +49,6 @@ $(document).ready(function(){
 
     var svg;
 
-    var bigSvg;
-
     var key;
 
     //assign a specific color Value to a Country by using d3 function
@@ -82,7 +80,7 @@ $(document).ready(function(){
     });
 
     $('#professional').click(function(){
-        filterProfessional(newChart);
+        filterProfessional();
     });
 
 
@@ -106,7 +104,7 @@ $(document).ready(function(){
                     return d.year;
                 };
 
-                 if (first){
+                if (first){
                     calculateBarchart(json);
                     first = false;}
                 else{
@@ -140,7 +138,7 @@ $(document).ready(function(){
             .done(function (json) {
                 json = json.sort(function (a,b) {return d3.ascending(a.country, b.country); });
                 calculateMap(json, callback);
-                //drawRefinedChart();
+                drawRefinedChart();
                 key = function (d) {
                     return d.country;
                 };
@@ -172,7 +170,7 @@ $(document).ready(function(){
     }
 
     //function for creating an new array with both data
-    var filterProfessional = function filterProfessional(callback){
+    function filterProfessional(){
         $.getJSON("../src/index.php/migration/migrations?filter=firstMigration&denomination=1")
             .done(function (json) {
                 var refinedDatasets = [];
@@ -184,32 +182,31 @@ $(document).ready(function(){
                     for (data in json) {
                         //console.log(json[data]);
                         if (dataset[i].country == json[data].country) {
-                            refinedDataset.denomAmount = json[data].amount;}
-
+                            refinedDataset.denomAmount = json[data].amount;
+                        }
                     }
-                        //console.log(refinedDataset);
-                        refinedDatasets.push(refinedDataset);
+                    //console.log(refinedDataset);
+                    refinedDatasets.push(refinedDataset);
+                    key = function (d) {
+                        return d.country;
+                    };
                 })
-                $.each (refinedDatasets, function( i){
-                    if (!refinedDatasets[i].denomAmount){
-                        refinedDatasets[i].denomAmount = 0;
-                    }
-                })
-                //console.log(refinedDatasets);
-                callback(refinedDatasets);
 
+                console.log(refinedDatasets);
+                //calculateGroupedBarchart(regroupedData);
             })
 
 
     };
 
-    var newChart = function drawRefinedChart(data) {
+    function drawRefinedChart() {
 
-       //margin values zum Abstand zwischen den zwei den mehreren SVG-Grafiken, die gezeichnet werden;
+        //margin values zum Abstand zwischen den zwei den mehreren SVG-Grafiken, die gezeichnet werden;
         //jede Gruppe von Balken ist eine SVG-Grafik!
-        var margin = {top: 0, right: 0, bottom: 0, left: 0},
+        var margin = {top: 20, right: 20, bottom: 30, left: 40},
             width = 960 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
+
 
         var x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -223,51 +220,55 @@ $(document).ready(function(){
             .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
 
-        bigSvg = d3.select("body").append("svg")
+        var svg = d3.select("body").append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-          //get an array of all key values (the ages) in the dataset; States are excluded
-            //first line (title line is evaluated)
-            var catNames = d3.keys(data[0]).filter(function (key) {
-                 return key !== "country";
-            });
-            console.log(catNames);
+        d3.csv("pics/testcsv.csv", function (error, data) {
 
-           //map each datarow/Object to an key in the keymap;
+            //get an array of all key values (the ages) in the dataset; States are excluded
+            //first line (title line is evaluated)
+            var ageNames = d3.keys(data[0]).filter(function (key) {
+                return key !== "State";
+            });
+
+            console.log(data);
+            //map each datarow/Object to an key in the keymap;
             //each data has additional attribute ages; with
             //name and value
             data.forEach(function (d) {
-                d.cat = catNames.map(function (name) {
-                      return {name: name, value: +d[name]};
+                d.ages = ageNames.map(function (name) {
+                    return {name: name, value: +d[name]};
                 });
+                //console.log(d.ages);
             });
 
 
             x0.domain(data.map(function (d) {
-                return d.country;
+                return d.State;
             }));
-            x1.domain(catNames).rangeRoundBands([0, x0.rangeBand()]);
+            x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
             y.domain([0, d3.max(data, function (d) {
-                return d3.max(d.cat, function (d) {
+                return d3.max(d.ages, function (d) {
                     return d.value;
                 });
             })]);
 
 
             //append an group Element for every state, as dataholder for the age data
-            var state = bigSvg.selectAll(".state")
+            var state = svg.selectAll(".state")
                 .data(data)
                 .enter().append("g")
                 .attr("class", "g")
-                .attr("transform", function(d) { return "translate(" + x0(d.country) + ",0)"; });
+                .attr("transform", function(d) { return "translate(" + x0(d.State) + ",0)"; });
 
 
-           state.selectAll("rect")
+            state.selectAll("rect")
                 .data(function (d) {
-                   return d.cat;
+                    console.log (d.ages);
+                    return d.ages;
                 })
                 .enter().append("rect")
                 .attr("width", x1.rangeBand())
@@ -285,8 +286,8 @@ $(document).ready(function(){
                 });
 
 
-            var legend = bigSvg.selectAll(".legend")
-                .data(catNames.slice().reverse())
+            var legend = svg.selectAll(".legend")
+                .data(ageNames.slice().reverse())
                 .enter().append("g")
                 .attr("class", "legend")
                 .attr("transform", function (d, i) {
@@ -308,11 +309,11 @@ $(document).ready(function(){
                     return d;
                 });
 
-       // })
+        })
     }
 
 
-/*    var regroup = function regroup(data){
+    /*    var regroup = function regroup(data){
      var dataArray = [];
      var subarrayOne = [];
      var subarrayTwo =[];
