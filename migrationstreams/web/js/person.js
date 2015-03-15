@@ -1,10 +1,4 @@
 $(document).ready(function(){
-    var map = new Datamap({
-        element: document.getElementById('map-wrapper'),
-        fills: {
-            defaultFill: "#000000"
-        }
-    });
 
     var isDrawing = false;
 
@@ -66,6 +60,7 @@ $(document).ready(function(){
             $('#person-list').addClass('not-clickable');
         } else {
             $('#person-list').removeClass('not-clickable');
+            $('#map-wrapper').empty();
             $('#error-message').hide();
             var personId = $(this).val();
             $.getJSON("../src/index.php/migration/migrations?personId=" + personId)
@@ -75,7 +70,7 @@ $(document).ready(function(){
         }
     });
 
-        var getCountries = function(migrations, callback){
+    var getCountries = function(migrations, callback){
         $.getJSON("../src/index.php/country/countries")
             .done(function(countries) {
                 callback(migrations, countries);
@@ -86,42 +81,31 @@ $(document).ready(function(){
         isDrawing = true;
         var longitudeStart = 0;
         var latitudeStart = 0;
+        var codeStart = "";
         var migrationInfo = [];
+        migrationInfo[0] = {};
+        var migrationData = {};
         var arcs = [];
+        var colorCountries = {};
         $.each(migrations, function(index, migration){
             $.each(countries, function(index, country){
                 if(country['Id'] === 7){
-                    longitudeStart = country['Longitude'];
-                    latitudeStart = country['Latitude'];
+                    migrationInfo[0] = {code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude']};
                 }
                 if(migration['CountryId'] === country['Id']) {
-                    migrationInfo.push({longitude: country['Longitude'], latitude: country['Latitude'], year: migration['Year']});
+                    migrationInfo.push({code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude']});
+                    migrationData[country['Code']] = {year: migration['Year']}
                 }
             });
         });
-        var arc = {
-            origin: {
-                latitude: latitudeStart,
-                longitude: longitudeStart
-            },
-            destination: {
-                latitude: migrationInfo[0]['latitude'],
-                longitude: migrationInfo[0]['longitude']
-            }
-        };
-        arcs.push(arc);
-        map.arc(arcs,{strokeWidth: 4, strokeColor: 'rgba(61, 127, 184, 0.9)', animationSpeed: 2000});
+        var map = drawMap(migrationData);
 
-        if(migrationInfo.length > 1) {
-            var index = 0;
-            loop();
-        } else {
-            $('#person-list').removeClass('not-clickable');
-            isDrawing = false;
-        }
+        var index = 0;
+        loop();
+
         function loop () {
             setTimeout(function () {
-                arc = {
+                var arc = {
                     origin: {
                         latitude: migrationInfo[index]['latitude'],
                         longitude: migrationInfo[index]['longitude']
@@ -132,7 +116,10 @@ $(document).ready(function(){
                     }
                 }
                 arcs.push(arc);
-                map.arc(arcs, {strokeWidth: 4, strokeColor: 'rgba(61, 127, 184, 0.9)', animationSpeed: 2000});
+                map.arc(arcs, {strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
+                colorCountries[migrationInfo[0]['code']] = "#FF4D4D";
+                colorCountries[migrationInfo[index + 1]['code']] = "#99796B";
+                map.updateChoropleth(colorCountries);
                 index++;
                 if(index < migrationInfo.length - 1) {
                     loop();
@@ -140,7 +127,28 @@ $(document).ready(function(){
                     $('#person-list').removeClass('not-clickable');
                     isDrawing = false;
                 }
-            }, 3000)
+            }, 2000)
         }
+    }
+
+    var drawMap = function (migrationData) {
+        var map = new Datamap({
+            element: document.getElementById('map-wrapper'),
+            geographyConfig: {
+                highlightOnHover: false,
+                popupTemplate: function(geography, data) {
+                    if ( !data ) return;
+                    return ['<div class="hoverinfo"><strong>',
+                        'Migration to ' + geography.properties.name,
+                        ' in ' + data.year,
+                        '</strong></div>'].join('')
+                }
+            },
+            fills: {
+                defaultFill: "#000000"
+            },
+            data: migrationData
+        });
+        return map;
     }
 });
