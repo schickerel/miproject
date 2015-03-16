@@ -27,7 +27,9 @@ $(document).ready(function(){
         }
     });
 
-
+    //Variable for storing the current value of the main Filter
+    //firstMigration, destination, distribution
+    var mainFilter;
 
     var xScale;
 
@@ -82,7 +84,16 @@ $(document).ready(function(){
     });
 
     $('#professional').click(function(){
-        filterProfessional(newChart);
+        var url = buildUrl('denomination', 1);
+        filter(newChart, url, 'Katholiken');
+    });
+
+    $('#selectdenom').change(function(){
+        //construct the URL for the json request
+        var url = buildUrl(this.name, this.value);
+        //get the selected Text value; used for the diagram's legend
+        var legend = $("#selectdenom :selected").text();
+        filter(newChart, url, legend);
     });
 
 
@@ -125,12 +136,13 @@ $(document).ready(function(){
                     return d.country;
                 };
                 if (first){
-                    //calculateBarchart(json);
+                    calculateBarchart(json);
                     dataset = json;
                     first = false;}
                 else{
                     recalculateBarchart(json);
                 }
+                mainFilter = "firstMigration";
 
             });
     }
@@ -150,6 +162,7 @@ $(document).ready(function(){
                 else{
                     recalculateBarchart(json);
                 }
+                mainFilter = "targetCountryMigration";
             });
     }
 
@@ -168,14 +181,16 @@ $(document).ready(function(){
                 else{
                     recalculateBarchart(json);
                 }
+                mainFilter = "distribution";
             });
     }
 
     //function for creating an new array with both data
-    var filterProfessional = function filterProfessional(callback){
-        $.getJSON("../src/index.php/migration/migrations?filter=firstMigration&denomination=1")
+    function filter(callback, url, category){
+        $.getJSON(url)
             .done(function (json) {
                 var refinedDatasets = [];
+                var refinedCategory = category;
                 json = json.sort(function (a,b) {return d3.ascending(a.country, b.country); });
                 $.each (dataset, function( i){
                     var refinedDataset = {};
@@ -184,24 +199,28 @@ $(document).ready(function(){
                     for (data in json) {
                         //console.log(json[data]);
                         if (dataset[i].country == json[data].country) {
-                            refinedDataset.denomAmount = json[data].amount;}
-
+                            refinedDataset[refinedCategory] = json[data].amount;}
                     }
                         //console.log(refinedDataset);
                         refinedDatasets.push(refinedDataset);
                 })
                 $.each (refinedDatasets, function( i){
-                    if (!refinedDatasets[i].denomAmount){
-                        refinedDatasets[i].denomAmount = 0;
+                    if (!refinedDatasets[i][refinedCategory]){
+                        refinedDatasets[i][refinedCategory] = 0;
                     }
                 })
                 //console.log(refinedDatasets);
                 callback(refinedDatasets);
 
             })
-
-
     };
+    //category is the general category, number the specific no of this category
+    function buildUrl(category, number){
+        var url = "  ../src/index.php/migration/migrations?filter=";
+        var and = "";
+        url += mainFilter + "&" +category +"=" +number;
+        return url;
+    }
 
     var newChart = function drawRefinedChart(data) {
 
@@ -311,6 +330,10 @@ $(document).ready(function(){
        // })
     }
 
+    function recalculateRefined(data){
+
+    }
+
 
 
 
@@ -334,7 +357,7 @@ $(document).ready(function(){
         callback(countryMap);
 
     }
-    //Funktion zur Invalidierung??
+    //Funktion zur Invalidierung
     function invalidateMap(){
         var countryMap = {};
         var countries = Datamap.prototype.worldTopo.objects.world.geometries;
