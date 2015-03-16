@@ -79,9 +79,6 @@ $(document).ready(function(){
 
     var showPersonMigrations = function(migrations, countries){
         isDrawing = true;
-        var longitudeStart = 0;
-        var latitudeStart = 0;
-        var codeStart = "";
         var migrationInfo = [];
         migrationInfo[0] = {};
         var migrationData = {};
@@ -93,8 +90,18 @@ $(document).ready(function(){
                     migrationInfo[0] = {code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude']};
                 }
                 if(migration['CountryId'] === country['Id']) {
-                    migrationInfo.push({code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude']});
-                    migrationData[country['Code']] = {year: migration['Year']}
+                    if(country['Code'] in migrationData) {
+                        var migrationYears = migrationData[country['Code']];
+                        var times =  migrationData[country['Code']].times;
+                        times++;
+                        migrationYears['times'] = times;
+                        migrationYears['year' + times] = migration['Year'];
+                        migrationData[country['Code']] = migrationYears;
+                        migrationInfo.push({code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude'], times: times});
+                    } else {
+                        migrationData[country['Code']] = {year: migration['Year'], times: 1}
+                        migrationInfo.push({code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude'], times: 1});
+                    }
                 }
             });
         });
@@ -116,9 +123,18 @@ $(document).ready(function(){
                     }
                 }
                 arcs.push(arc);
-                map.arc(arcs, {strokeWidth: 2, strokeColor: 'rgba(61, 127, 184, 0.9)'});
-                colorCountries[migrationInfo[0]['code']] = "#FF4D4D";
-                colorCountries[migrationInfo[index + 1]['code']] = "#99796B";
+                map.arc(arcs, {
+                    strokeWidth: 2,
+                    arcSharpness: migrationInfo[index + 1]['times'],
+                    strokeColor: 'rgba(61, 127, 184, 0.9)'}
+                );
+                colorCountries[migrationInfo[0]['code']] = "#C0392B";
+
+                var color = d3.scale.linear()
+                    .domain([1, 5])
+                    .range(["#F39C12", "#32025B"]);
+
+                colorCountries[migrationInfo[index + 1]['code']] = color(migrationInfo[index + 1]['times']);
                 map.updateChoropleth(colorCountries);
                 index++;
                 if(index < migrationInfo.length - 1) {
@@ -137,11 +153,17 @@ $(document).ready(function(){
             geographyConfig: {
                 highlightOnHover: false,
                 popupTemplate: function(geography, data) {
-                    if ( !data ) return;
-                    return ['<div class="hoverinfo"><strong>',
-                        'Migration to ' + geography.properties.name,
-                        ' in ' + data.year,
-                        '</strong></div>'].join('')
+                    if ( !data ) {
+                        return;
+                    } else {
+                        var hoverDiv = ["<div class='hoverinfo'><strong>Migration to " + geography.properties.name + " in " + data['year']];
+                        var times = 1;
+                        while(data.times > 1 && times !== data.times) {
+                            times++;
+                            hoverDiv.push("<br/> and in " + data['year' + times]);
+                        }
+                    }
+                    return hoverDiv.join("");
                 }
             },
             fills: {
