@@ -90,14 +90,23 @@ $(document).ready(function() {
 
     $('#distributionmonth').change(function () {
         getDistribution(updateMap);
+        d3.select("#refinedChart")
+            .remove();
+        firstRefined = true
     });
 
     $('#firstMigration').click(function () {
         getfirstMigrations(updateMap);
+        d3.select("#refinedChart")
+            .remove();
+        firstRefined = true
     });
 
     $('#destination').click(function () {
         getDestinations(updateMap);
+        d3.select("#refinedChart")
+            .remove();
+        firstRefined = true
     });
 
 
@@ -314,6 +323,7 @@ $(document).ready(function() {
 
 
         bigSvg = d3.select("body").append("svg")
+            .attr("id", "refinedChart")
             .attr("width", width)
             .attr("height", height)
             .append("g")
@@ -468,15 +478,16 @@ $(document).ready(function() {
                 return d.cat;
             })
         //console.log(stateEnter);
-
+        //enter function never used since whole svg is deleted when main filter category is
+        //changed
         stateEnter.selectAll("rect")
             .data(function (d) {
                 return d.cat;
             })
             .enter().append("rect")
             .attr("width", x1.rangeBand())
-            .attr("x", function (d) {
-                return x1(d.name);
+            .attr("x", function (d, i) {
+                return x1(i);
             })
             .attr("y", function (d) {
                 return y(d.value);
@@ -503,7 +514,7 @@ $(document).ready(function() {
                 return color(d.name);
             });
 
-        var exit = state.exit()
+        state.exit()
             .remove();
 
         redrawText()
