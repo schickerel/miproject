@@ -2,6 +2,7 @@
 
 namespace Migration
 {
+	use Country\CountryController;
 	use Silex\Application;
 	use Silex\ControllerProviderInterface;
 	use Symfony\Component\HttpFoundation\Request;
@@ -55,10 +56,13 @@ namespace Migration
 					$migrationsJson = $this->getTargetCountryMigrations($params);
 				} else if ($filter == 'distributionByCountries') {
 					$migrationsJson = $this->getDistributionByCountries($params);
+				} else if ($filter == 'distributionByCountries') {
+					$migrationsJson = $this->getDistributionByCountries($params);
 				}
-
 			} else if (array_key_exists('personId', $params)) {
 				$migrationsJson = $this->getMigrationsByPersonId($params['personId']);
+			} else if (array_key_exists('countryId', $params)) {
+				$migrationsJson = $this->getCountryMigrations($params);
 			} else {
 				$migrationCountries = array();
 				$migrations = MigrationQuery::create()
@@ -276,6 +280,108 @@ namespace Migration
 				->orderByYear()
 				->find();
 			return $migrations->toJSON(true, true);
+		}
+
+		public function getCountryMigrations($params) {
+			$migrations = array();
+			$migrations['emigrations'] = $this->getEmigrations($params);
+			$migrations['immigrations'] = $this->getImmigrations($params['countryId']);
+			$migrationsJson = json_encode($migrations);
+			return  $migrationsJson;
+		}
+
+		private function getImmigrations($countryId){
+			$immigrations = array();
+			$migrations = MigrationQuery::create()
+				->filterByCountryId($countryId)
+				->find();
+
+			foreach($migrations as $migration) {
+				$year = $migration->getYear();
+				$amount = 1;
+				if(empty($immigrations)){
+					$immigration = array("year"=>$year, "amount"=>$amount);
+					array_push($immigrations, $immigration);
+				} else {
+					$exists = false;
+					foreach($immigrations as $key => $value){
+						if($immigrations[$key]["year"] === $year) {
+							$currentAmount = $immigrations[$key]["amount"];
+							$currentAmount++;
+							$immigrations[$key]["amount"] = $currentAmount;
+							$exists = true;
+						}
+					}
+					if(!$exists){
+						$immigration = array("year"=>$year, "amount"=>$amount);
+						array_push($immigrations, $immigration);
+					}
+				}
+			}
+			return $immigrations;
+		}
+
+		private  function getEmigrations($params){
+			$countryId = intval($params['countryId']);
+			$emigrations = array();
+			$personIds = $this->getPersonIds($params);
+			foreach($personIds as $personId) {
+				$next = false;
+				$amount = 1;
+				$personMigrations = MigrationQuery::create()
+					->filterByPersonId($personId)
+					->orderByYear()
+					->find();
+				if($countryId === 7){
+					$year = $personMigrations[0]->getYear();
+					if(empty($emigrations)){
+						$emigration = array("year"=>$year, "amount"=>$amount);
+						array_push($emigrations, $emigration);
+					} else {
+						$exists = false;
+						foreach($emigrations as $key => $value){
+							if($emigrations[$key]["year"] === $year) {
+								$currentAmount = $emigrations[$key]["amount"];
+								$currentAmount++;
+								$emigrations[$key]["amount"] = $currentAmount;
+								$exists = true;
+							}
+						}
+						if(!$exists){
+							$emigration = array("year"=>$year, "amount"=>$amount);
+							array_push($emigrations, $emigration);
+						}
+					}
+				}
+				foreach($personMigrations as $personMigration){
+					if($next){
+						$year = $personMigration->getYear();
+						if(empty($emigrations)){
+							$emigration = array("year"=>$year, "amount"=>$amount);
+							array_push($emigrations, $emigration);
+						} else {
+							$exists = false;
+							foreach($emigrations as $key => $value){
+								if($emigrations[$key]["year"] === $year) {
+									$currentAmount = $emigrations[$key]["amount"];
+									$currentAmount++;
+									$emigrations[$key]["amount"] = $currentAmount;
+									$exists = true;
+								}
+							}
+							if(!$exists){
+								$emigration = array("year"=>$year, "amount"=>$amount);
+								array_push($emigrations, $emigration);
+							}
+						}
+						$next = false;
+					}
+					if($personMigration->getCountryId() === $countryId){
+						$next = true;
+					}
+				}
+			}
+			return $emigrations;
 		}
 
 		private function getPersonIds($params) {
