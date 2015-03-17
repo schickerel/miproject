@@ -1,7 +1,7 @@
 /**
  * Created by chris on 01.03.2015.
  */
-$(document).ready(function(){
+$(document).ready(function() {
 
     var first = true;
 
@@ -16,7 +16,7 @@ $(document).ready(function(){
             hideAntarctica: true,
             borderWidth: 1,
             borderColor: '#FDFDFD',
-            popupTemplate: function(geography, data) { //this function should just return a string
+            popupTemplate: function (geography, data) { //this function should just return a string
                 return '<div class="test"><strong>' + geography.properties.name + '</strong></div>';
             },
             popupOnHover: true, //disable the popup while hovering
@@ -41,6 +41,11 @@ $(document).ready(function(){
     var x0;
 
     var y;
+
+    //legend for refined Barchart
+    var legend;
+
+    var myText;
 
     var firstRefined = true;
 
@@ -74,69 +79,93 @@ $(document).ready(function(){
     //needs to be loaded when array is up
 
 
-
     var updateMap = function (data) {
         map.updateChoropleth(data);
     };
 
-    $('#overview').click(function(){
+    $('#overview').click(function () {
         getOverview(updateMap);
 
     });
 
-    $('#distribution').click(function(){
+    $('#distributionmonth').change(function () {
         getDistribution(updateMap);
     });
 
-    $('#firstMigration').click(function(){
+    $('#firstMigration').click(function () {
         getfirstMigrations(updateMap);
     });
 
-    $('#destination').click(function(){
+    $('#destination').click(function () {
         getDestinations(updateMap);
     });
 
-    $('#professional').click(function(){
-       recalculateRefined()
-    });
 
-    $('#selectdenom').change(function(){
+    $('#selectdenom').change(function () {
         //construct the URL for the json request
-        var url = buildUrl(this.name, this.value);
+        if (mainFilter == 'distributionbyCountry'){
+            var year = $("#distributionyear").val();
+            var month = $("#distributionmonth").val();
+            var url = buildUrl(this.name, this.value, year, month);
+        }else{
+            var url = buildUrl(this.name, this.value);
+        }
         //get the selected Text value; used for the diagram's legend
         var legend = $("#selectdenom :selected").text();
-        if (firstRefined){
-        filter(newChart, url, legend);
+        if (firstRefined) {
+            filter(newChart, url, legend);
+        } else {
+            filter(recalculateRefined, url, legend);
+        }
+    });
+
+    $('#selectprof').change(function () {
+        //construct the URL for the json request
+        if (mainFilter == 'distributionbyCountry'){
+            var year = $("#distributionyear").val();
+            var month = $("#distributionmonth").val();
+            var url = buildUrl(this.name, this.value, year, month);
         }else{
-        filter(recalculateRefined, url, legend);
-    }
+            var url = buildUrl(this.name, this.value);
+        }
+        //get the selected Text value; used for the diagram's legend
+        var legend = $("#selectprof :selected").text();
+        if (firstRefined) {
+            filter(newChart, url, legend);
+        } else {
+            filter(recalculateRefined, url, legend);
+        }
     });
 
 
-    var getOverview = function (callback){
+    var getOverview = function (callback) {
         var countryMap = {};
         $.getJSON("../src/index.php/migration/migrations")
-            .done(function(json) {
+            .done(function (json) {
 
                 //console.log(d3.min(json, function(d) { return parseInt(d.amount); }));
-                for (var country in json)  {
+                for (var country in json) {
                     var currentCountry = json[country];
                     countryMap[currentCountry] = '#ce2834';
                 }
-                callback(countryMap);})
+                callback(countryMap);
+            })
 
         $.getJSON("../src/index.php/migration/migrations?filter=overview")
-            .done(function(json) {
-                json = json.sort(function (a,b) {return d3.ascending(a.year, b.year); });
+            .done(function (json) {
+                json = json.sort(function (a, b) {
+                    return d3.ascending(a.year, b.year);
+                });
 
                 key = function (d) {
                     return d.year;
                 };
 
-                 if (first){
+                if (first) {
                     calculateBarchart(json);
-                    first = false;}
-                else{
+                    first = false;
+                }
+                else {
                     recalculateBarchart(json);
                 }
 
@@ -146,16 +175,19 @@ $(document).ready(function(){
     function getfirstMigrations(callback) {
         $.getJSON("../src/index.php/migration/migrations?filter=firstMigration")
             .done(function (json) {
-                json = json.sort(function (a,b) {return d3.ascending(a.country, b.country); });
+                json = json.sort(function (a, b) {
+                    return d3.ascending(a.country, b.country);
+                });
                 calculateMap(json, callback)
                 key = function (d) {
                     return d.country;
                 };
-                if (first){
+                if (first) {
                     calculateBarchart(json);
                     dataset = json;
-                    first = false;}
-                else{
+                    first = false;
+                }
+                else {
                     recalculateBarchart(json);
                 }
                 mainFilter = "firstMigration";
@@ -166,16 +198,19 @@ $(document).ready(function(){
     function getDestinations(callback) {
         $.getJSON("../src/index.php/migration/migrations?filter=targetCountryMigration")
             .done(function (json) {
-                json = json.sort(function (a,b) {return d3.ascending(a.country, b.country); });
+                json = json.sort(function (a, b) {
+                    return d3.ascending(a.country, b.country);
+                });
                 calculateMap(json, callback);
                 //drawRefinedChart();
                 key = function (d) {
                     return d.country;
                 };
-                if (first){
+                if (first) {
                     calculateBarchart(json);
-                    first = false;}
-                else{
+                    first = false;
+                }
+                else {
                     recalculateBarchart(json);
                 }
                 mainFilter = "targetCountryMigration";
@@ -184,44 +219,56 @@ $(document).ready(function(){
 
 
     function getDistribution(callback) {
-        $.getJSON("../src/index.php/migration/migrations?filter=distributionByCountries&year=1933&month=3")
+        var url = "../src/index.php/migration/migrations?filter=distributionByCountries&";
+        var year = $("#distributionyear").val();
+        var month = $("#distributionmonth").val();
+
+        url+= url + "year=" + year + "&month=" + month;
+
+        $.getJSON(url)
             .done(function (json) {
-                json = json.sort(function (a,b) {return d3.ascending(a.country, b.country); });
+                json = json.sort(function (a, b) {
+                    return d3.ascending(a.country, b.country);
+                });
                 calculateMap(json, callback);
                 key = function (d) {
                     return d.country;
                 };
-                if (first){
+                if (first) {
                     calculateBarchart(json);
-                    first = false;}
-                else{
+                    first = false;
+                }
+                else {
                     recalculateBarchart(json);
                 }
-                mainFilter = "distribution";
+                mainFilter = "distributionByCountries";
             });
     }
 
     //function for creating an new array with both data
-    function filter(callback, url, category){
+    function filter(callback, url, category) {
         $.getJSON(url)
             .done(function (json) {
                 var refinedDatasets = [];
                 var refinedCategory = category;
-                json = json.sort(function (a,b) {return d3.ascending(a.country, b.country); });
-                $.each (dataset, function( i){
+                json = json.sort(function (a, b) {
+                    return d3.ascending(a.country, b.country);
+                });
+                $.each(dataset, function (i) {
                     var refinedDataset = {};
                     refinedDataset.country = dataset[i].country;
                     refinedDataset.totalAmount = dataset[i].amount;
                     for (data in json) {
                         //console.log(json[data]);
                         if (dataset[i].country == json[data].country) {
-                            refinedDataset[refinedCategory] = json[data].amount;}
+                            refinedDataset[refinedCategory] = json[data].amount;
+                        }
                     }
-                        //console.log(refinedDataset);
-                        refinedDatasets.push(refinedDataset);
+                    //console.log(refinedDataset);
+                    refinedDatasets.push(refinedDataset);
                 })
-                $.each (refinedDatasets, function( i){
-                    if (!refinedDatasets[i][refinedCategory]){
+                $.each(refinedDatasets, function (i) {
+                    if (!refinedDatasets[i][refinedCategory]) {
                         refinedDatasets[i][refinedCategory] = 0;
                     }
                 })
@@ -231,12 +278,20 @@ $(document).ready(function(){
             })
     };
     //category is the general category, number the specific no of this category
-    function buildUrl(category, number){
+    function buildUrl(category, number, year, month) {
         var url = "  ../src/index.php/migration/migrations?filter=";
         var and = "";
-        url += mainFilter + "&" +category +"=" +number;
+        //index.php / migration / migrations ? filter = distributionByCountries & year = 1933 & month = 3
+        if (mainFilter == "distributionByCountries") {
+            url += mainFilter + "&" + "year=" + year + "&month=" + month + "&" + category + "=" + number;
+        } else {
+            url += mainFilter + "&" + category + "=" + number;
+        }
+        console.log(url);
         return url;
+
     }
+
 
     var newChart = function drawRefinedChart(data) {
 
@@ -320,7 +375,7 @@ $(document).ready(function(){
                 });
 
 
-          /*  var legend = bigSvg.selectAll(".legend")
+            legend = bigSvg.selectAll(".legend")
                 .data(catNames.slice().reverse())
                 .enter().append("g")
                 .attr("class", "legend")
@@ -334,14 +389,14 @@ $(document).ready(function(){
                 .attr("height", 18)
                 .style("fill", color);
 
-            legend.append("text")
+            myText = legend.append("text")
                 .attr("x", width - 24)
                 .attr("y", 9)
                 .attr("dy", ".35em")
                 .style("text-anchor", "end")
                 .text(function (d) {
                     return d;
-                });*/
+                });
 
        // })
     }
@@ -451,10 +506,19 @@ $(document).ready(function(){
         var exit = state.exit()
             .remove();
 
+        redrawText()
+
+        function redrawText() {
+            myText
+                .data(catNames.slice().reverse())
+                .transition()
+                .duration(1000)
+                .text(function (d) {
+                    return d;
+                });
 
 
-
-
+        }
 
 
     }

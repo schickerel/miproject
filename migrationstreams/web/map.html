@@ -13,21 +13,42 @@
 <body>
 <div style="position: absolute; z-index: 100000000;">
     <input id="overview" type="button" value="Overview" name="o"/>
-    <input id="distribution" type="button" value="Distribution" name="d"/>
     <input id="firstMigration" type="button" value="firstMigration" name="f"/>
     <input id="destination" type="button" value="destination" name="d"/>
-    <input id="professional" type="button" value="professional" name="d"/></div></br></br>
-    <select id="selectdenom" name="denomination" style="position: absolute; z-index: 10000000;">
+
+    Distribution
+    <select id="distributionyear" name="distyear">
+        <option value="1933">1933</option>
+        <option value="1934">1934</option>
+        <option value="1935">1935</option>
+        <option value="1936">1936</option>
+    </select>
+
+    <select id="distributionmonth" name="distmonth">
+        <option value="1">Januar</option>
+        <option value="2">Februar</option>
+        <option value="3">März</option>
+        <option value="4">April</option>
+    </select>
+
+    <select id="selectdenom" name="denomination">
         <option value="1" name="jüdisch">jüdisch</option>
         <option value="2">keine</option>
         <option value="3">evangelisch</option>
         <option value="4">katholisch</option>
     </select>
 
+    <select id="selectprof" name="professionalCategory">
+    <option value="1" name="jüdisch">Literatur und Publizistik</option>
+    <option value="2">Theater</option>
+    <option value="3">Bildende Kunst und Architektur</option>
+    <option value="4">Film</option>
+    </select>
+
 
 </div>
-<div id="container" style="position: absolute; top: 40px; width: 1200px; height: 800px;"></div>
-<div id="barcontainer" style="position: relative; top: 40px; left: 70px; width: 250px; height: 150px;"></div>
+<div id="container" style="position: absolute; top: 90px; width: 1200px; height: 800px;"></div>
+<div id="barcontainer" style="position: relative; top: 60px; left: 70px; width: 250px; height: 150px;"></div>
 <div id="barcontainertwo" style="position: relative; top: 550px; left: 70px; width: 960px; height: 500px;"></div>
 <div id="chart"></div>
 
