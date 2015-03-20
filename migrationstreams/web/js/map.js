@@ -384,6 +384,21 @@ $(document).ready(function() {
                     return color(d.name);
                 });
 
+        bigSvg.selectAll("text")
+            .data(dataset) //Bind data with custom key function
+            .enter()
+            .append("text")
+            .text(function(d) {
+                return d.country;
+            })
+            .attr("text-anchor", "middle")
+            .attr("x", function(d, i){
+                return x0(d.country) + + x0.rangeBand()/2;;
+            })
+            .attr("y", height-5)
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("fill", "black");
 
             legend = bigSvg.selectAll(".legend")
                 .data(catNames.slice().reverse())
