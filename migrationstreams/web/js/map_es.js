@@ -43,7 +43,8 @@ $(document).ready(function(){
                         if(countryCode === geography.id) {
                             $.getJSON("../src/index.php/migration/migrations?countryId=" + countryData[countryCode])
                                 .done(function (migrations) {
-                                    drawChart(migrations);
+                                    var country = geography.properties.name;
+                                    openDialog(migrations, country);
                                 });
                         }
                     }
@@ -51,6 +52,16 @@ $(document).ready(function(){
             }
         });
     };
+
+
+    var openDialog = function (migrations, countryName) {
+        $('#country-chart').html('');
+        drawChart(migrations);
+        $('#country-chart').dialog({
+            title: countryName
+        });
+    }
+
 
     var drawChart = function (migrations) {
 
