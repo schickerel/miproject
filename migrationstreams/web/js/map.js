@@ -238,7 +238,7 @@ $(document).ready(function(){
                 .data(dataset)
                 .enter()
                 .append("text") 
-                .text(function(d) { return "key";})                                     
+                .text(function(d) { return d.country;})                                     
                 .attr("x", function(d, i) {return i * (w / dataset.length); })
                 .attr("y", function(d) {return h- yScale(d.amount)-5 });
     }
@@ -284,6 +284,7 @@ $(document).ready(function(){
             });
 
 
+
         //nur die Dinge neu schreiben, die sich durch die neu hinzugekommenen Werte ändern
         datas.transition()
             .duration(1000)
@@ -312,6 +313,14 @@ $(document).ready(function(){
             .transition()
             .duration(500)
             .remove();
+            
+            svg.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text") 
+                .text(function(d) { return d.country;})                                     
+                .attr("x", function(d, i) {return i * (w / dataset.length); })
+                .attr("y", function(d) {return h- yScale(d.amount)-5 });
 
     }});
 
