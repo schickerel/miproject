@@ -101,11 +101,21 @@ $(document).ready(function() {
 
     });
 
-    $('#distributionmonth').change(function () {
+    /*$('#distributionmonth').change(function () {
         getDistribution(updateMap);
         d3.select("#refinedChart")
             .remove();
         firstRefined = true
+    });*/
+
+    $( "#distributionmonth" ).selectmenu({
+        change: function( event, ui ) {
+            getDistribution(updateMap);
+            d3.select("#refinedChart")
+                .remove();
+            firstRefined = true
+
+        }
     });
 
 
@@ -318,7 +328,7 @@ $(document).ready(function() {
 
     var newChart = function drawRefinedChart(data) {
 
-       //margin values zum Abstand zwischen den zwei den mehreren SVG-Grafiken, die gezeichnet werden;
+        //margin values zum Abstand zwischen den zwei den mehreren SVG-Grafiken, die gezeichnet werden;
         //jede Gruppe von Balken ist eine SVG-Grafik!
         var margin = {top: 0, right: 0, bottom: 0, left: 0},
             width = 960 - margin.left - margin.right,
@@ -327,76 +337,76 @@ $(document).ready(function() {
         x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
 
-         x1 = d3.scale.ordinal();
+        x1 = d3.scale.ordinal();
 
-         y = d3.scale.linear()
+        y = d3.scale.linear()
             .range([height, 0]);
 
         var color = d3.scale.ordinal()
             .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
 
-        bigSvg = d3.select("body").append("svg")
+        bigSvg = d3.select("#barcontainertwo").append("svg")
             .attr("id", "refinedChart")
             .attr("width", width)
             .attr("height", height)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-         //get an array of all key values (the ages) in the dataset; States are excluded
-            //first line (title line is evaluated)
-            var catNames = d3.keys(data[0]).filter(function (key) {
-                 return key !== "country";
+        //get an array of all key values (the ages) in the dataset; States are excluded
+        //first line (title line is evaluated)
+        var catNames = d3.keys(data[0]).filter(function (key) {
+            return key !== "country";
+        });
+        console.log(catNames);
+
+        //map each datarow/Object to an key in the keymap;
+        //each data has additional attribute ages; with
+        //name and value
+        data.forEach(function (d) {
+            d.cat = catNames.map(function (name) {
+                return {name: name, value: +d[name]};
             });
-            console.log(catNames);
+        });
 
-           //map each datarow/Object to an key in the keymap;
-            //each data has additional attribute ages; with
-            //name and value
-            data.forEach(function (d) {
-                d.cat = catNames.map(function (name) {
-                      return {name: name, value: +d[name]};
-                });
+
+        x0.domain(data.map(function (d) {
+            return d.country;
+        }));
+        x1.domain(catNames).rangeRoundBands([0, x0.rangeBand()]);
+        y.domain([0, d3.max(data, function (d) {
+            return d3.max(d.cat, function (d) {
+                return d.value;
             });
+        })]);
 
 
-            x0.domain(data.map(function (d) {
-                return d.country;
-            }));
-            x1.domain(catNames).rangeRoundBands([0, x0.rangeBand()]);
-            y.domain([0, d3.max(data, function (d) {
-                return d3.max(d.cat, function (d) {
-                    return d.value;
-                });
-            })]);
+        //append an group Element for every state, as dataholder for the age data
+        state = bigSvg.selectAll(".state")
+            .data(data)
+            .enter().append("g")
+            .attr("class", "g")
+            .attr("transform", function(d) { return "translate(" + x0(d.country) + ",0)"; });
 
 
-            //append an group Element for every state, as dataholder for the age data
-            state = bigSvg.selectAll(".state")
-                .data(data)
-                .enter().append("g")
-                .attr("class", "g")
-                .attr("transform", function(d) { return "translate(" + x0(d.country) + ",0)"; });
-
-
-           bars = state.selectAll("rect")
-                .data(function (d) {
-                   return d.cat;
-                })
-                .enter().append("rect")
-                .attr("width", x1.rangeBand())
-                .attr("x", function (d) {
-                    return x1(d.name);
-                })
-                .attr("y", function (d) {
-                    return y(d.value);
-                })
-                .attr("height", function (d) {
-                    return height - y(d.value);
-                })
-                .style("fill", function (d) {
-                    return color(d.name);
-                });
+        bars = state.selectAll("rect")
+            .data(function (d) {
+                return d.cat;
+            })
+            .enter().append("rect")
+            .attr("width", x1.rangeBand())
+            .attr("x", function (d) {
+                return x1(d.name);
+            })
+            .attr("y", function (d) {
+                return y(d.value);
+            })
+            .attr("height", function (d) {
+                return height - y(d.value);
+            })
+            .style("fill", function (d) {
+                return color(d.name);
+            });
 
         bigSvg.selectAll("text")
             .data(dataset) //Bind data with custom key function
@@ -414,30 +424,30 @@ $(document).ready(function() {
             .attr("font-size", "11px")
             .attr("fill", "black");
 
-            legend = bigSvg.selectAll(".legend")
-                .data(catNames.slice().reverse())
-                .enter().append("g")
-                .attr("class", "legend")
-                .attr("transform", function (d, i) {
-                    return "translate(0," + i * 20 + ")";
-                });
+        legend = bigSvg.selectAll(".legend")
+            .data(catNames.slice().reverse())
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function (d, i) {
+                return "translate(0," + i * 20 + ")";
+            });
 
-            legend.append("rect")
-                .attr("x", width - 18)
-                .attr("width", 18)
-                .attr("height", 18)
-                .style("fill", color);
+        legend.append("rect")
+            .attr("x", width - 18)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", color);
 
-            myText = legend.append("text")
-                .attr("x", width - 24)
-                .attr("y", 9)
-                .attr("dy", ".35em")
-                .style("text-anchor", "end")
-                .text(function (d) {
-                    return d;
-                });
+        myText = legend.append("text")
+            .attr("x", width - 24)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("text-anchor", "end")
+            .text(function (d) {
+                return d;
+            });
 
-       // })
+        // })
     }
 
     var recalculateRefined = function recalculateRefined(data){
@@ -455,9 +465,9 @@ $(document).ready(function() {
             .range([height, 0]);
 
 
-       /* console.log(d3.max(data, function(d){
-            return d.amount;
-        }));*/
+        /* console.log(d3.max(data, function(d){
+         return d.amount;
+         }));*/
 
         var color = d3.scale.ordinal()
             .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
@@ -499,7 +509,7 @@ $(document).ready(function() {
             .data(data);
 
 
-         var stateEnter =  state.enter().append("g")
+        var stateEnter =  state.enter().append("g")
             .attr("class", "g")
             .attr("transform", function(d) { return x0(d.country)  });
 
@@ -616,7 +626,7 @@ $(document).ready(function() {
         xScale = d3.scale.linear()
             .domain([0, d3.max(dataset, function (d) {
                 return d.amount;
-                })])
+            })])
             .range([0, w]);
 
         yScale = d3.scale.ordinal()
@@ -694,7 +704,7 @@ $(document).ready(function() {
 
         colorScale.domain([0, d3.max(dataset, function (d) {
             return d.amount;
-            })])
+        })])
             .domain([d3.min(json, function(d) { return parseInt(d.amount); }),
                 d3.max(json, function(d) { return parseInt(d.amount); })
             ]);
