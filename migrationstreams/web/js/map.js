@@ -88,11 +88,21 @@ $(document).ready(function() {
 
     });
 
-    $('#distributionmonth').change(function () {
+    /*$('#distributionmonth').change(function () {
         getDistribution(updateMap);
         d3.select("#refinedChart")
             .remove();
         firstRefined = true
+    });*/
+
+    $( "#distributionmonth" ).selectmenu({
+        change: function( event, ui ) {
+            getDistribution(updateMap);
+            d3.select("#refinedChart")
+                .remove();
+            firstRefined = true
+
+        }
     });
 
     $('#firstMigration').click(function () {
@@ -322,7 +332,7 @@ $(document).ready(function() {
             .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
 
-        bigSvg = d3.select("body").append("svg")
+        bigSvg = d3.select("#barcontainertwo").append("svg")
             .attr("id", "refinedChart")
             .attr("width", width)
             .attr("height", height)
