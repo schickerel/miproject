@@ -6,12 +6,16 @@ $(document).ready(function() {
     var first = true;
 
     var map;
+
+    var zoomFactor = 0.9,
+        enabled = true;
+
     map = new Datamap({
         element: document.getElementById('container'),
         fills: {
             defaultFill: "#000000"
         },
-        geographyConfig: {
+         geographyConfig: {
             dataUrl: null, //if not null, datamaps will fetch the map JSON (currently only supports topojson)
             hideAntarctica: true,
             borderWidth: 1,
@@ -26,6 +30,15 @@ $(document).ready(function() {
             highlightBorderWidth: 5
         }
     });
+
+/*
+    map.svg.call(d3.behavior.zoom()
+           .on("zoom", redraw)
+    )
+    function redraw() {
+        map.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
+*/
 
     //Variable for storing the current value of the main Filter
     //firstMigration, destination, distribution
@@ -94,6 +107,7 @@ $(document).ready(function() {
             .remove();
         firstRefined = true
     });
+
 
     $('#firstMigration').click(function () {
         getfirstMigrations(updateMap);
