@@ -13,13 +13,13 @@ import java.sql.Statement;
 import java.text.*;
 import java.util.Date;
  
-public class ReadCVS {
+public class ReadCSV {
  
 	Connection conn;
 	
   public static void main(String[] args) throws ParseException, ClassNotFoundException, SQLException {
  
-    ReadCVS obj = new ReadCVS();
+    ReadCSV obj = new ReadCSV();
     obj.connection();
     obj.run();
   }
@@ -33,6 +33,7 @@ public class ReadCVS {
   
   public void run() throws SQLException {
 	  
+	//  String csvFile = "nik-2:/ christian$/Applications/XAMPP/xamppfiles/htdocs/miproject/migrationstreams/build/data.csv";  
     String csvFile = "C:\\xampp\\htdocs\\miproject\\migrationstreams\\build\\data\\data.csv";
     
     BufferedReader br = null;
