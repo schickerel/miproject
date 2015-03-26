@@ -6,16 +6,12 @@ $(document).ready(function() {
     var first = true;
 
     var map;
-
-    var zoomFactor = 0.9,
-        enabled = true;
-
     map = new Datamap({
         element: document.getElementById('container'),
         fills: {
             defaultFill: "#000000"
         },
-         geographyConfig: {
+        geographyConfig: {
             dataUrl: null, //if not null, datamaps will fetch the map JSON (currently only supports topojson)
             hideAntarctica: true,
             borderWidth: 1,
@@ -28,17 +24,30 @@ $(document).ready(function() {
             highlightFillColor: '#FC8D59',
             highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
             highlightBorderWidth: 5
+        },
+        done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+
+                for (var countryCode in countryData) {
+                    if(countryCode === geography.id) {
+                        $.getJSON("../src/index.php/migration/migrations?countryId=" + countryData[countryCode])
+                            .done(function (migrations) {
+                                var country = geography.properties.name;
+                                openDialog(migrations, country);
+                            });
+                    }
+                }
+            });
         }
     });
 
-/*
-    map.svg.call(d3.behavior.zoom()
-           .on("zoom", redraw)
-    )
-    function redraw() {
-        map.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-    }
-*/
+    var openDialog = function (migrations, countryName) {
+        $('#country-chart').html('');
+        //drawChart(migrations);
+        $('#country-chart').dialog({
+            title: countryName
+        });
+    };
 
     //Variable for storing the current value of the main Filter
     //firstMigration, destination, distribution
@@ -101,12 +110,15 @@ $(document).ready(function() {
 
     });
 
-    /*$('#distributionmonth').change(function () {
-        getDistribution(updateMap);
-        d3.select("#refinedChart")
-            .remove();
-        firstRefined = true
-    });*/
+        $( "#slider" ).slider({
+            change: function (event, ui) {
+                getDistribution(updateMap, ui.value);
+                d3.select("#refinedChart")
+                    .remove();
+                firstRefined = true
+            }
+        });
+
 
     $( "#distributionmonth" ).selectmenu({
         change: function( event, ui ) {
@@ -117,7 +129,6 @@ $(document).ready(function() {
 
         }
     });
-
 
     $('#firstMigration').click(function () {
         getfirstMigrations(updateMap);
@@ -154,21 +165,23 @@ $(document).ready(function() {
         }
     });
 
-    $('#selectprof').change(function () {
+    $('#selectprof').selectmenu ({
         //construct the URL for the json request
-        if (mainFilter == 'distributionbyCountry'){
-            var year = $("#distributionyear").val();
-            var month = $("#distributionmonth").val();
-            var url = buildUrl(this.name, this.value, year, month);
-        }else{
-            var url = buildUrl(this.name, this.value);
-        }
-        //get the selected Text value; used for the diagram's legend
-        var legend = $("#selectprof :selected").text();
-        if (firstRefined) {
-            filter(newChart, url, legend);
-        } else {
-            filter(recalculateRefined, url, legend);
+        change: function( event, ui ) {
+            if (mainFilter == 'distributionbyCountry') {
+                var year = $("#distributionyear").val();
+                var month = $("#distributionmonth").val();
+                var url = buildUrl(this.name, this.value, year, month);
+            } else {
+                var url = buildUrl(this.name, this.value);
+            }
+            //get the selected Text value; used for the diagram's legend
+            var legend = $("#selectprof :selected").text();
+            if (firstRefined) {
+                filter(newChart, url, legend);
+            } else {
+                filter(recalculateRefined, url, legend);
+            }
         }
     });
 
@@ -253,10 +266,10 @@ $(document).ready(function() {
     }
 
 
-    function getDistribution(callback) {
+    function getDistribution(callback, value) {
         var url = "../src/index.php/migration/migrations?filter=distributionByCountries&";
-        var year = $("#distributionyear").val();
-        var month = $("#distributionmonth").val();
+        var year = value;
+        var month = 5;
 
         url+= url + "year=" + year + "&month=" + month;
 
@@ -332,9 +345,9 @@ $(document).ready(function() {
 
         //margin values zum Abstand zwischen den zwei den mehreren SVG-Grafiken, die gezeichnet werden;
         //jede Gruppe von Balken ist eine SVG-Grafik!
-        var margin = {top: 0, right: 0, bottom: 0, left: 0},
-            width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+        var margin = {top: 15, right: 0, bottom: 0, left: 0},
+            width = 900 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
 
         x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -424,7 +437,7 @@ $(document).ready(function() {
             .attr("y", height-5)
             .attr("font-family", "sans-serif")
             .attr("font-size", "11px")
-            .attr("fill", "black");
+            .attr("fill", "white");
 
         legend = bigSvg.selectAll(".legend")
             .data(catNames.slice().reverse())
@@ -435,7 +448,8 @@ $(document).ready(function() {
             });
 
         legend.append("rect")
-            .attr("x", width - 18)
+            .attr("x", 18)
+            .attr("y", 2)
             .attr("width", 18)
             .attr("height", 18)
             .style("fill", color);
@@ -445,6 +459,7 @@ $(document).ready(function() {
             .attr("y", 9)
             .attr("dy", ".35em")
             .style("text-anchor", "end")
+            .attr("fill", "white")
             .text(function (d) {
                 return d;
             });
@@ -454,9 +469,9 @@ $(document).ready(function() {
 
     var recalculateRefined = function recalculateRefined(data){
 
-        var margin = {top: 0, right: 0, bottom: 0, left: 0},
-            width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+        var margin = {top: 15, right: 0, bottom: 0, left: 0},
+            width = 900 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
 
         x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -731,7 +746,15 @@ $(document).ready(function() {
             .attr("fill", function (d) {
                 return colorScale(d.amount);
             })
-
+            .on("mouseover", function(d) {
+                var countryvalue = {};
+                countryvalue[d.country] = 'rgb(0, 0, 150)';
+                map.updateChoropleth(countryvalue);
+            }).on("mouseout", function(d) {
+                var countryvalue = {};
+                countryvalue[d.country] = colorScale(d.amount)
+                map.updateChoropleth(countryvalue);
+            });
 
         //nur die Dinge neu schreiben, die sich durch die neu hinzugekommenen Werte ändern
         datas.transition()

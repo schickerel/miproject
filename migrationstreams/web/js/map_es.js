@@ -54,6 +54,7 @@ $(document).ready(function(){
     };
 
 
+
     var openDialog = function (migrations, countryName) {
         $('#country-chart').html('');
         drawChart(migrations);
@@ -61,7 +62,6 @@ $(document).ready(function(){
             title: countryName
         });
     }
-
 
     var drawChart = function (migrations) {
 
