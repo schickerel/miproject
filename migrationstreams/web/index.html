@@ -40,14 +40,13 @@
 
 <div class="subheader">
     <div class="container">
-        <!--<div id="slider"></div>-->
 
         <button id="overview" class="button">Overview</button>
         <!--<button id="distribution" class="button">Distribution</button>-->
         <button id="firstMigration" class="button">First Migration</button>
         <button id="destination" class="button">Destination</button>
 
-        <select class="selectmenu" id="distributionyear">
+       <!-- <select class="selectmenu" id="distributionyear">
             <option value="1933">1933</option>
             <option value="1934">1934</option>
             <option value="1935">1935</option>
@@ -59,27 +58,24 @@
             <option value="2">Februar</option>
             <option value="3">März</option>
             <option value="4">April</option>
-        </select>
+        </select>-->
+        <button id="distribution" class="button">Distribution</button>
 
         <button id="dialog-link" class="button">Detailansicht</button>
 
-
     </div>
 </div>
+
+<div class="buttonMenu">
+<div class="container" style="margin-top: 15">
+    <div id="slider"></div>
+</div></div>
+
         <!-- ui-dialog -->
         <div class="dialog" title="Detailansicht">
-            <div>
-            <button id="firstMigration" class="button">First Migration</button>
-            <button id="destination" class="button">Destination</button>
 
-            <select class="selectmenu" name="test" style="display: list-item">
-                <option value="1">test1</option>
-                <option value="2">test2</option>
-            </select>
-        </div>
-            <!--<div id="barcontainertwo" style="width: 800px; height: 300px;"></div>-->
-
-            <!--<select id="selectdenom" class="selectmenu" name="denomination">
+        <div>
+            <select id="selectdenom" class="selectmenu" name="denomination">
                 <option value="1" name="jüdisch">jüdisch</option>
                 <option value="2">keine</option>
                 <option value="3">evangelisch</option>
@@ -91,7 +87,13 @@
                 <option value="2">Theater</option>
                 <option value="3">Bildende Kunst und Architektur</option>
                 <option value="4">Film</option>
-            </select>-->
+            </select>
+        </div>
+
+            <div id="barcontainertwo" style="width: 900px; height: 400px; margin-bottom: 15px; margin-top: 15px"></div>
+
+            <button id="firstMigration" class="button">First Migration</button>
+            <button id="destination" class="button">Destination</button>
 
         </div>
 

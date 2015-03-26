@@ -121,3 +121,16 @@ select {
 	width: 200px;
 }
 
+.ui-slider-tick-mark{
+	display:inline-block;
+	width:2px;
+	background:white;
+	height:16px;
+	position:absolute;
+	top:-4px;
+}
+
+#slider {
+	visibility: hidden;
+}
+
