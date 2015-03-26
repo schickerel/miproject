@@ -384,6 +384,21 @@ $(document).ready(function() {
                 return color(d.name);
             });
 
+        bigSvg.selectAll("text")
+            .data(dataset) //Bind data with custom key function
+            .enter()
+            .append("text")
+            .text(function(d) {
+                return d.country;
+            })
+            .attr("text-anchor", "middle")
+            .attr("x", function(d, i){
+                return x0(d.country) + + x0.rangeBand()/2;;
+            })
+            .attr("y", height-5)
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("fill", "black");
 
         legend = bigSvg.selectAll(".legend")
             .data(catNames.slice().reverse())
@@ -447,7 +462,9 @@ $(document).ready(function() {
         //name and value
         data.forEach(function (d) {
             d.cat = catNames.map(function (name) {
+
                 return {name: name, value: +d[name]};
+
             });
 
         });
@@ -598,8 +615,7 @@ $(document).ready(function() {
                 d3.max(json, function(d) { return parseInt(d.amount); })
             ]);
 
-        console.log(colorScale(d3.min(dataset, function (d) {
-            return d.amount;})));
+
 
 
         var datas = svg.selectAll("rect")
@@ -620,6 +636,35 @@ $(document).ready(function() {
             .attr("fill", function (d) {
                 return (colorScale(d.amount));
             })
+            .on("mouseover", function(d) {
+                var countryvalue = {};
+                countryvalue[d.country] = 'rgb(0, 0, 150)';
+                map.updateChoropleth(countryvalue);
+            }).on("mouseout", function(d) {
+                var countryvalue = {};
+                countryvalue[d.country] = colorScale(d.amount)
+                map.updateChoropleth(countryvalue);
+            });
+
+
+
+        svg.selectAll("text")
+            .data(dataset, key) //Bind data with custom key function
+            .enter()
+            .append("text")
+            .text(function(d) {
+                 return d.country
+            })
+            .attr("text-anchor", "middle")
+            .attr("x", 20)
+            .attr("y", function(d, i) {
+                return yScale(i) + yScale.rangeBand()/2;
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("fill", "black");
+
+
     }
     function recalculateBarchart(json) {
         dataset = json;
@@ -679,16 +724,50 @@ $(document).ready(function() {
                 return colorScale(d.amount);
             })
 
+        //Update all labels
+        var text =svg.selectAll("text")
+            .data(dataset, key)
+
+            text.transition() // <-- This is new,
+            .duration(1000) // and so is this.
+            .text(function(d) {
+                return d.country
+            })
+            .attr("text-anchor", "middle")
+            .attr("x", 20)
+            .attr("y", function(d, i) {
+                return yScale(i) + yScale.rangeBand()/2;
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("fill", "black");
 
         // .attr("fill", function(d) {
         // return "rgb(0, 0, " + Math.round(colorScale(d.count)) + ")";
         // });
 
+    text.enter()
+            .append("text")
+            .text(function(d) {
+                return d.country
+            })
+            .attr("text-anchor", "middle")
+            .attr("x", 20)
+            .attr("y", function(d, i) {
+                return yScale(i) + yScale.rangeBand()/2;
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("fill", "black");
+
+        text.exit()
+            .transition()
+             .remove();
 
         //. attrTween("d", tweenPie);
         datas.exit()
             .transition()
-            .duration(500)
+            .duration(200)
             .remove();
 
     }});
