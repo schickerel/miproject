@@ -134,21 +134,23 @@ $(document).ready(function() {
     });
 
 
-    $('#selectdenom').change(function () {
+    $('#selectdenom').selectmenu ({
         //construct the URL for the json request
-        if (mainFilter == 'distributionbyCountry'){
-            var year = $("#distributionyear").val();
-            var month = $("#distributionmonth").val();
-            var url = buildUrl(this.name, this.value, year, month);
-        }else{
-            var url = buildUrl(this.name, this.value);
-        }
-        //get the selected Text value; used for the diagram's legend
-        var legend = $("#selectdenom :selected").text();
-        if (firstRefined) {
-            filter(newChart, url, legend);
-        } else {
-            filter(recalculateRefined, url, legend);
+        change: function( event, ui ) {
+            if (mainFilter == 'distributionbyCountry') {
+                var year = $("#distributionyear").val();
+                var month = $("#distributionmonth").val();
+                var url = buildUrl(this.name, this.value, year, month);
+            } else {
+                var url = buildUrl(this.name, this.value);
+            }
+            //get the selected Text value; used for the diagram's legend
+            var legend = $("#selectdenom :selected").text();
+            if (firstRefined) {
+                filter(newChart, url, legend);
+            } else {
+                filter(recalculateRefined, url, legend);
+            }
         }
     });
 
