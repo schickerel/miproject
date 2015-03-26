@@ -13,13 +13,13 @@ import java.sql.Statement;
 import java.text.*;
 import java.util.Date;
  
-public class ReadCVS {
+public class ReadCSV {
  
 	Connection conn;
 	
   public static void main(String[] args) throws ParseException, ClassNotFoundException, SQLException {
  
-    ReadCVS obj = new ReadCVS();
+    ReadCSV obj = new ReadCSV();
     obj.connection();
     obj.run();
   }

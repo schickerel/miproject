@@ -42,3 +42,7 @@
     width: 100%;
     height: 1000px;
 }
+
+.datamaps-arc {
+    pointer-events: none;
+}
