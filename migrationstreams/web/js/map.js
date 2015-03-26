@@ -24,8 +24,30 @@ $(document).ready(function() {
             highlightFillColor: '#FC8D59',
             highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
             highlightBorderWidth: 5
+        },
+        done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+
+                for (var countryCode in countryData) {
+                    if(countryCode === geography.id) {
+                        $.getJSON("../src/index.php/migration/migrations?countryId=" + countryData[countryCode])
+                            .done(function (migrations) {
+                                var country = geography.properties.name;
+                                openDialog(migrations, country);
+                            });
+                    }
+                }
+            });
         }
     });
+
+    var openDialog = function (migrations, countryName) {
+        $('#country-chart').html('');
+        //drawChart(migrations);
+        $('#country-chart').dialog({
+            title: countryName
+        });
+    };
 
     //Variable for storing the current value of the main Filter
     //firstMigration, destination, distribution
