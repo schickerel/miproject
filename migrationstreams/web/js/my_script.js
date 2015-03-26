@@ -19,6 +19,7 @@ $(function(){
 $( ".selectmenu" ).selectmenu();
 });
 
+
 $(function(){
 $( ".button" ).button();
 });
