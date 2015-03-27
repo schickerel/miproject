@@ -20,8 +20,6 @@ $app->mount('/country', new Country\CountryController());
 $app->mount('/denomination', new Denomination\DenominationController());
 $app->mount('/professionalcategory', new ProfessionalCategory\ProfessionalCategoryController());
 
-$app ['debug'] = true;
-
 $app->run();
 
 
