@@ -124,8 +124,6 @@ namespace Person
 				}
 
 				if($minYear == $year) {
-					echo "MinYear: ";
-					echo($minYear);
 					array_push($ages, $person->getId());
 				}
 			}
