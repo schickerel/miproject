@@ -50,8 +50,6 @@ namespace Migration
 					$migrationsJson = $this->getTargetCountryMigrations($params);
 				} else if ($filter == 'distributionByCountries') {
 					$migrationsJson = $this->getDistributionByCountries($params);
-				} else if ($filter == 'distributionByCountries') {
-					$migrationsJson = $this->getDistributionByCountries($params);
 				}
 			} else if (array_key_exists('personId', $params)) {
 				$migrationsJson = $this->getMigrationsByPersonId($params['personId']);
