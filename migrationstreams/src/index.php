@@ -18,7 +18,7 @@ $app->mount('/migration', new Migration\MigrationController());
 $app->mount('/person', new Person\PersonController());
 $app->mount('/country', new Country\CountryController());
 $app->mount('/denomination', new Denomination\DenominationController());
-$app->mount('/professionalcategory', new ProfessionalCategory\ProfessionalCategoryController());
+$app->mount('/professionalCategory', new ProfessionalCategory\ProfessionalCategoryController());
 
 $app->run();
 
