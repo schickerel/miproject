@@ -1,7 +1,4 @@
 
-/*$(function(){
-$("#slider").dateRangeSlider();
-});*/
 
 /*$(function() {
     $( "#show-option" ).tooltip({
@@ -33,6 +30,34 @@ $( "#slider" ).slider({
     }
 
 });
+
+    function setSliderTicks(el) {
+        var $slider = $(el);
+        var max = $slider.slider("option", "max");
+        var min = $slider.slider("option", "min");
+        var spacing = 100 / (max - min);
+
+        $slider.find('.ui-slider-tick-mark').remove();
+        for (var i = 0; i < max - min; i++) {
+            $('<span class="ui-slider-tick-mark"></span>').css('left', (spacing * i) + '%').appendTo($slider);
+        }
+    }
+});
+
+$(function(){
+    $( "#slider2" ).slider({
+        range: false,
+        min: 1933,
+        max: 1970,
+        create: function(event, ui){
+            setSliderTicks(event.target);
+        },
+        change: function(event, ui) {
+            alert(ui.value);
+        }
+
+    });
+
     function setSliderTicks(el) {
         var $slider = $(el);
         var max = $slider.slider("option", "max");
@@ -95,7 +120,7 @@ $(function(){
         resizable: false,
         width: 800,
         height: 130,
-        position: { my: "top", at: "left" }
+        position: { my: "top", at: "left", of: $("#test3") }
     /*   buttons: [
          {
          text: "Ok",
@@ -124,6 +149,40 @@ $(function(){
 $(function(){
     $( "#overview" ).click(function( event ) {
         $( ".dialog2" ).dialog( "open")
+
+        event.preventDefault();
+    });
+});
+
+$(function(){
+    $( ".dialog3" ).dialog({
+        autoOpen: false,
+        draggable: false,
+        resizable: false,
+        width: 50,
+        height: 600,
+        position: { my: "top", at: "left", of: $("#test4") }
+        /*   buttons: [
+         {
+         text: "Ok",
+         click: function() {
+         $( this ).dialog( "close" );
+         }
+         },
+         {
+         text: "Cancel",
+         click: function() {
+         $( this ).dialog( "close" );
+         }
+         }
+         ]*/
+    });
+});
+
+// Link to open the dialog
+$(function(){
+    $( "#filter" ).click(function( event ) {
+        $( ".dialog3" ).dialog( "open")
 
         event.preventDefault();
     });
@@ -197,14 +256,14 @@ $("#barcontainer").each(function () { $("svg")[0].setAttribute('viewBox', '0 0 1
 });*/
 
 
-$(document).ready(function(){
+/*$(document).ready(function(){
     $("#test").click(function(){
         $("#barcontainer").slideUp(1000);
     });
     $("#test2").click(function(){
         $("#barcontainer").slideDown(1000);
     });
-});
+});*/
 
 
 
