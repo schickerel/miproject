@@ -124,6 +124,7 @@ $(function(){
 $(function(){
     $( "#overview" ).click(function( event ) {
         $( ".dialog2" ).dialog( "open")
+        $(".dialog2").css("visibility","visible");
 
         event.preventDefault();
     });
@@ -137,6 +138,7 @@ $(function(){
     $( "#distribution" ).click(function(){
         $("#slider").css("visibility", "visible");
         $("#dialog-link").css("visibility","visible");
+        $(".dialog2").css("visibility","visible");
     });
 });
 
@@ -144,6 +146,7 @@ $(function(){
     $( "#destination" ).click(function(){
         $("#slider").css("visibility", "hidden");
         $("#dialog-link").css("visibility","visible");
+        $(".dialog2").css("visibility","visible");
     });
 });
 

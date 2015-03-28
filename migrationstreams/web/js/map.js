@@ -56,9 +56,9 @@ $(document).ready(function() {
     var drawChart = function (migrations, country) {
 
         var width = 650;
-        var height = 150;
+        var height = 120;
         var margin = 10;
-        var barHeight = 150;
+        var barHeight = 120;
 
         var emigrations = migrations['emigrations'];
         var immigrations = migrations['immigrations'];
@@ -89,8 +89,15 @@ $(document).ready(function() {
             .outerTickSize(0)
             .orient("bottom");
 
+        d3.select("#chart")
+            .remove();
+        d3.select("#barchart")
+            .remove();
+
+        first = true;
         var svg = d3.select("#barcontainer")
             .append("svg")
+            .attr("id", "chart")
             .attr("width", width)
             .attr("height", height);
 
@@ -122,7 +129,19 @@ $(document).ready(function() {
             .attr("width", (x.rangeBand() / 2) - margin)
             .attr("y",  function(d) { return y(d.amount); })
             .attr("height", function(d) { return barHeight - y(d.amount);})
-            .style("fill", "blue");;
+            .style("fill", "blue");
+
+
+        svg.selectAll("text")
+            .data(emigrations) //Bind data with custom key function
+            .enter()
+            .append("text")
+            .text("test")
+            .attr("x", 15)
+            .attr("y", 15)
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "18px")
+            .attr("fill", "white");
 
     };
 
@@ -188,15 +207,19 @@ $(document).ready(function() {
     };
 
     $('#overview').click(function () {
+        d3.select("#chart")
+            .remove();
         getOverview(updateMap);
+
 
     });
 
         $( "#slider" ).slider({
             change: function (event, ui) {
-                getDistribution(updateMap, ui.value);
-                d3.select("#refinedChart")
+                d3.select("#chart")
                     .remove();
+                getDistribution(updateMap, ui.value);
+
                 //firstRefined = true
             }
         });
@@ -213,11 +236,15 @@ $(document).ready(function() {
     });
 
     $('#firstMigration').click(function () {
+        d3.select("#chart")
+            .remove();
         getfirstMigrations(updateMap);
 
     });
 
     $('#destination').click(function () {
+        d3.select("#chart")
+            .remove();
         getDestinations(updateMap);
 
     });
@@ -773,8 +800,7 @@ $(document).ready(function() {
         var h = 150;
         svg = d3.select("#barcontainer")
             .append("svg")
-           /* .attr("viewBox", "30 0 30 30")
-            .attr("z-index", 10000)*/
+            .attr("id", "barchart")
             .attr("width", w)
             .attr("height", h);
 
