@@ -16,7 +16,6 @@ $("#slider").dateRangeSlider();
 /*zweite Zeile reicht nur wenn direkt in html-Datei als Skript geschrieben wird, bei auslagerung in js datei muss außen rum nochmal funktion
 */
 
-
 $(function(){
 $( ".button" ).button();
 });
@@ -59,6 +58,8 @@ $( "#accordion" ).accordion();
 $(function(){
 $( ".dialog" ).dialog({
     autoOpen: false,
+    draggable: false,
+    resizable: false,
     width: 1000,
     height: 600
  /*   buttons: [
@@ -88,24 +89,68 @@ $( "#dialog-link" ).click(function( event ) {
 });
 
 $(function(){
+    $( ".dialog2" ).dialog({
+        autoOpen: false,
+        draggable: false,
+        resizable: false,
+        width: 800,
+        height: 130,
+        position: { my: "top", at: "left" }
+    /*   buttons: [
+         {
+         text: "Ok",
+         click: function() {
+         $( this ).dialog( "close" );
+         }
+         },
+         {
+         text: "Cancel",
+         click: function() {
+         $( this ).dialog( "close" );
+         }
+         }
+         ]*/
+    });;
+});
+
+$(function(){
+    $("#closeDialog").click(function(event){
+        $(".dialog").dialog("close")
+        event.preventDefault();
+    });
+});
+
+// Link to open the dialog
+$(function(){
+    $( "#overview" ).click(function( event ) {
+        $( ".dialog2" ).dialog( "open")
+
+        event.preventDefault();
+    });
+});
+
+$(function(){
     $( ".selectmenu" ).selectmenu();
 });
 
 $(function(){
     $( "#distribution" ).click(function(){
         $("#slider").css("visibility", "visible");
+        $("#dialog-link").css("visibility","visible");
     });
 });
 
 $(function(){
     $( "#destination" ).click(function(){
         $("#slider").css("visibility", "hidden");
+        $("#dialog-link").css("visibility","visible");
     });
 });
 
 $(function(){
     $( "#overview" ).click(function(){
         $("#slider").css("visibility", "hidden");
+        $("#dialog-link").css("visibility","hidden");
     });
 });
 
@@ -114,3 +159,51 @@ $(function(){
         $("#slider").css("visibility", "hidden");
     });
 });
+
+$(function() {
+    $( "#button2" ).click(function() {
+        $( "#effect" ).toggleClass( "newClass", 1000 );
+    });
+});
+
+/*$(function() {
+
+        $( "#barcontainer" ).css("visibility","hidden");
+
+    });*/
+
+
+/*$(function() {
+$("#test").click(function() {
+    $( ".blubb" ).effect( "size", {
+        to: { width: 1200, height: 80 }
+    }, 1000).css("visibility","visible");
+});
+});
+
+$(function() {
+    $("#test2").click(function() {
+        $( ".blubb" ).effect( "size", {
+            to: { width: 1200, height: 400 }
+        }, 1000 );
+    });
+});*/
+
+/*$(function() {
+    $("#test").click(function() {
+$("#barcontainer").each(function () { $("svg")[0].setAttribute('viewBox', '0 0 100 100') });
+});
+});*/
+
+
+$(document).ready(function(){
+    $("#test").click(function(){
+        $("#barcontainer").slideUp(1000);
+    });
+    $("#test2").click(function(){
+        $("#barcontainer").slideDown(1000);
+    });
+});
+
+
+

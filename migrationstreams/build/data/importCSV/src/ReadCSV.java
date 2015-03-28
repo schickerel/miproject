@@ -38,7 +38,7 @@ public class ReadCSV {
     
     BufferedReader br = null;
     String line = "";
-    String cvsSplitBy = ",";
+    String csvSplitBy = ";";
     
     
     try {
@@ -50,7 +50,7 @@ public class ReadCSV {
         int denominationId;
         int professionalCategoryId;
         while ((line = br.readLine()) != null) {
-            String[] splittedRow = line.split(cvsSplitBy);
+            String[] splittedRow = line.split(csvSplitBy);
 
             String firstName = splittedRow[0];
             String lastName = splittedRow[1];

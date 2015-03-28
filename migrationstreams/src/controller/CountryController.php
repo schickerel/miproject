@@ -23,7 +23,7 @@ namespace Country
             return $factory;
         }
 
-        public function getCountries(Application $app) {
+        public function getCountries() {
             $countries = CountryQuery::create()
                 ->find();
 
@@ -32,7 +32,7 @@ namespace Country
             return new Response($countriesJson, 200, ['Content-Type' => 'application/json']);
         }
 
-        public function getCountryById(Application $app, $id) {
+        public function getCountryById($id) {
             $country = CountryQuery::create()
                 ->findPK($id);
 

@@ -773,6 +773,8 @@ $(document).ready(function() {
         var h = 150;
         svg = d3.select("#barcontainer")
             .append("svg")
+           /* .attr("viewBox", "30 0 30 30")
+            .attr("z-index", 10000)*/
             .attr("width", w)
             .attr("height", h);
 

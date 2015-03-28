@@ -24,7 +24,7 @@ namespace Denomination
             return $factory;
         }
 
-        public function getDenominations(Application $app) {
+        public function getDenominations() {
             $denominations = DenominationQuery::create()
                 ->find();
 
@@ -33,7 +33,7 @@ namespace Denomination
             return new Response($denominationsJson, 200, ['Content-Type' => 'application/json']);
         }
 
-        public function getDenominationById(Application $app, $id) {
+        public function getDenominationById($id) {
             $denomination = DenominationQuery::create()
                 ->findPK($id);
 

@@ -98,7 +98,7 @@ h1 {
 	padding-bottom: 0px;
 	z-index: 10;
 	position: relative;
-	height: 50px;
+	height: 35px;
 }
 
 .map {
@@ -125,12 +125,28 @@ select {
 	display:inline-block;
 	width:2px;
 	background:white;
-	height:16px;
+	height:14px;
 	position:absolute;
-	top:-4px;
 }
 
 #slider {
 	visibility: hidden;
 }
 
+.info{
+	/*visibility: hidden;*/
+	background-color: fuchsia;
+}
+
+.toggler { width: 500px; height: 200px; position: relative; }
+
+#effect {position: relative;  width: 240px;  padding: 1em; letter-spacing: 0; font-size: 1.2em; border: 1px solid #000; background: #eee; color: #333; }
+
+.newClass { text-indent: 40px; letter-spacing: .4em; width: 410px; height: 100px; padding: 30px; margin: 10px; font-size: 1.6em; }
+
+#button2 { padding: .5em 1em; text-decoration: none; }
+
+.ui-dialog-titlebar
+{
+	display:none;
+}
