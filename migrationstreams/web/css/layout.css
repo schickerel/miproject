@@ -85,9 +85,9 @@ h1 {
 }
 
 .subheader {
-	padding-top: 10px;
+	padding-top: 2px;
 	background: #000000 url("ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
-	padding-bottom: 0px;
+	padding-bottom: 4px;
 	z-index: 10;
 	position: relative;
 	height: 50px;
@@ -109,12 +109,12 @@ h1 {
 	height: 800px;
 }
 
-.diagramm {
+.subheader2 {
 	padding-top: 10px;
 	padding-bottom: 0px;
 	z-index: 10;
 	position: relative;
-	height: 185px;
+	height: 50px;
 }
 
 select {
@@ -133,8 +133,17 @@ select {
 	visibility: hidden;
 }
 
+#slider2 {
+	visibility: hidden;
+}
+
 .info{
-	/*visibility: hidden;*/
+	visibility: hidden;
+	background-color: fuchsia;
+}
+
+.info2{
+	visibility: hidden;
 	background-color: fuchsia;
 }
 
@@ -143,4 +152,11 @@ select {
 	display:none;
 }
 
+.ui-icon {
+	height: 30px;
+	width:15px;
+}
 
+#person-list {
+	background: #000000 url("ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
+}
