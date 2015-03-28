@@ -436,7 +436,7 @@ $(document).ready(function() {
             .style("font-size","8px")
 
             .attr("x", function(d){
-                 return x(d) +12;
+                 return x(d) + (x.rangeBand()/2);
                   })
             .attr("y",  height)
             .style("fill", "red");
