@@ -108,7 +108,6 @@ $( ".dialog" ).dialog({
 $(function(){
 $( "#dialog-link" ).click(function( event ) {
     $( ".dialog" ).dialog( "open")
-
     event.preventDefault();
 });
 });
@@ -117,7 +116,10 @@ $(function(){
     $( ".dialog2" ).dialog({
         autoOpen: false,
         draggable: false,
-        resizable: false,
+        resizable: true,
+        open: function (event, ui) {
+            $('.dialog2').css('overflow', 'hidden'); //this line does the actual hiding
+        },
         width: 800,
         height: 130,
         position: { my: "top", at: "left", of: $("#test3") }
@@ -197,6 +199,7 @@ $(function(){
     $( "#distribution" ).click(function(){
         $("#slider").css("visibility", "visible");
         $("#dialog-link").css("visibility","visible");
+
         $(".dialog2").css("visibility","visible");
     });
 });
