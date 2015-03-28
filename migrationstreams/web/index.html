@@ -29,6 +29,9 @@
     <div class="container">
         <h1>Migration aus dem Deutschen Reich 1933-1945</h1>
         <div class="menu">
+            <div class="info" style="position: absolute">
+                <p>test</p>
+            </div>
             <span><a href="index.html">Start</a></span>
             <span><a href="index2.html">Personenliste</a></span>
             <span><a href="index.html">Lorem Ipsum</a></span>
@@ -62,6 +65,9 @@
         <button id="distribution" class="button">Distribution</button>
 
         <button id="dialog-link" class="button">Detailansicht</button>
+        <!--<button id="test" class="button">test</button>
+        <button id="test2" class="button">test</button>-->
+
 
     </div>
 </div>
@@ -70,6 +76,7 @@
 <div class="container" style="margin-top: 15">
     <div id="slider"></div>
 </div></div>
+
 
         <!-- ui-dialog -->
         <div class="dialog" title="Detailansicht">
@@ -94,18 +101,27 @@
 
             <button id="firstMigration" class="button">First Migration</button>
             <button id="destination" class="button">Destination</button>
+            <button id="closeDialog" class="button">Cancel</button>
 
         </div>
 
-<div id ="country-chart"></div>
+<!--<div id ="country-chart"></div>-->
 
-<div class="diagramm">
-    <div class="container">
-        <div id="barcontainer"></div>
+
+    <div class="dialog2">
+        <div id="barcontainer" style="width: 400px; height: 160px"></div>
+   </div>
+
+
+<div id="container" style="position: absolute; top: 180px; width: 1200px; height: 800px;">
+    <div class="info" style="position: absolute; left: 60px; top: 80px">
     </div>
 </div>
 
-<div id="container" style="position: absolute; top: 160px; width: 1200px; height: 800px;"></div>
+<div id="barchart" class="container">
+    <!--<button id="dialog-link2" class="button">chart</button>-->
+</div>
+
 
       <script src="js/map.js"></script> 
 
