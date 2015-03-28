@@ -117,8 +117,11 @@ $(function(){
     $( ".dialog2" ).dialog({
         autoOpen: false,
         draggable: false,
-        resizable: false,
-        width: 750,
+        resizable: true,
+        open: function (event, ui) {
+            $('.dialog2').css('overflow', 'hidden'); //this line does the actual hiding
+        },
+        width: 800,
         height: 130,
         position: { my: "top", at: "left", of: $("#test3") }
     /*   buttons: [
@@ -162,13 +165,21 @@ $(function(){
         resizable: false,
         width: 50,
         height: 600,
-        position: {
-            my: "left top",
-            at: "left bottom",
-            of: $('#test4')
-        },
-        appendTo: "#test4"
-        //position: { my: "top", at: "left", of: $(".buttonMenu") }
+        position: { my: "top", at: "left", of: $("#test4") }
+        /*   buttons: [
+         {
+         text: "Ok",
+         click: function() {
+         $( this ).dialog( "close" );
+         }
+         },
+         {
+         text: "Cancel",
+         click: function() {
+         $( this ).dialog( "close" );
+         }
+         }
+         ]*/
     });
 });
 

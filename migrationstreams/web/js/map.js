@@ -53,97 +53,7 @@ $(document).ready(function() {
         });
     }
 
-    var drawChart = function (migrations, country) {
 
-        var width = 650;
-        var height = 120;
-        var margin = 10;
-        var barHeight = 120;
-
-        var emigrations = migrations['emigrations'];
-        var immigrations = migrations['immigrations'];
-
-        var emigrationsMax = d3.max(emigrations, function(d) { return d.amount; });
-        var immigrationsMax = d3.max(immigrations, function(d) { return d.amount; });
-
-        var maxAmount = 0;
-        if(emigrationsMax > immigrationsMax) {
-            maxAmount = emigrationsMax;
-        } else {
-            maxAmount = immigrationsMax;
-        }
-
-        var domain = emigrations.map(function(d) {return d.year}).concat(immigrations.map(function(d) {return d.year}));
-        for(var i=0; i<domain .length; ++i) {
-            for(var j=i+1; j<domain .length; ++j) {
-                if(domain [i] === domain [j])
-                    domain .splice(j--, 1);
-            }
-        }
-
-        var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-        var y = d3.scale.linear().range([barHeight, 0]);
-
-        var xAxis = d3.svg.axis()
-            .scale(x)
-            .outerTickSize(0)
-            .orient("bottom");
-
-        d3.select("#chart")
-            .remove();
-        d3.select("#barchart")
-            .remove();
-
-        first = true;
-        var svg = d3.select("#barcontainer")
-            .append("svg")
-            .attr("id", "chart")
-            .attr("width", width)
-            .attr("height", height);
-
-        x.domain(domain.map(function(d) {return d}).sort());
-        y.domain([0, maxAmount]);
-
-        svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(0," + (barHeight) + ")")
-            .call(xAxis);
-
-        svg.selectAll("rect.emigrations")
-            .data(emigrations)
-            .enter()
-            .append("rect")
-            .attr("class", "emigrations")
-            .attr("x", function(d) { return x(d.year) + margin;})
-            .attr("width", x.rangeBand() / 2 - margin)
-            .attr("y",  function(d) { return y(d.amount);})
-            .attr("height", function(d) { return barHeight - y(d.amount);})
-            .style("fill", "white");
-
-        svg.selectAll("rect.immigrations")
-            .data(immigrations)
-            .enter()
-            .append("rect")
-            .attr("class", "immigrations")
-            .attr("x", function(d) { return x(d.year) + (x.rangeBand()/2);})
-            .attr("width", (x.rangeBand() / 2) - margin)
-            .attr("y",  function(d) { return y(d.amount); })
-            .attr("height", function(d) { return barHeight - y(d.amount);})
-            .style("fill", "blue");
-
-
-        svg.selectAll("text")
-            .data(emigrations) //Bind data with custom key function
-            .enter()
-            .append("text")
-            .text("test")
-            .attr("x", 15)
-            .attr("y", 15)
-            .attr("font-family", "sans-serif")
-            .attr("font-size", "18px")
-            .attr("fill", "white");
-
-    };
 
 
     //Variable for storing the current value of the main Filter
@@ -440,6 +350,99 @@ $(document).ready(function() {
                 mainFilter = "distributionByCountries";
             });
     }
+
+    function drawChart (migrations, country) {
+
+        var width = 650;
+        var height = 120;
+        var margin = 10;
+        var barHeight = 120;
+
+        var emigrations = migrations['emigrations'];
+        var immigrations = migrations['immigrations'];
+
+        var emigrationsMax = d3.max(emigrations, function(d) { return d.amount; });
+        var immigrationsMax = d3.max(immigrations, function(d) { return d.amount; });
+
+        var maxAmount = 0;
+        if(emigrationsMax > immigrationsMax) {
+            maxAmount = emigrationsMax;
+        } else {
+            maxAmount = immigrationsMax;
+        }
+
+        var domain = emigrations.map(function(d) {return d.year}).concat(immigrations.map(function(d) {return d.year}));
+        for(var i=0; i<domain .length; ++i) {
+            for(var j=i+1; j<domain .length; ++j) {
+                if(domain [i] === domain [j])
+                    domain .splice(j--, 1);
+            }
+        }
+
+
+        var sortedDomain =domain.sort();
+
+        console.log(sortedDomain);
+
+        var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+        var y = d3.scale.linear().range([barHeight, 0]);
+
+
+
+        d3.select("#chart")
+            .remove();
+        d3.select("#barchart")
+            .remove();
+
+        first = true;
+        var svg = d3.select("#barcontainer")
+            .append("svg")
+            .attr("id", "chart")
+            .attr("width", width)
+            .attr("height", height);
+
+        x.domain(domain.map(function(d) {return d}).sort());
+        y.domain([0, maxAmount]);
+
+       svg.selectAll("rect.emigrations")
+            .data(emigrations)
+            .enter()
+            .append("rect")
+            .attr("class", "emigrations")
+            .attr("x", function(d) { return x(d.year) + margin;})
+            .attr("width", x.rangeBand() / 2 - margin)
+            .attr("y",  function(d) { return y(d.amount);})
+            .attr("height", function(d) { return barHeight - y(d.amount);})
+            .style("fill", "white");
+
+        svg.selectAll("rect.immigrations")
+            .data(immigrations)
+            .enter()
+            .append("rect")
+            .attr("class", "immigrations")
+            .attr("x", function(d) { return x(d.year) + (x.rangeBand()/2);})
+            .attr("width", (x.rangeBand() / 2) - margin)
+            .attr("y",  function(d) { return y(d.amount); })
+            .attr("height", function(d) { return barHeight - y(d.amount);})
+            .style("fill", "blue");
+
+        svg.selectAll("text")
+            .data(sortedDomain)
+            .enter()
+            .append("text")
+            .text(function(d){
+                return d;
+            })
+            .style("font-size","8px")
+
+            .attr("x", function(d){
+                 return x(d) + (x.rangeBand()/2);
+                  })
+            .attr("y",  height)
+            .style("fill", "red");
+
+
+    };
 
     //function for creating an new array with both data
     function filter(callback, url, category, empty) {
