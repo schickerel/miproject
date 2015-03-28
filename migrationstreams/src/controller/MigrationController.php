@@ -27,21 +27,15 @@ namespace Migration
 			return $factory;
 		}
 
-		public function getMigrationById(Application $app, $id) {
+		public function getMigrationById($id) {
 			$migration = MigrationQuery::create()
 				->findPK($id);
-			if ($migration == null) {
-				$app->error(function (\Exception $e, $code) {
-					return new Response('We are sorry, but something went terribly wrong.');
-				});
-			} else {
-				$migrationJson = $migration->toJSON(true, true);
-				return  new Response($migrationJson, 200, ['Content-Type' => 'application/json']);
-			}
 
+			$migrationJson = $migration->toJSON(true, true);
+			return  new Response($migrationJson, 200, ['Content-Type' => 'application/json']);
 		}
 
-	 	public function getMigrations(Application $app, Request $request) {
+	 	public function getMigrations(Request $request) {
 			$migrationsJson = null;
 			$params = $request->query->all();
 
@@ -54,8 +48,6 @@ namespace Migration
 					$migrationsJson = $this->getFirstMigrations($params);
 				} else if ($filter == 'targetCountryMigration') {
 					$migrationsJson = $this->getTargetCountryMigrations($params);
-				} else if ($filter == 'distributionByCountries') {
-					$migrationsJson = $this->getDistributionByCountries($params);
 				} else if ($filter == 'distributionByCountries') {
 					$migrationsJson = $this->getDistributionByCountries($params);
 				}

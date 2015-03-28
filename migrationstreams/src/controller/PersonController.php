@@ -25,7 +25,7 @@ namespace Person
 			return $factory;
 		}
 
-		public function getPersonById(Application $app, $id) {
+		public function getPersonById($id) {
 			$person = PersonQuery::create()
 				->findPK($id);
 			$personJson = $person->toJSON(true, true);
@@ -33,7 +33,7 @@ namespace Person
 			return  new Response($personJson, 200, ['Content-Type' => 'application/json']);
 		}
 
-		public function getPersons(Application $app, Request $request) {
+		public function getPersons(Request $request) {
 			$params = $request->query->all();
 			$persons = PersonQuery::create();
 
@@ -124,8 +124,6 @@ namespace Person
 				}
 
 				if($minYear == $year) {
-					echo "MinYear: ";
-					echo($minYear);
 					array_push($ages, $person->getId());
 				}
 			}

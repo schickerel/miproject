@@ -12,7 +12,7 @@ namespace ProfessionalCategory
             $factory = $app['controllers_factory'];
 
             $factory->get(
-                '/professionalcategories',
+                '/professionalCategories',
                 'ProfessionalCategory\ProfessionalCategoryController::getProfessionalCategories'
             );
 
@@ -24,7 +24,7 @@ namespace ProfessionalCategory
             return $factory;
         }
 
-        public function getProfessionalCategories(Application $app) {
+        public function getProfessionalCategories() {
             $professionalCategories = ProfessionalCategoryQuery::create()
                 ->find();
 
@@ -33,7 +33,7 @@ namespace ProfessionalCategory
             return new Response($professionalCategoriesJson, 200, ['Content-Type' => 'application/json']);
         }
 
-        public function getProfessionalCategoryById(Application $app, $id) {
+        public function getProfessionalCategoryById($id) {
             $professionalCategory = ProfessionalCategoryQuery::create()
                 ->findPK($id);
 
