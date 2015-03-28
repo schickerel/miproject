@@ -4,50 +4,128 @@
 $(document).ready(function() {
 
     var first = true;
-
     var map;
-    map = new Datamap({
-        element: document.getElementById('container'),
-        fills: {
-            defaultFill: "#000000"
-        },
-        geographyConfig: {
-            dataUrl: null, //if not null, datamaps will fetch the map JSON (currently only supports topojson)
-            hideAntarctica: true,
-            borderWidth: 1,
-            borderColor: '#FDFDFD',
-            popupTemplate: function (geography, data) { //this function should just return a string
-                return '<div class="test"><strong>' + geography.properties.name + '</strong></div>';
-            },
-            popupOnHover: true, //disable the popup while hovering
-            highlightOnHover: true,
-            highlightFillColor: '#FC8D59',
-            highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
-            highlightBorderWidth: 5
-        },
-        done: function(datamap) {
-            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-
-                for (var countryCode in countryData) {
-                    if(countryCode === geography.id) {
-                        $.getJSON("../src/index.php/migration/migrations?countryId=" + countryData[countryCode])
-                            .done(function (migrations) {
-                                var country = geography.properties.name;
-                                openDialog(migrations, country);
-                            });
-                    }
-                }
-            });
-        }
-    });
-
-    var openDialog = function (migrations, countryName) {
-        $('#country-chart').html('');
-        //drawChart(migrations);
-        $('#country-chart').dialog({
-            title: countryName
+    $.getJSON("../src/index.php/country/countries")
+        .done(function (countries) {
+            buildMap(countries);
         });
+
+    var buildMap = function (countries) {
+
+        var countryData = new Array();
+        for (var countryKey in countries) {
+            var country = countries[countryKey];
+            countryData[country['Code']] = country['Id'];
+        }
+
+        map = new Datamap({
+            element: document.getElementById('container'),
+            fills: {
+                defaultFill: "#000000"
+            },
+            geographyConfig: {
+                dataUrl: null, //if not null, datamaps will fetch the map JSON (currently only supports topojson)
+                hideAntarctica: true,
+                borderWidth: 1,
+                borderColor: '#FDFDFD',
+                popupTemplate: function (geography, data) { //this function should just return a string
+                    return '<div class="test"><strong>' + geography.properties.name + '</strong></div>';
+                },
+                popupOnHover: true, //disable the popup while hovering
+                highlightOnHover: true,
+                highlightFillColor: '#FC8D59',
+                highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+                highlightBorderWidth: 5
+            },
+            done: function (datamap) {
+                datamap.svg.selectAll('.datamaps-subunit').on('click', function (geography) {
+                    for (var countryCode in countryData) {
+                        if (countryCode === geography.id) {
+                            $.getJSON("../src/index.php/migration/migrations?countryId=" + countryData[countryCode])
+                                .done(function (migrations) {
+                                    var country = geography.properties.name;
+                                    drawChart(migrations, country);
+                                });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    var drawChart = function (migrations, country) {
+
+        var width = 650;
+        var height = 150;
+        var margin = 10;
+        var barHeight = 150;
+
+        var emigrations = migrations['emigrations'];
+        var immigrations = migrations['immigrations'];
+
+        var emigrationsMax = d3.max(emigrations, function(d) { return d.amount; });
+        var immigrationsMax = d3.max(immigrations, function(d) { return d.amount; });
+
+        var maxAmount = 0;
+        if(emigrationsMax > immigrationsMax) {
+            maxAmount = emigrationsMax;
+        } else {
+            maxAmount = immigrationsMax;
+        }
+
+        var domain = emigrations.map(function(d) {return d.year}).concat(immigrations.map(function(d) {return d.year}));
+        for(var i=0; i<domain .length; ++i) {
+            for(var j=i+1; j<domain .length; ++j) {
+                if(domain [i] === domain [j])
+                    domain .splice(j--, 1);
+            }
+        }
+
+        var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+        var y = d3.scale.linear().range([barHeight, 0]);
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .outerTickSize(0)
+            .orient("bottom");
+
+        var svg = d3.select("#barcontainer")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        x.domain(domain.map(function(d) {return d}).sort());
+        y.domain([0, maxAmount]);
+
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + (barHeight) + ")")
+            .call(xAxis);
+
+        svg.selectAll("rect.emigrations")
+            .data(emigrations)
+            .enter()
+            .append("rect")
+            .attr("class", "emigrations")
+            .attr("x", function(d) { return x(d.year) + margin;})
+            .attr("width", x.rangeBand() / 2 - margin)
+            .attr("y",  function(d) { return y(d.amount);})
+            .attr("height", function(d) { return barHeight - y(d.amount);})
+            .style("fill", "white");
+
+        svg.selectAll("rect.immigrations")
+            .data(immigrations)
+            .enter()
+            .append("rect")
+            .attr("class", "immigrations")
+            .attr("x", function(d) { return x(d.year) + (x.rangeBand()/2);})
+            .attr("width", (x.rangeBand() / 2) - margin)
+            .attr("y",  function(d) { return y(d.amount); })
+            .attr("height", function(d) { return barHeight - y(d.amount);})
+            .style("fill", "blue");;
+
     };
+
 
     //Variable for storing the current value of the main Filter
     //firstMigration, destination, distribution
@@ -87,7 +165,11 @@ $(document).ready(function() {
 
     var dataset;
 
-    var refinedDataset;
+    var refinedDatasets;
+
+    var currentURL;
+
+    var currentLegend;
 
     var svg;
 
@@ -115,7 +197,7 @@ $(document).ready(function() {
                 getDistribution(updateMap, ui.value);
                 d3.select("#refinedChart")
                     .remove();
-                firstRefined = true
+                //firstRefined = true
             }
         });
 
@@ -125,24 +207,55 @@ $(document).ready(function() {
             getDistribution(updateMap);
             d3.select("#refinedChart")
                 .remove();
-            firstRefined = true
+            //firstRefined = true
 
         }
     });
 
     $('#firstMigration').click(function () {
         getfirstMigrations(updateMap);
-        d3.select("#refinedChart")
-            .remove();
-        firstRefined = true
+
     });
 
     $('#destination').click(function () {
         getDestinations(updateMap);
+
+    });
+
+    $('#firstMigrationRefined').click(function () {
+
+        firstRefined = true;
         d3.select("#refinedChart")
             .remove();
-        firstRefined = true
+        getfirstMigrations(updateMap);
+        //mainFilter = "firstMigration";
+        newChart(dataset);
+        console.log(mainFilter, currentURL, currentLegend);
+
+
     });
+
+
+
+    $('#destinationRefined').click(function () {
+        firstRefined = true;
+        d3.select("#refinedChart")
+            .remove();
+        getDestinations(updateMap);
+        //mainFilter = "targetCountryMigration";
+        var empty = true;
+        newChart(dataset);
+
+
+
+    });
+
+    //remove svg graphic on dialog close
+    $('.dialog').bind('dialogclose', function(event) {
+        d3.select("#refinedChart")
+            .remove();
+    });
+
 
 
     $('#selectdenom').selectmenu ({
@@ -151,16 +264,20 @@ $(document).ready(function() {
             if (mainFilter == 'distributionbyCountry') {
                 var year = $("#distributionyear").val();
                 var month = $("#distributionmonth").val();
-                var url = buildUrl(this.name, this.value, year, month);
+                currentURL = buildUrl(this.name, this.value, year, month);
             } else {
-                var url = buildUrl(this.name, this.value);
+                currentURL = buildUrl(this.name, this.value);
             }
             //get the selected Text value; used for the diagram's legend
-            var legend = $("#selectdenom :selected").text();
+            currentLegend = $("#selectdenom :selected").text();
+            var empty = false;
             if (firstRefined) {
-                filter(newChart, url, legend);
+                d3.select("#refinedChart")
+                    .remove();
+                  filter(newChart, currentURL, currentLegend, empty);
+                firstRefined = false;
             } else {
-                filter(recalculateRefined, url, legend);
+                filter(recalculateRefined, currentURL, currentLegend, empty);
             }
         }
     });
@@ -171,16 +288,20 @@ $(document).ready(function() {
             if (mainFilter == 'distributionbyCountry') {
                 var year = $("#distributionyear").val();
                 var month = $("#distributionmonth").val();
-                var url = buildUrl(this.name, this.value, year, month);
+                currentURL = buildUrl(this.name, this.value, year, month);
             } else {
-                var url = buildUrl(this.name, this.value);
+                currentURL = buildUrl(this.name, this.value);
             }
             //get the selected Text value; used for the diagram's legend
-            var legend = $("#selectprof :selected").text();
+            currentLegend = $("#selectprof :selected").text();
+            var empty = false;
             if (firstRefined) {
-                filter(newChart, url, legend);
+                d3.select("#refinedChart")
+                    .remove();
+                filter(newChart, currentURL, currentLegend, empty);
+                firstRefined = false;
             } else {
-                filter(recalculateRefined, url, legend);
+                filter(recalculateRefined, currentURL, currentLegend, empty);
             }
         }
     });
@@ -294,10 +415,11 @@ $(document).ready(function() {
     }
 
     //function for creating an new array with both data
-    function filter(callback, url, category) {
+    function filter(callback, url, category, empty) {
+        if (empty ===false){
         $.getJSON(url)
             .done(function (json) {
-                var refinedDatasets = [];
+                refinedDatasets = [];
                 var refinedCategory = category;
                 json = json.sort(function (a, b) {
                     return d3.ascending(a.country, b.country);
@@ -322,8 +444,23 @@ $(document).ready(function() {
                 })
                 //console.log(refinedDatasets);
                 callback(refinedDatasets);
-                firstRefined = false;
+                //firstRefined = false;
             })
+        }else {
+            var refinedCategory = category;
+            $.each(dataset, function (i) {
+                var refinedDataset = {};
+                refinedDataset.country = dataset[i].country;
+                refinedDataset.totalAmount = dataset[i].amount;
+                refinedDataset[refinedCategory] = 3;
+                refinedDatasets.push(refinedDataset);
+                var refinedCategory = category;
+            })
+
+            callback(refinedDatasets);
+
+        }
+
     };
     //category is the general category, number the specific no of this category
     function buildUrl(category, number, year, month) {
@@ -373,7 +510,6 @@ $(document).ready(function() {
         var catNames = d3.keys(data[0]).filter(function (key) {
             return key !== "country";
         });
-        console.log(catNames);
 
         //map each datarow/Object to an key in the keymap;
         //each data has additional attribute ages; with
@@ -434,7 +570,7 @@ $(document).ready(function() {
             .attr("x", function(d, i){
                 return x0(d.country) + + x0.rangeBand()/2;;
             })
-            .attr("y", height-5)
+            .attr("y", height-20)
             .attr("font-family", "sans-serif")
             .attr("font-size", "11px")
             .attr("fill", "white");
@@ -639,6 +775,8 @@ $(document).ready(function() {
             .append("svg")
             .attr("width", w)
             .attr("height", h);
+
+
 
         xScale = d3.scale.linear()
             .domain([0, d3.max(dataset, function (d) {
