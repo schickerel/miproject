@@ -95,7 +95,7 @@ $(function(){
         resizable: false,
         width: 800,
         height: 130,
-        position: { my: "top", at: "left", of: barchart }
+        position: { my: "top", at: "left" }
     /*   buttons: [
          {
          text: "Ok",
