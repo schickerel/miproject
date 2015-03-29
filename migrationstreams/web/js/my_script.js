@@ -120,7 +120,13 @@ $(function(){
         resizable: false,
         width: 750,
         height: 130,
-        position: { my: "top", at: "left", of: $("#test3") }
+        open: function(event, ui) {
+            $(event.target).parent().css('position', 'fixed');
+            $(event.target).parent().css('top', '200px');
+            $(event.target).parent().css('left', '10px');
+        }
+        //dialogClass: "positionDialogStart"
+        //position: { my: "top", at: "left", of: $("#test3") }
     /*   buttons: [
          {
          text: "Ok",
@@ -135,7 +141,7 @@ $(function(){
          }
          }
          ]*/
-    });;
+    });
 });
 
 $(function(){
@@ -224,28 +230,55 @@ $(function(){
 });
 
 $(function(){
-    $( "#distributionrefined" ).click(function(){
+    $( "#DistributionRefined" ).click(function(){
         $("#slider2").css("visibility", "visible");
     });
 });
 
-/*$(function(){
-    $( "#help" ).click(function(){
-        $(".info").css("visibility", "visible");
+$(function(){
+    $( "#firstMigrationRefined" ).click(function(){
+        $("#slider2").css("visibility", "hidden");
     });
+});
+
+$(function(){
+    $( "#destinationRefined" ).click(function(){
+        $("#slider2").css("visibility", "hidden");
+    });
+});
+
+$(function(){
+$( "#helpButtonStart" ).click(function() {
+    //$(".helpDialogStart").fadeIn( "slow");
+    $( ".helpDialogStart" ).toggle( "drop" );
+});
+});
+
+/*$(function(){
+$("#helpButtonStart").click (function () {
+    if ($(".helpDialogStart").css("visibility")== "hidden") {
+        $(".helpDialogStart").fadeIn("slow");
+        //$(".helpDialogStart").css("visibility", "visible");
+    } else {
+        $( ".helpDialogStart" ).toggle( "explode" );
+    }
+});
 });*/
 
 $(function(){
-$("#helpButtonStart").click (function () {
-    if ($(".helpDialogStart").css("visibility")== "hidden") {
-        $(".helpDialogStart").css("visibility", "visible");
-    } else {
-        $(".helpDialogStart").css("visibility", "hidden");
-    }
-});
+    $("#helpButtonDetail").click(function() {
+        $( ".helpDialogDetail" ).toggle( "drop" );
+    });
 });
 
 $(function(){
+    $("#helpButtonPerson").click(function() {
+        $( ".helpDialogPerson" ).toggle( "drop" );
+    });
+});
+
+
+/*$(function(){
     $("#helpButtonDetail").click (function () {
         if ($(".helpDialogDetail").css("visibility")== "hidden") {
             $(".helpDialogDetail").css("visibility", "visible");
@@ -263,7 +296,7 @@ $(function(){
             $(".helpDialogPerson").css("visibility", "hidden");
         }
     });
-});
+});*/
 
 /*$(function() {
     $( "#button2" ).click(function() {

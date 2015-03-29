@@ -138,18 +138,18 @@ select {
 }
 
 .helpDialogStart{
-	visibility: hidden;
-	background-color: fuchsia;
+	display: none;
+	background-color: #800032;
 }
 
 .helpDialogDetail{
-	visibility: hidden;
-	background-color: fuchsia;
+	display: none;
+	background-color: #800032;
 }
 
 .helpDialogPerson{
-	visibility: hidden;
-	background-color: fuchsia;
+	display: none;
+	background-color: #800032;
 }
 
 .ui-dialog-titlebar
@@ -168,4 +168,10 @@ select {
 
 #dialog-link {
 	visibility: hidden;
+}
+
+.positionDialogStart {
+	position: absolute;
+	left:5px;
+	top:50px;
 }
