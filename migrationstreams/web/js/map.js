@@ -267,13 +267,9 @@ $(document).ready(function() {
                     return d.year;
                 };
 
-                if (first) {
-                    calculateBarchart(json);
-                    first = false;
-                }
-                else {
                     recalculateBarchart(json);
-                }
+
+
 
             });
     };
@@ -288,15 +284,10 @@ $(document).ready(function() {
                 key = function (d) {
                     return d.country;
                 };
-                if (first) {
-                    calculateBarchart(json);
-                    dataset = json;
-                    first = false;
-                }
-                else {
+
                     recalculateBarchart(json);
-                }
                 mainFilter = "firstMigration";
+
 
             });
     }
@@ -312,16 +303,10 @@ $(document).ready(function() {
                 key = function (d) {
                     return d.country;
                 };
-                if (first) {
-                    calculateBarchart(json);
-                    first = false;
-                }
-                else {
-                    recalculateBarchart(json);
-                }
-                mainFilter = "targetCountryMigration";
-            });
-    }
+                recalculateBarchart(json);
+                 mainFilter = "targetCountryMigration";
+
+    })}
 
 
     function getDistribution(callback, value) {
@@ -341,7 +326,7 @@ $(document).ready(function() {
                     return d.country;
                 };
                 if (first) {
-                    calculateBarchart(json);
+                    recalculateBarchart(json);
                     first = false;
                 }
                 else {
@@ -796,19 +781,20 @@ $(document).ready(function() {
         updateMap(countryMap);
     }
 
-    function calculateBarchart(json) {
+    function recalculateBarchart(json) {
         dataset = json;
 
         var w = 650;
-        var h = 150;
-        svg = d3.select("#barcontainer")
-            .append("svg")
-            .attr("id", "barchart")
-            .attr("width", w)
-            .attr("height", h);
+        var h = 450;
 
-
-
+        if(first) {
+             svg = d3.select("#barcontainer")
+                .append("svg")
+                .attr("id", "barchart")
+                .attr("width", w)
+                .attr("height", h);
+                first = false;
+        }
         xScale = d3.scale.linear()
             .domain([0, d3.max(dataset, function (d) {
                 return d.amount;
@@ -826,83 +812,13 @@ $(document).ready(function() {
             ]);
 
 
-
-
-        var datas = svg.selectAll("rect")
-            .data(dataset, key);
-
-        datas.enter()
-            .append("rect")
-            .attr("x", 0)
-            .attr("y", function(d,i){
-                return yScale(i);
-            })
-            .attr("width", function(d){
-                return xScale(d.amount);
-            })
-            .attr("height", function (d) {
-                return yScale.rangeBand();
-            })
-            .attr("fill", function (d) {
-                return (colorScale(d.amount));
-            })
-            .on("mouseover", function(d) {
-                var countryvalue = {};
-                countryvalue[d.country] = 'rgb(0, 0, 150)';
-                map.updateChoropleth(countryvalue);
-            }).on("mouseout", function(d) {
-                var countryvalue = {};
-                countryvalue[d.country] = colorScale(d.amount)
-                map.updateChoropleth(countryvalue);
-            });
-
-
-
-        svg.selectAll("text")
-            .data(dataset, key) //Bind data with custom key function
-            .enter()
-            .append("text")
-            .text(function(d) {
-                 return d.country
-            })
-            .attr("text-anchor", "middle")
-            .attr("x", 20)
-            .attr("y", function(d, i) {
-                return yScale(i) + yScale.rangeBand()/2;
-            })
-            .attr("font-family", "sans-serif")
-            .attr("font-size", "11px")
-            .attr("fill", "black");
-
-
-    }
-    function recalculateBarchart(json) {
-        dataset = json;
-        dataset = dataset.sort(function (a,b) {return d3.ascending(a.value, b.value); });
-
-        var w = 650;
-        var h = 150;
-        xScale.domain([0, d3.max(dataset, function (d) {
-            return d.amount;
-        })])
-
-        yScale.domain(d3.range(dataset.length))
-
-        colorScale.domain([0, d3.max(dataset, function (d) {
-            return d.amount;
-        })])
-            .domain([d3.min(json, function(d) { return parseInt(d.amount); }),
-                d3.max(json, function(d) { return parseInt(d.amount); })
-            ]);
-
-
         var datas = svg.selectAll("rect")
             .data(dataset, key);
 
         datas.enter()
 
             .append("rect")
-            .attr("x", 0)
+            .attr("x", 50)
             .attr("y", function(d,i){
                 return yScale(i);
             })
@@ -928,7 +844,7 @@ $(document).ready(function() {
         //nur die Dinge neu schreiben, die sich durch die neu hinzugekommenen Werte ändern
         datas.transition()
             .duration(1000)
-            .attr("x", 0)
+            .attr("x", 50)
             .attr("y", function(d,i){
                 return yScale(i);
             })
@@ -949,16 +865,17 @@ $(document).ready(function() {
             text.transition() // <-- This is new,
             .duration(1000) // and so is this.
             .text(function(d) {
-                return d.country
+
+                    return d.country + " " + d.amount;
             })
             .attr("text-anchor", "middle")
-            .attr("x", 20)
+            .attr("x", 25)
             .attr("y", function(d, i) {
                 return yScale(i) + yScale.rangeBand()/2;
             })
             .attr("font-family", "sans-serif")
             .attr("font-size", "11px")
-            .attr("fill", "black");
+            .attr("fill", "yellow");
 
         // .attr("fill", function(d) {
         // return "rgb(0, 0, " + Math.round(colorScale(d.count)) + ")";
@@ -967,20 +884,20 @@ $(document).ready(function() {
     text.enter()
             .append("text")
             .text(function(d) {
-                return d.country
+                 return d.country + " " + d.amount;
             })
             .attr("text-anchor", "middle")
-            .attr("x", 20)
+            .attr("x", 25)
             .attr("y", function(d, i) {
                 return yScale(i) + yScale.rangeBand()/2;
             })
             .attr("font-family", "sans-serif")
             .attr("font-size", "11px")
-            .attr("fill", "black");
+            .attr("fill", "yellow");
 
-        text.exit()
-            .transition()
-             .remove();
+    text.exit()
+          .transition()
+          .remove();
 
         //. attrTween("d", tweenPie);
         datas.exit()
