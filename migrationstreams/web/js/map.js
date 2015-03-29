@@ -781,81 +781,6 @@ $(document).ready(function() {
         updateMap(countryMap);
     }
 
-    function calculateBarchart(json) {
-        dataset = json;
-
-        var w = 650;
-        var h = 450;
-        svg = d3.select("#barcontainer")
-            .append("svg")
-            .attr("id", "barchart")
-            .attr("width", w)
-            .attr("height", h);
-
-        xScale = d3.scale.linear()
-            .domain([0, d3.max(dataset, function (d) {
-                return d.amount;
-            })])
-            .range([0, w]);
-
-        yScale = d3.scale.ordinal()
-            .domain(d3.range(dataset.length))
-            .rangeBands([0, h]);
-
-        colorScale = d3.scale.quantize()
-            .range(['rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(165,15,21)','rgb(103,0,13)'])
-            .domain([d3.min(json, function(d) { return parseInt(d.amount); }),
-                d3.max(json, function(d) { return parseInt(d.amount); })
-            ]);
-
-        var datas = svg.selectAll("rect")
-            .data(dataset, key);
-
-        datas.enter()
-            .append("rect")
-            .attr("x", 0)
-            .attr("y", function(d,i){
-                return yScale(i);
-            })
-            .attr("width", function(d){
-                return xScale(d.amount);
-            })
-            .attr("height", function (d) {
-                return yScale.rangeBand();
-            })
-            .attr("fill", function (d) {
-                return (colorScale(d.amount));
-            })
-            .on("mouseover", function(d) {
-                var countryvalue = {};
-                countryvalue[d.country] = 'rgb(0, 0, 150)';
-                map.updateChoropleth(countryvalue);
-            }).on("mouseout", function(d) {
-                var countryvalue = {};
-                countryvalue[d.country] = colorScale(d.amount)
-                map.updateChoropleth(countryvalue);
-            });
-
-
-
-        svg.selectAll("text")
-            .data(dataset, key) //Bind data with custom key function
-            .enter()
-            .append("text")
-            .text(function(d) {
-                 return d.country + " " + d.amount;
-            })
-            .attr("text-anchor", "middle")
-            .attr("x", 20)
-            .attr("y", function(d, i) {
-                return yScale(i) + yScale.rangeBand()/2;
-            })
-            .attr("font-family", "sans-serif")
-            .attr("font-size", "11px")
-            .attr("fill", "black");
-
-
-    }
     function recalculateBarchart(json) {
         dataset = json;
 
@@ -893,7 +818,7 @@ $(document).ready(function() {
         datas.enter()
 
             .append("rect")
-            .attr("x", 0)
+            .attr("x", 50)
             .attr("y", function(d,i){
                 return yScale(i);
             })
@@ -919,7 +844,7 @@ $(document).ready(function() {
         //nur die Dinge neu schreiben, die sich durch die neu hinzugekommenen Werte ändern
         datas.transition()
             .duration(1000)
-            .attr("x", 0)
+            .attr("x", 50)
             .attr("y", function(d,i){
                 return yScale(i);
             })
@@ -944,13 +869,13 @@ $(document).ready(function() {
                     return d.country + " " + d.amount;
             })
             .attr("text-anchor", "middle")
-            .attr("x", 20)
+            .attr("x", 25)
             .attr("y", function(d, i) {
                 return yScale(i) + yScale.rangeBand()/2;
             })
             .attr("font-family", "sans-serif")
             .attr("font-size", "11px")
-            .attr("fill", "black");
+            .attr("fill", "yellow");
 
         // .attr("fill", function(d) {
         // return "rgb(0, 0, " + Math.round(colorScale(d.count)) + ")";
@@ -960,20 +885,19 @@ $(document).ready(function() {
             .append("text")
             .text(function(d) {
                  return d.country + " " + d.amount;
-
             })
             .attr("text-anchor", "middle")
-            .attr("x", 20)
+            .attr("x", 25)
             .attr("y", function(d, i) {
                 return yScale(i) + yScale.rangeBand()/2;
             })
             .attr("font-family", "sans-serif")
             .attr("font-size", "11px")
-            .attr("fill", "black");
+            .attr("fill", "yellow");
 
-        text.exit()
-            .transition()
-             .remove();
+    text.exit()
+          .transition()
+          .remove();
 
         //. attrTween("d", tweenPie);
         datas.exit()
