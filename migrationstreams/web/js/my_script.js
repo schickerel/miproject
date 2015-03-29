@@ -115,7 +115,7 @@ $( "#dialog-link" ).click(function( event ) {
 
 $(function(){
     $( ".dialog2" ).dialog({
-        autoOpen: false,
+        autoOpen: true,
         draggable: false,
         resizable: false,
         width: 750,
@@ -146,14 +146,14 @@ $(function(){
 });
 
 // Link to open the dialog
-$(function(){
+/*$(function(){
     $( "#overview" ).click(function( event ) {
         $( ".dialog2" ).dialog( "open")
         $(".dialog2").css("visibility","visible");
 
         event.preventDefault();
     });
-});
+});*/
 
 $(function(){
     $( ".dialog3" ).dialog({
@@ -219,6 +219,7 @@ $(function(){
 $(function(){
     $( "#firstMigration" ).click(function(){
         $("#slider").css("visibility", "hidden");
+        $("#dialog-link").css("visibility","visible");
     });
 });
 
@@ -234,19 +235,35 @@ $(function(){
     });
 });*/
 
-$(document).on('click', '#help', function () {
-    if ($(".info").css ("visibility", "hidden")) {
-        $('.info').css("visibility", "visible");
+$(function(){
+$("#help").click (function () {
+    if ($(".info").css("visibility")== "hidden") {
+        $(".info").css("visibility", "visible");
     } else {
-        $('.info').css("visibility", "hidden");
+        $(".info").css("visibility", "hidden");
     }
+});
 });
 
 $(function(){
- $( "#help2" ).click(function(){
- $(".info2").css("visibility", "visible");
- });
- });
+    $("#help2").click (function () {
+        if ($(".info2").css("visibility")== "hidden") {
+            $(".info2").css("visibility", "visible");
+        } else {
+            $(".info2").css("visibility", "hidden");
+        }
+    });
+});
+
+$(function(){
+    $("#help3").click (function () {
+        if ($(".info3").css("visibility")== "hidden") {
+            $(".info3").css("visibility", "visible");
+        } else {
+            $(".info3").css("visibility", "hidden");
+        }
+    });
+});
 
 /*$(function() {
     $( "#button2" ).click(function() {

@@ -147,6 +147,11 @@ select {
 	background-color: fuchsia;
 }
 
+.info3{
+	visibility: hidden;
+	background-color: fuchsia;
+}
+
 .ui-dialog-titlebar
 {
 	display:none;
@@ -159,4 +164,8 @@ select {
 
 #person-list {
 	background: #000000 url("ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
+}
+
+#dialog-link {
+	visibility: hidden;
 }
