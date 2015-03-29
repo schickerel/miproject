@@ -6,26 +6,22 @@
     <script src="libs/jquery-2.1.3.js"></script>
     <script src="libs/d3.js"></script>
     <script src="libs/topojson.js"></script>
-    <!--datamaps has to be loaded last-->
     <script src="libs/datamaps.world.min.js"></script>
-
     <script src="js/my_script.js"></script>
     <link href="css/layout.css" rel="stylesheet" type="text/css">
-
     <script src="js/jquery-ui.js"></script>
     <link href="css/jquery-ui.min.css" rel="stylesheet">
-
 
 </head>
 <body>
 <div class="header">
     <div class="container">
-        <h1>Migration aus dem Deutschen Reich 1933-1945</h1>
+        <h1>Migration aus dem Deutschen Reich 1933-1970</h1>
         <div class="menu">
             <span><a href="index.html">Start</a></span>
-            <span><a href="index.html">Personenliste</a></span>
-            <span><a href="index.html">Lorem Ipsum</a></span>
-            <span><a href="index.html">Kontakt</a></span>
+            <span><a href="person.html">Personenliste</a></span>
+            <span><a href="index.html">Über das Projekt</a></span>
+            <span><a href="kontakt.html">Kontakt</a></span>
         </div>
     </div>
 </div>
@@ -61,26 +57,19 @@
 
 <div class="helpDialogPerson" style="position: absolute; left: 350px; top: 350px; width: 700px"> ts r t, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
 
+<button id="helpButtonPerson" class="button" style="left: 20px; margin-top: 14px"><img src="images/Help-icon.png"></button>
+<p style="margin-top: 10px;"></p>
+<button id="filter" class="button" style="left: 20px; margin-top: 5px">Suche</button>
 
-<table style="padding-top: 10px; padding-left: 30px"><tbody>
-<tr style="vertical-align:top;">
-    <td>
-        <button id="helpButtonPerson" class="button"><img src="images/Help-icon.png"></button>
-        <p style="margin-top: 10px;"></p>
-            <button id="filter" class="button">Suche</button>
+<div class="dialogPerson">
+    <ul id="person-list" style="list-style-type:none">
+    </ul>
+</div>
 
-        <p style="margin-top: 10px;"></p>
-        <ul id="person-list" style="width:100px; padding-left: 30px; padding-right: 20px">
-        </ul>
-</td>
-    <td>
-        <div id="map-wrapper" style="position: relative; top: 0px; width: 1100px; height: 550px;">
-        </div>
-        <script src="js/person.js"></script>
-    </td>
-</tr>
-    </tbody>
-</table>
+<div id="map-wrapper" style="position: absolute; top: 260px; width: 1000px; height: 800px; left:200px">
+</div>
+
+<script src="js/person.js"></script>
 
 </body>
 </html>

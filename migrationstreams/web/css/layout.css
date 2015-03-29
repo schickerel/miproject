@@ -77,7 +77,6 @@ h1 {
 
 .header .menu a , .header h1 { line-height: 27px; }
 
-
 .container {
 	width: 1200px;
 	margin: auto;
@@ -99,22 +98,6 @@ h1 {
 	z-index: 10;
 	position: relative;
 	height: 35px;
-}
-
-.map {
-	padding-top: 10px;
-	padding-bottom: 0px;
-	z-index: 10;
-	position: absolute;
-	height: 800px;
-}
-
-.subheader2 {
-	padding-top: 10px;
-	padding-bottom: 0px;
-	z-index: 10;
-	position: relative;
-	height: 50px;
 }
 
 select {
@@ -142,6 +125,11 @@ select {
 	background-color: #800032;
 }
 
+.helpDialogStart2{
+	display: none;
+	background-color: #800032;
+}
+
 .helpDialogDetail{
 	display: none;
 	background-color: #800032;
@@ -162,16 +150,12 @@ select {
 	width:15px;
 }
 
-#person-list {
-	background: #000000 url("ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
-}
-
-#dialog-link {
+#dialogDetail {
 	visibility: hidden;
 }
 
-.positionDialogStart {
-	position: absolute;
-	left:5px;
-	top:50px;
+#person-list li:hover{
+	background-color: #800032;
+	color: #fff;
+	cursor: pointer;
 }
