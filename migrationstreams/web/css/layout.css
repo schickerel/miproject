@@ -85,12 +85,12 @@ h1 {
 }
 
 .subheader {
-	padding-top: 10px;
+	padding-top: 2px;
 	background: #000000 url("ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
-	padding-bottom: 0px;
+	padding-bottom: 4px;
 	z-index: 10;
 	position: relative;
-	height: 70px;
+	height: 50px;
 }
 
 .buttonMenu {
@@ -109,12 +109,12 @@ h1 {
 	height: 800px;
 }
 
-.diagramm {
+.subheader2 {
 	padding-top: 10px;
 	padding-bottom: 0px;
 	z-index: 10;
 	position: relative;
-	height: 185px;
+	height: 50px;
 }
 
 select {
@@ -133,22 +133,30 @@ select {
 	visibility: hidden;
 }
 
+#slider2 {
+	visibility: hidden;
+}
+
 .info{
-	/*visibility: hidden;*/
+	visibility: hidden;
 	background-color: fuchsia;
 }
 
-.toggler { width: 500px; height: 200px; position: relative; }
-
-#effect {position: relative;  width: 240px;  padding: 1em; letter-spacing: 0; font-size: 1.2em; border: 1px solid #000; background: #eee; color: #333; }
-
-.newClass { text-indent: 40px; letter-spacing: .4em; width: 410px; height: 100px; padding: 30px; margin: 10px; font-size: 1.6em; }
-
-#button2 { padding: .5em 1em; text-decoration: none; }
+.info2{
+	visibility: hidden;
+	background-color: fuchsia;
+}
 
 .ui-dialog-titlebar
 {
 	display:none;
 }
 
+.ui-icon {
+	height: 30px;
+	width:15px;
+}
 
+#person-list {
+	background: #000000 url("ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
+}

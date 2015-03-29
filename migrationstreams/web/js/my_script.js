@@ -108,7 +108,7 @@ $( ".dialog" ).dialog({
 $(function(){
 $( "#dialog-link" ).click(function( event ) {
     $( ".dialog" ).dialog( "open")
-    $(".dialog2").dialog("option", "width", 1200);
+
     event.preventDefault();
 });
 });
@@ -117,11 +117,8 @@ $(function(){
     $( ".dialog2" ).dialog({
         autoOpen: false,
         draggable: false,
-        resizable: true,
-        open: function (event, ui) {
-            $('.dialog2').css('overflow', 'hidden'); //this line does the actual hiding
-        },
-        width: 800,
+        resizable: false,
+        width: 750,
         height: 130,
         position: { my: "top", at: "left", of: $("#test3") }
     /*   buttons: [
@@ -165,7 +162,7 @@ $(function(){
         resizable: false,
         width: 50,
         height: 600,
-        position: { my: "top", at: "left", of: $("#test4") }
+        position: { my: "bottom", at: "bottom", of: $(".buttonMenu") }
         /*   buttons: [
          {
          text: "Ok",
@@ -200,7 +197,6 @@ $(function(){
     $( "#distribution" ).click(function(){
         $("#slider").css("visibility", "visible");
         $("#dialog-link").css("visibility","visible");
-
         $(".dialog2").css("visibility","visible");
     });
 });
@@ -226,11 +222,37 @@ $(function(){
     });
 });
 
-$(function() {
+$(function(){
+    $( "#distributionrefined" ).click(function(){
+        $("#slider2").css("visibility", "visible");
+    });
+});
+
+/*$(function(){
+    $( "#help" ).click(function(){
+        $(".info").css("visibility", "visible");
+    });
+});*/
+
+$(document).on('click', '#help', function () {
+    if ($(".info").css ("visibility", "hidden")) {
+        $('.info').css("visibility", "visible");
+    } else {
+        $('.info').css("visibility", "hidden");
+    }
+});
+
+$(function(){
+ $( "#help2" ).click(function(){
+ $(".info2").css("visibility", "visible");
+ });
+ });
+
+/*$(function() {
     $( "#button2" ).click(function() {
         $( "#effect" ).toggleClass( "newClass", 1000 );
     });
-});
+});*/
 
 /*$(function() {
 
@@ -238,10 +260,10 @@ $(function() {
 
     });*/
 
-
-/*$(function() {
+/*
+$(function() {
 $("#test").click(function() {
-    $( ".blubb" ).effect( "size", {
+    $( ".dialog2" ).effect( "size", {
         to: { width: 1200, height: 80 }
     }, 1000).css("visibility","visible");
 });

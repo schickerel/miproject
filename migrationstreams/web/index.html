@@ -35,7 +35,7 @@
             <span><a href="index2.html">Personenliste</a></span>
             <span><a href="index.html">Über das Projekt</a></span>
             <span><a href="index.html">Kontakt</a></span>
-        </div>
+    </div>
     </div>
 </div>
 
@@ -43,44 +43,36 @@
 <div class="subheader">
     <div class="container">
 
-        <button id="overview" class="button">Overview</button>
+        <button id="overview" class="button">Überblick</button>
         <!--<button id="distribution" class="button">Distribution</button>-->
-        <button id="firstMigration" class="button">First Migration</button>
-        <button id="destination" class="button">Destination</button>
-
-       <!-- <select class="selectmenu" id="distributionyear">
-            <option value="1933">1933</option>
-            <option value="1934">1934</option>
-            <option value="1935">1935</option>
-            <option value="1936">1936</option>
-        </select>
-
-        <select id="distributionmonth" class="selectmenu">
-            <option value="1">Januar</option>
-            <option value="2">Februar</option>
-            <option value="3">März</option>
-            <option value="4">April</option>
-        </select>-->
-        <button id="distribution" class="button">Distribution</button>
-
+        <button id="firstMigration" class="button">Erstmigration</button>
+        <button id="destination" class="button">Zielmigration</button>
+        <button id="distribution" class="button">Verteilung</button>
         <button id="dialog-link" class="button">Detailansicht</button>
+        <button id="help" class="button" style="left: 380px"><img src="pics/Help-icon.png"></button>
+
+
+        <div class="info" style="margin-left:750px">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
 
     </div>
+
 </div>
 
+
 <div class="buttonMenu">
-<div class="container" style="margin-top: 15">
+<div class="container">
     <div id="slider"></div>
 </div></div>
 
         <!-- ui-dialog -->
         <div class="dialog" title="Detailansicht">
 
-            <div id="slider2"></div>
+            <div id="slider2" style="top:10px"></div>
 
-            <div class="buttonMenu">
+            <div class="buttonMenu" style="top:20px; padding-bottom: 15px">
         <div>
             <select id="selectdenom" class="selectmenu" name="denomination">
+                <option selected>Konfession</option>
                 <option value="1" name="jüdisch">jüdisch</option>
                 <option value="2">keine</option>
                 <option value="3">evangelisch</option>
@@ -88,19 +80,25 @@
             </select>
 
             <select id="selectprof" class="selectmenu" name="professionalCategory">
+                <option selected>Beruf</option>
                 <option value="1" name="jüdisch">Literatur und Publizistik</option>
                 <option value="2">Theater</option>
                 <option value="3">Bildende Kunst und Architektur</option>
                 <option value="4">Film</option>
             </select>
+
+            <div class="info2"> ts r t, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+
         </div>
                 </div>
 
             <div id="barcontainertwo" style="width: 900px; height: 400px; margin-bottom: 15px; margin-top: 15px"></div>
 
-            <button id="firstMigrationRefined" class="button">First Migration</button>
-            <button id="destinationRefined" class="button">Destination</button>
-            <button id="closeDialog" class="button">Cancel</button>
+            <button id="firstMigrationRefined" class="button">Erstmigration</button>
+            <button id="destinationRefined" class="button">Zielmigration</button>
+            <button id="distributionrefined" class="button">Verteilung</button>
+            <button id="closeDialog" class="button" style="left: 300px">Cancel</button>
+            <button id="help2" class="button" style="left: 320px"><img src="pics/Help-icon.png"></button>
 
         </div>
 
@@ -113,12 +111,13 @@
 
 
 <div id="container" style="position: absolute; top: 180px; width: 1200px; height: 800px;">
-    <div class="info" style="position: absolute; left: 60px; top: 80px">
+    <div class="info" style="position: absolute; left: 60px; top: 140px; width: 700px">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    </div>
+    <div class="info" style="position: absolute; left: 600px; top: 400px">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
     </div>
 </div>
 
 <div id="test3" class="container">
-    <!--<button id="dialog-link2" class="button">chart</button>-->
 </div>
 
 
