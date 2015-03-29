@@ -267,13 +267,9 @@ $(document).ready(function() {
                     return d.year;
                 };
 
-                if (first) {
-                    calculateBarchart(json);
-                    first = false;
-                }
-                else {
                     recalculateBarchart(json);
-                }
+
+
 
             });
     };
@@ -288,15 +284,10 @@ $(document).ready(function() {
                 key = function (d) {
                     return d.country;
                 };
-                if (first) {
-                    calculateBarchart(json);
-                    dataset = json;
-                    first = false;
-                }
-                else {
+
                     recalculateBarchart(json);
-                }
                 mainFilter = "firstMigration";
+
 
             });
     }
@@ -312,16 +303,10 @@ $(document).ready(function() {
                 key = function (d) {
                     return d.country;
                 };
-                if (first) {
-                    calculateBarchart(json);
-                    first = false;
-                }
-                else {
-                    recalculateBarchart(json);
-                }
-                mainFilter = "targetCountryMigration";
-            });
-    }
+                recalculateBarchart(json);
+                 mainFilter = "targetCountryMigration";
+
+    })}
 
 
     function getDistribution(callback, value) {
@@ -341,7 +326,7 @@ $(document).ready(function() {
                     return d.country;
                 };
                 if (first) {
-                    calculateBarchart(json);
+                    recalculateBarchart(json);
                     first = false;
                 }
                 else {
@@ -800,7 +785,7 @@ $(document).ready(function() {
         dataset = json;
 
         var w = 650;
-        var h = 150;
+        var h = 450;
         svg = d3.select("#barcontainer")
             .append("svg")
             .attr("id", "barchart")
@@ -873,19 +858,30 @@ $(document).ready(function() {
     }
     function recalculateBarchart(json) {
         dataset = json;
-        dataset = dataset.sort(function (a,b) {return d3.ascending(a.value, b.value); });
 
         var w = 650;
-        var h = 150;
-        xScale.domain([0, d3.max(dataset, function (d) {
-            return d.amount;
-        })])
+        var h = 450;
 
-        yScale.domain(d3.range(dataset.length))
+        if(first) {
+             svg = d3.select("#barcontainer")
+                .append("svg")
+                .attr("id", "barchart")
+                .attr("width", w)
+                .attr("height", h);
+                first = false;
+        }
+        xScale = d3.scale.linear()
+            .domain([0, d3.max(dataset, function (d) {
+                return d.amount;
+            })])
+            .range([0, w]);
 
-        colorScale.domain([0, d3.max(dataset, function (d) {
-            return d.amount;
-        })])
+        yScale = d3.scale.ordinal()
+            .domain(d3.range(dataset.length))
+            .rangeBands([0, h]);
+
+        colorScale = d3.scale.quantize()
+            .range(['rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(165,15,21)','rgb(103,0,13)'])
             .domain([d3.min(json, function(d) { return parseInt(d.amount); }),
                 d3.max(json, function(d) { return parseInt(d.amount); })
             ]);
