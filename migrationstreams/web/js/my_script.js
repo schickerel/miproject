@@ -236,31 +236,31 @@ $(function(){
 });*/
 
 $(function(){
-$("#help").click (function () {
-    if ($(".info").css("visibility")== "hidden") {
-        $(".info").css("visibility", "visible");
+$("#helpButtonStart").click (function () {
+    if ($(".helpDialogStart").css("visibility")== "hidden") {
+        $(".helpDialogStart").css("visibility", "visible");
     } else {
-        $(".info").css("visibility", "hidden");
+        $(".helpDialogStart").css("visibility", "hidden");
     }
 });
 });
 
 $(function(){
-    $("#help2").click (function () {
-        if ($(".info2").css("visibility")== "hidden") {
-            $(".info2").css("visibility", "visible");
+    $("#helpButtonDetail").click (function () {
+        if ($(".helpDialogDetail").css("visibility")== "hidden") {
+            $(".helpDialogDetail").css("visibility", "visible");
         } else {
-            $(".info2").css("visibility", "hidden");
+            $(".helpDialogDetail").css("visibility", "hidden");
         }
     });
 });
 
 $(function(){
-    $("#help3").click (function () {
-        if ($(".info3").css("visibility")== "hidden") {
-            $(".info3").css("visibility", "visible");
+    $("#helpButtonPerson").click (function () {
+        if ($(".helpDialogPerson").css("visibility")== "hidden") {
+            $(".helpDialogPerson").css("visibility", "visible");
         } else {
-            $(".info3").css("visibility", "hidden");
+            $(".helpDialogPerson").css("visibility", "hidden");
         }
     });
 });

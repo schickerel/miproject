@@ -137,17 +137,17 @@ select {
 	visibility: hidden;
 }
 
-.info{
+.helpDialogStart{
 	visibility: hidden;
 	background-color: fuchsia;
 }
 
-.info2{
+.helpDialogDetail{
 	visibility: hidden;
 	background-color: fuchsia;
 }
 
-.info3{
+.helpDialogPerson{
 	visibility: hidden;
 	background-color: fuchsia;
 }
