@@ -807,8 +807,6 @@ $(document).ready(function() {
             .attr("width", w)
             .attr("height", h);
 
-
-
         xScale = d3.scale.linear()
             .domain([0, d3.max(dataset, function (d) {
                 return d.amount;
@@ -824,9 +822,6 @@ $(document).ready(function() {
             .domain([d3.min(json, function(d) { return parseInt(d.amount); }),
                 d3.max(json, function(d) { return parseInt(d.amount); })
             ]);
-
-
-
 
         var datas = svg.selectAll("rect")
             .data(dataset, key);
@@ -863,7 +858,7 @@ $(document).ready(function() {
             .enter()
             .append("text")
             .text(function(d) {
-                 return d.country
+                 return d.country + " " + d.amount;
             })
             .attr("text-anchor", "middle")
             .attr("x", 20)
@@ -949,7 +944,8 @@ $(document).ready(function() {
             text.transition() // <-- This is new,
             .duration(1000) // and so is this.
             .text(function(d) {
-                return d.country
+
+                    return d.country + " " + d.amount;
             })
             .attr("text-anchor", "middle")
             .attr("x", 20)
@@ -967,7 +963,8 @@ $(document).ready(function() {
     text.enter()
             .append("text")
             .text(function(d) {
-                return d.country
+                 return d.country + " " + d.amount;
+
             })
             .attr("text-anchor", "middle")
             .attr("x", 20)

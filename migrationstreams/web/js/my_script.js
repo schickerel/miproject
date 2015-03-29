@@ -108,6 +108,7 @@ $( ".dialog" ).dialog({
 $(function(){
 $( "#dialog-link" ).click(function( event ) {
     $( ".dialog" ).dialog( "open")
+    $(".dialog2").dialog("option", "width", 1200);
     event.preventDefault();
 });
 });
