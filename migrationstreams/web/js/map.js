@@ -54,8 +54,6 @@ $(document).ready(function() {
     }
 
 
-
-
     //Variable for storing the current value of the main Filter
     //firstMigration, destination, distribution
     var mainFilter;
@@ -124,7 +122,7 @@ $(document).ready(function() {
 
     });
 
-    $( "#slider" ).slider({
+    $("#slider").slider({
         change: function (event, ui) {
             d3.select("#chart")
                 .remove();
@@ -135,8 +133,8 @@ $(document).ready(function() {
     });
 
 
-    $( "#distributionmonth" ).selectmenu({
-        change: function( event, ui ) {
+    $("#distributionmonth").selectmenu({
+        change: function (event, ui) {
             getDistribution(updateMap);
             d3.select("#refinedChart")
                 .remove();
@@ -168,11 +166,9 @@ $(document).ready(function() {
         getfirstMigrations(updateMap);
         //mainFilter = "firstMigration";
         newChart(dataset);
-        console.log(mainFilter, currentURL, currentLegend);
 
 
     });
-
 
 
     $('#destinationRefined').click(function () {
@@ -187,20 +183,18 @@ $(document).ready(function() {
         newChart(dataset);
 
 
-
     });
 
     //remove svg graphic on dialog close
-    $('.dialog').bind('dialogclose', function(event) {
+    $('.dialog').bind('dialogclose', function (event) {
         d3.select("#refinedChart")
             .remove();
     });
 
 
-
-    $('#selectdenom').selectmenu ({
+    $('#selectdenom').selectmenu({
         //construct the URL for the json request
-        change: function( event, ui ) {
+        change: function (event, ui) {
             if (mainFilter == 'distributionbyCountry') {
                 var year = $("#distributionyear").val();
                 var month = $("#distributionmonth").val();
@@ -222,9 +216,9 @@ $(document).ready(function() {
         }
     });
 
-    $('#selectprof').selectmenu ({
+    $('#selectprof').selectmenu({
         //construct the URL for the json request
-        change: function( event, ui ) {
+        change: function (event, ui) {
             if (mainFilter == 'distributionbyCountry') {
                 var year = $("#distributionyear").val();
                 var month = $("#distributionmonth").val();
@@ -270,12 +264,73 @@ $(document).ready(function() {
                     return d.year;
                 };
 
-                recalculateBarchart(json);
-
+                calculatePieChart(json);
 
 
             });
     };
+
+    function calculatePieChart(json) {
+
+
+    //Width and height
+    var w = 100;
+    var h = 120;
+
+    var dataset = json;
+
+    var outerRadius = w / 2;
+    var innerRadius = 0;
+    var arc = d3.svg.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius);
+
+    var pie = d3.layout.pie()
+        .value(function (d) {
+            return d.amount;
+        });
+
+    //Easy colors accessible via a 10-step ordinal scale
+        var newcolorScale = d3.scale.quantize()
+            .range(['rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(165,15,21)','rgb(103,0,13)'])
+            .domain([d3.min(dataset, function(d) { return parseInt(d.amount); }),
+                d3.max(dataset, function(d) { return parseInt(d.amount); })
+            ]);
+
+    console.log(newcolorScale( d3.max(dataset, function(d) { return parseInt(d.amount);})))
+        //Create SVG element
+    var svg = d3.select("#barcontainer")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
+    //Set up groups
+    var arcs = svg.selectAll("g.arc")
+        .data(pie(dataset))
+        .enter()
+        .append("g")
+        .attr("class", "arc")
+        .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
+
+    //Draw arc paths
+    arcs.append("path")
+        .attr("fill", function (d, i) {
+            console.log(d);
+            return newcolorScale(d.value);
+        })
+        .attr("d", arc);
+
+    //Labels
+    arcs.append("text")
+        .attr("transform", function (d) {
+            return "translate(" + arc.centroid(d.country) + ")";
+        })
+        .attr("text-anchor", "middle")
+        .text(function (d) {
+            return d.value;
+        });
+
+    }
 
     function getfirstMigrations(callback) {
         $.getJSON("../src/index.php/migration/migrations?filter=firstMigration")
@@ -854,7 +909,7 @@ $(document).ready(function() {
         text.enter()
             .append("text")
             .text(function(d) {
-                return d.country + " " + d.amount;
+                return key(d) + " " + d.amount;
             })
             .attr("text-anchor", "middle")
             .attr("x", 25)
