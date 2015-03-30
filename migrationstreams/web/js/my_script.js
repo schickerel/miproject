@@ -59,7 +59,7 @@ $(document).ready(function(){
         draggable: false,
         resizable: false,
         width: 1000,
-        height: 600
+        height: 650
     });
 
     $( "#dialogDetail" ).click(function( event ) {

@@ -338,9 +338,9 @@ $(document).ready(function() {
     function drawChart (migrations, country) {
 
         var width = 650;
-        var height = 120;
-        var margin = 10;
-        var barHeight = 120;
+        var height = 110;
+        var margin = 0;
+        var barHeight = 110;
 
         var emigrations = migrations['emigrations'];
         var immigrations = migrations['immigrations'];
@@ -567,7 +567,7 @@ $(document).ready(function() {
                 return y(d.value);
             })
             .attr("height", function (d) {
-                return height - y(d.value) -50;
+                return height - y(d.value) -80;
             })
             .style("fill", function (d) {
                 return color(d.name);
@@ -584,7 +584,7 @@ $(document).ready(function() {
             .attr("x", function(d, i){
                 return x0(d.country) + + x0.rangeBand()/2;;
             })
-            .attr("y", height-40)
+            .attr("y", height-70)
             .attr("font-family", "sans-serif")
             .attr("font-size", "11px")
             .attr("fill", "yellow");
@@ -594,21 +594,20 @@ $(document).ready(function() {
             .enter().append("g")
             .attr("class", "legend")
             .attr("transform", function (d, i) {
-                return "translate("+i * 180+",420)";
+                return "translate(" +i * 350+",400)";
             });
 
         legend.append("rect")
             .attr("x", 18)
-            .attr("y", 2)
+            .attr("y", 22)
             .attr("width", 18)
             .attr("height", 18)
             .style("fill", color);
 
         myText = legend.append("text")
-            .attr("x", 18)
-            .attr("y", 25)
+            .attr("x", 70)
+            .attr("y", 30)
             .attr("dy", ".35em")
-            .style("text-anchor", "end")
             .attr("fill", "yellow")
             .text(function (d) {
                 return d;
