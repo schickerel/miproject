@@ -81,6 +81,7 @@ $(document).ready(function(){
 
     $("#closeDialog").click(function(event){
         $(".dialogDetail").dialog("close")
+        d3.select("#refinedChart").remove()
         event.preventDefault();
     });
 
@@ -109,34 +110,41 @@ $(document).ready(function(){
         $("#slider").css("visibility", "visible");
         $("#dialogDetail").css("visibility","visible");
         $(".dialogStart").css("visibility","visible");
+        $("#sliderLabel").css("visibility","visible")
     });
 
     $( "#destination" ).click(function(){
         $("#slider").css("visibility", "hidden");
         $("#dialogDetail").css("visibility","visible");
         $(".dialogStart").css("visibility","visible");
+        $("#sliderLabel").css("visibility","hidden")
     });
 
     $( "#overview" ).click(function(){
         $("#slider").css("visibility", "hidden");
         $("#dialogDetail").css("visibility","hidden");
+        $("#sliderLabel").css("visibility","hidden")
     });
 
     $( "#firstMigration" ).click(function(){
         $("#slider").css("visibility", "hidden");
         $("#dialogDetail").css("visibility","visible");
+        $("#sliderLabel").css("visibility","hidden")
     });
 
     $( "#DistributionRefined" ).click(function(){
         $("#slider2").css("visibility", "visible");
+        $("#sliderLabel2").css("visibility","visible");
     });
 
     $( "#firstMigrationRefined" ).click(function(){
         $("#slider2").css("visibility", "hidden");
+        $("#sliderLabel2").css("visibility","hidden");
     });
 
     $( "#destinationRefined" ).click(function(){
         $("#slider2").css("visibility", "hidden");
+        $("#sliderLabel2").css("visibility","hidden");
     });
 
     $( "#helpButtonStart" ).click(function() {
