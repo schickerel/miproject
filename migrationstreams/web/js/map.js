@@ -594,7 +594,7 @@ $(document).ready(function() {
             .enter().append("g")
             .attr("class", "legend")
             .attr("transform", function (d, i) {
-                return "translate("+i * 180+",380)";
+                return "translate("+i * 180+",450)";
             });
 
         legend.append("rect")
