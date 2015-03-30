@@ -160,7 +160,8 @@ $(document).ready(function() {
     });
 
     $('#firstMigrationRefined').click(function () {
-
+        d3.select("#chart")
+            .remove();
         firstRefined = true;
         d3.select("#refinedChart")
             .remove();
@@ -175,6 +176,8 @@ $(document).ready(function() {
 
 
     $('#destinationRefined').click(function () {
+        d3.select("#chart")
+            .remove();
         firstRefined = true;
         d3.select("#refinedChart")
             .remove();
