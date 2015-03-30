@@ -112,7 +112,7 @@ $(document).ready(function(){
 
         var index = 0;
         loop();
-        $('#person-migrations').append("<p>Migrationen:</p>")
+        $('#person-migrations').append("<p>Migrationen:</p>");
         function loop () {
             setTimeout(function () {
                 var arc = {
