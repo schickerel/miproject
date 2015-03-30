@@ -92,7 +92,7 @@ $(document).ready(function(){
         draggable: false,
         resizable: false,
         width: 200,
-        height: 400,
+        height: 450,
         open: function(event, ui) {
             $(event.target).parent().css('top', '500px');
             $(event.target).parent().css('left', '20px');
