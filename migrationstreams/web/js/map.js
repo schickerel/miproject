@@ -160,7 +160,8 @@ $(document).ready(function() {
     });
 
     $('#firstMigrationRefined').click(function () {
-
+        d3.select("#chart")
+            .remove();
         firstRefined = true;
         d3.select("#refinedChart")
             .remove();
@@ -175,6 +176,8 @@ $(document).ready(function() {
 
 
     $('#destinationRefined').click(function () {
+        d3.select("#chart")
+            .remove();
         firstRefined = true;
         d3.select("#refinedChart")
             .remove();
@@ -495,7 +498,7 @@ $(document).ready(function() {
         //jede Gruppe von Balken ist eine SVG-Grafik!
         var margin = {top: 15, right: 0, bottom: 0, left: 0},
             width = 900 - margin.left - margin.right,
-            height = 430 - margin.top - margin.bottom;
+            height = 470 - margin.top - margin.bottom;
 
         x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -618,7 +621,7 @@ $(document).ready(function() {
 
         var margin = {top: 15, right: 0, bottom: 0, left: 0},
             width = 900 - margin.left - margin.right,
-            height = 430 - margin.top - margin.bottom;
+            height = 470 - margin.top - margin.bottom;
 
         x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
