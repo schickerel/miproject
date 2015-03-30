@@ -724,6 +724,7 @@ $(document).ready(function () {
             .attr("class", "legend")
             .attr("transform", function (d, i) {
                 return "translate(" + i * 350 + ",400)";
+                //
             });
 
         legend.append("rect")
