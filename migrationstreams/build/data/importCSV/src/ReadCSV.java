@@ -33,8 +33,8 @@ public class ReadCSV {
   
   public void run() throws SQLException {
 	  
-	//  String csvFile = "nik-2:/ christian$/Applications/XAMPP/xamppfiles/htdocs/miproject/migrationstreams/build/data.csv";  
-    String csvFile = "C:\\xampp\\htdocs\\miproject\\migrationstreams\\build\\data\\data.csv";
+	//  String csvFile = "nik-2:/ christian$/Applications/XAMPP/xamppfiles/htdocs/miproject/migrationstreams/build/importCSV/data.csv";
+    String csvFile = "C:\\xampp\\htdocs\\miproject\\migrationstreams\\build\\data\\importCSV\\data.csv";
     
     BufferedReader br = null;
     String line = "";

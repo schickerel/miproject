@@ -60,9 +60,13 @@ $(document).ready(function(){
             $('#person-list').addClass('not-clickable');
         } else {
             $('#person-list').removeClass('not-clickable');
+            $('#person-information').empty();
+            $('#person-migrations').empty();
             $('#map-wrapper').empty();
             $('#error-message').hide();
             var personId = $(this).val();
+            var personName = $(this).html();
+            $('#person-information').html("<h2>" + personName + "</h2>");
             $.getJSON("../src/index.php/migration/migrations?personId=" + personId)
                 .done(function (migrations) {
                     getCountries(migrations, showPersonMigrations);
@@ -87,7 +91,7 @@ $(document).ready(function(){
         $.each(migrations, function(index, migration){
             $.each(countries, function(index, country){
                 if(country['Id'] === 7){
-                    migrationInfo[0] = {code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude']};
+                    migrationInfo[0] = {code: country['Code'], country: country['Country'], year: migration['Year'], longitude: country['Longitude'], latitude: country['Latitude']};
                 }
                 if(migration['CountryId'] === country['Id']) {
                     if(country['Code'] in migrationData) {
@@ -97,10 +101,10 @@ $(document).ready(function(){
                         migrationYears['times'] = times;
                         migrationYears['year' + times] = migration['Year'];
                         migrationData[country['Code']] = migrationYears;
-                        migrationInfo.push({code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude'], times: times});
+                        migrationInfo.push({code: country['Code'], country: country['Country'], year: migration['Year'], longitude: country['Longitude'], latitude: country['Latitude'], times: times});
                     } else {
                         migrationData[country['Code']] = {year: migration['Year'], times: 1}
-                        migrationInfo.push({code: country['Code'], longitude: country['Longitude'], latitude: country['Latitude'], times: 1});
+                        migrationInfo.push({code: country['Code'], country: country['Country'], year: migration['Year'], longitude: country['Longitude'], latitude: country['Latitude'], times: 1});
                     }
                 }
             });
@@ -109,7 +113,7 @@ $(document).ready(function(){
 
         var index = 0;
         loop();
-
+        $('#person-migrations').append("<p>Migrationen:</p>")
         function loop () {
             setTimeout(function () {
                 var arc = {
@@ -136,6 +140,7 @@ $(document).ready(function(){
 
                 colorCountries[migrationInfo[index + 1]['code']] = color(migrationInfo[index + 1]['times']);
                 map.updateChoropleth(colorCountries);
+                $('#person-migrations').append("<p>" + migrationInfo[index + 1]['year'] + ": " + migrationInfo[index]['country'] + " &#10137; " + migrationInfo[index+1]['country'] + "</p>");
                 index++;
                 if(index < migrationInfo.length - 1) {
                     loop();

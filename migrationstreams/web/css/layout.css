@@ -77,7 +77,6 @@ h1 {
 
 .header .menu a , .header h1 { line-height: 27px; }
 
-
 .container {
 	width: 1200px;
 	margin: auto;
@@ -101,22 +100,6 @@ h1 {
 	height: 35px;
 }
 
-.map {
-	padding-top: 10px;
-	padding-bottom: 0px;
-	z-index: 10;
-	position: absolute;
-	height: 800px;
-}
-
-.subheader2 {
-	padding-top: 10px;
-	padding-bottom: 0px;
-	z-index: 10;
-	position: relative;
-	height: 50px;
-}
-
 select {
 	width: 200px;
 }
@@ -137,19 +120,24 @@ select {
 	visibility: hidden;
 }
 
-.info{
-	visibility: hidden;
-	background-color: fuchsia;
+.helpDialogStart{
+	display: none;
+	background-color: #800032;
 }
 
-.info2{
-	visibility: hidden;
-	background-color: fuchsia;
+.helpDialogStart2{
+	display: none;
+	background-color: #800032;
 }
 
-.info3{
-	visibility: hidden;
-	background-color: fuchsia;
+.helpDialogDetail{
+	display: none;
+	background-color: #800032;
+}
+
+.helpDialogPerson{
+	display: none;
+	background-color: #800032;
 }
 
 .ui-dialog-titlebar
@@ -162,10 +150,20 @@ select {
 	width:15px;
 }
 
-#person-list {
-	background: #000000 url("ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
+#dialogDetail {
+	visibility: hidden;
 }
 
-#dialog-link {
-	visibility: hidden;
+#person-list li:hover{
+	background-color: #800032;
+	color: #fff;
+	cursor: pointer;
+}
+
+.datamaps-arc {
+	pointer-events: none;
+}
+
+.datamaps-hoverover {
+	color: #000000;
 }

@@ -2,74 +2,50 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Migration aus dem Deutschen Reich 1933-1970</title>
     <script src="libs/jquery-2.1.3.js"></script>
     <script src="libs/d3.js"></script>
     <script src="libs/topojson.js"></script>
-    <!--datamaps has to be loaded last-->
     <script src="libs/datamaps.world.min.js"></script>
-
-
-    <!-- Meine Skripte -->
     <script src="js/my_script.js"></script>
     <link href="css/layout.css" rel="stylesheet" type="text/css">
-
-    <script src="jquery-ui.js"></script>
-    <link href="jquery-ui.min.css" rel="stylesheet">
-
-
-
-    <!-- RangeSlider Skripte -->
-    <!-- <script src="js/jQRangeSlider-min.js"></script> -->
-   <!-- <script src="js/jQDateRangeSlider-min.js"></script>
-    <link rel="stylesheet" href="css/iThing.css" type="text/css" />
--->
+    <script src="libs/jquery-ui.js"></script>
+    <link href="libs/jquery-ui.min.css" rel="stylesheet">
 
 </head>
 <body>
 <div class="header">
     <div class="container">
-        <h1>Migration aus dem Deutschen Reich 1933-1945</h1>
+        <h1>Migration aus dem Deutschen Reich 1933-1970</h1>
         <div class="menu">
             <span><a href="index.html">Start</a></span>
-            <span><a href="index2.html">Personenliste</a></span>
-            <span><a href="index.html">Über das Projekt</a></span>
-            <span><a href="index.html">Kontakt</a></span>
-    </div>
+            <span><a href="person.html">Personenliste</a></span>
+            <span><a href="kontakt.html">Kontakt</a></span>
+        </div>
     </div>
 </div>
-
 
 <div class="subheader">
     <div class="container">
-
         <button id="overview" class="button">Überblick</button>
-        <!--<button id="distribution" class="button">Distribution</button>-->
         <button id="firstMigration" class="button">Erstmigration</button>
         <button id="destination" class="button">Zielmigration</button>
         <button id="distribution" class="button">Verteilung</button>
-        <button id="dialog-link" class="button">Detailansicht</button>
-        <button id="help" class="button" style="left: 380px"><img src="pics/Help-icon.png"></button>
-
-
-        <div class="info" style="margin-left:750px">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-
+        <button id="dialogDetail" class="button">Detailansicht</button>
+        <button id="helpButtonStart" class="button" style="left: 380px"><img src="images/Help-icon.png"></button>
+        <div class="helpDialogStart" style="margin-left:750px">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
     </div>
-
 </div>
 
-
 <div class="buttonMenu">
-<div class="container">
-    <div id="slider"></div>
-</div></div>
+    <div class="container">
+        <div id="slider"></div>
+    </div>
+</div>
 
-        <!-- ui-dialog -->
-        <div class="dialog" title="Detailansicht">
-
-            <div id="slider2" style="top:10px"></div>
-
-            <div class="buttonMenu" style="top:20px; padding-bottom: 15px">
+<div class="dialogDetail" title="Detailansicht">
+    <div id="slider2" style="top:10px"></div>
+    <div class="buttonMenu" style="top:20px; padding-bottom: 15px">
         <div>
             <select id="selectdenom" class="selectmenu" name="denomination">
                 <option selected>Konfession</option>
@@ -78,7 +54,6 @@
                 <option value="3">evangelisch</option>
                 <option value="4">katholisch</option>
             </select>
-
             <select id="selectprof" class="selectmenu" name="professionalCategory">
                 <option selected>Beruf</option>
                 <option value="1" name="jüdisch">Literatur und Publizistik</option>
@@ -86,42 +61,29 @@
                 <option value="3">Bildende Kunst und Architektur</option>
                 <option value="4">Film</option>
             </select>
-
-            <div class="info2"> ts r t, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-
+            <div class="helpDialogDetail"> ts r t, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
         </div>
-                </div>
+    </div>
+    <div id="barcontainertwo" style="width: 900px; height: 400px; margin-bottom: 15px; margin-top: 15px"></div>
+    <button id="firstMigrationRefined" class="button">Erstmigration</button>
+    <button id="destinationRefined" class="button">Zielmigration</button>
+    <button id="DistributionRefined" class="button">Verteilung</button>
+    <button id="closeDialog" class="button" style="left: 300px">Cancel</button>
+    <button id="helpButtonDetail" class="button" style="left: 320px"><img src="images/Help-icon.png"></button>
+</div>
 
-            <div id="barcontainertwo" style="width: 900px; height: 430px; margin-bottom: 15px; margin-top: 15px"></div>
-
-            <button id="firstMigrationRefined" class="button">Erstmigration</button>
-            <button id="destinationRefined" class="button">Zielmigration</button>
-            <button id="distributionrefined" class="button">Verteilung</button>
-            <button id="closeDialog" class="button" style="left: 300px">Cancel</button>
-            <button id="help2" class="button" style="left: 320px"><img src="pics/Help-icon.png"></button>
-
-        </div>
-
-<div id ="country-chart"></div>
-
-
-    <div class="dialog2">
-        <div id="barcontainer" style="width: 400px; height: 160px"></div>
-   </div>
-
+<div class="dialogStart">
+    <div id="barcontainer" style="width: 400px; height: 160px"></div>
+</div>
 
 <div id="container" style="position: absolute; top: 180px; width: 1200px; height: 800px;">
-    <div class="info" style="position: absolute; left: 60px; top: 140px; width: 700px">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    <div class="helpDialogStart2" style="position: absolute; left: 60px; top: 140px; width: 700px">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
     </div>
-    <div class="info" style="position: absolute; left: 600px; top: 400px">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    <div class="helpDialogStart" style="position: absolute; left: 600px; top: 400px">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
     </div>
 </div>
 
-<div id="test3" class="container">
-</div>
-
-
-      <script src="js/map.js"></script> 
+<script src="js/map.js"></script>
 
 </body>
 </html>
