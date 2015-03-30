@@ -124,15 +124,15 @@ $(document).ready(function() {
 
     });
 
-        $( "#slider" ).slider({
-            change: function (event, ui) {
-                d3.select("#chart")
-                    .remove();
-                getDistribution(updateMap, ui.value);
+    $( "#slider" ).slider({
+        change: function (event, ui) {
+            d3.select("#chart")
+                .remove();
+            getDistribution(updateMap, ui.value);
 
-                //firstRefined = true
-            }
-        });
+            //firstRefined = true
+        }
+    });
 
 
     $( "#distributionmonth" ).selectmenu({
@@ -211,7 +211,7 @@ $(document).ready(function() {
             if (firstRefined) {
                 d3.select("#refinedChart")
                     .remove();
-                  filter(newChart, currentURL, currentLegend, empty);
+                filter(newChart, currentURL, currentLegend, empty);
                 firstRefined = false;
             } else {
                 filter(recalculateRefined, currentURL, currentLegend, empty);
@@ -267,7 +267,7 @@ $(document).ready(function() {
                     return d.year;
                 };
 
-                    recalculateBarchart(json);
+                recalculateBarchart(json);
 
 
 
@@ -285,7 +285,7 @@ $(document).ready(function() {
                     return d.country;
                 };
 
-                    recalculateBarchart(json);
+                recalculateBarchart(json);
                 mainFilter = "firstMigration";
 
 
@@ -304,9 +304,9 @@ $(document).ready(function() {
                     return d.country;
                 };
                 recalculateBarchart(json);
-                 mainFilter = "targetCountryMigration";
+                mainFilter = "targetCountryMigration";
 
-    })}
+            })}
 
 
     function getDistribution(callback, value) {
@@ -325,13 +325,9 @@ $(document).ready(function() {
                 key = function (d) {
                     return d.country;
                 };
-                if (first) {
+
                     recalculateBarchart(json);
-                    first = false;
-                }
-                else {
-                    recalculateBarchart(json);
-                }
+
                 mainFilter = "distributionByCountries";
             });
     }
@@ -389,7 +385,7 @@ $(document).ready(function() {
         x.domain(domain.map(function(d) {return d}).sort());
         y.domain([0, maxAmount]);
 
-       svg.selectAll("rect.emigrations")
+        svg.selectAll("rect.emigrations")
             .data(emigrations)
             .enter()
             .append("rect")
@@ -421,8 +417,8 @@ $(document).ready(function() {
             .style("font-size","8px")
 
             .attr("x", function(d){
-                 return x(d) + (x.rangeBand()/2);
-                  })
+                return x(d) + (x.rangeBand()/2);
+            })
             .attr("y",  height)
             .style("fill", "red");
 
@@ -432,35 +428,35 @@ $(document).ready(function() {
     //function for creating an new array with both data
     function filter(callback, url, category, empty) {
         if (empty ===false){
-        $.getJSON(url)
-            .done(function (json) {
-                refinedDatasets = [];
-                var refinedCategory = category;
-                json = json.sort(function (a, b) {
-                    return d3.ascending(a.country, b.country);
-                });
-                $.each(dataset, function (i) {
-                    var refinedDataset = {};
-                    refinedDataset.country = dataset[i].country;
-                    refinedDataset.totalAmount = dataset[i].amount;
-                    for (data in json) {
-                        //console.log(json[data]);
-                        if (dataset[i].country == json[data].country) {
-                            refinedDataset[refinedCategory] = json[data].amount;
+            $.getJSON(url)
+                .done(function (json) {
+                    refinedDatasets = [];
+                    var refinedCategory = category;
+                    json = json.sort(function (a, b) {
+                        return d3.ascending(a.country, b.country);
+                    });
+                    $.each(dataset, function (i) {
+                        var refinedDataset = {};
+                        refinedDataset.country = dataset[i].country;
+                        refinedDataset.totalAmount = dataset[i].amount;
+                        for (data in json) {
+                            //console.log(json[data]);
+                            if (dataset[i].country == json[data].country) {
+                                refinedDataset[refinedCategory] = json[data].amount;
+                            }
                         }
-                    }
-                    //console.log(refinedDataset);
-                    refinedDatasets.push(refinedDataset);
+                        //console.log(refinedDataset);
+                        refinedDatasets.push(refinedDataset);
+                    })
+                    $.each(refinedDatasets, function (i) {
+                        if (!refinedDatasets[i][refinedCategory]) {
+                            refinedDatasets[i][refinedCategory] = 0;
+                        }
+                    })
+                    //console.log(refinedDatasets);
+                    callback(refinedDatasets);
+                    //firstRefined = false;
                 })
-                $.each(refinedDatasets, function (i) {
-                    if (!refinedDatasets[i][refinedCategory]) {
-                        refinedDatasets[i][refinedCategory] = 0;
-                    }
-                })
-                //console.log(refinedDatasets);
-                callback(refinedDatasets);
-                //firstRefined = false;
-            })
         }else {
             var refinedCategory = category;
             $.each(dataset, function (i) {
@@ -499,7 +495,7 @@ $(document).ready(function() {
         //jede Gruppe von Balken ist eine SVG-Grafik!
         var margin = {top: 15, right: 0, bottom: 0, left: 0},
             width = 900 - margin.left - margin.right,
-            height = 400 - margin.top - margin.bottom;
+            height = 430 - margin.top - margin.bottom;
 
         x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -510,7 +506,7 @@ $(document).ready(function() {
             .range([height, 0]);
 
         var color = d3.scale.ordinal()
-            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+            .range(["#DFE2DB", "#DE1B1B"]);
 
 
         bigSvg = d3.select("#barcontainertwo").append("svg")
@@ -568,7 +564,7 @@ $(document).ready(function() {
                 return y(d.value);
             })
             .attr("height", function (d) {
-                return height - y(d.value);
+                return height - y(d.value) -50;
             })
             .style("fill", function (d) {
                 return color(d.name);
@@ -585,17 +581,17 @@ $(document).ready(function() {
             .attr("x", function(d, i){
                 return x0(d.country) + + x0.rangeBand()/2;;
             })
-            .attr("y", height-20)
+            .attr("y", height-40)
             .attr("font-family", "sans-serif")
             .attr("font-size", "11px")
-            .attr("fill", "white");
+            .attr("fill", "yellow");
 
         legend = bigSvg.selectAll(".legend")
             .data(catNames.slice().reverse())
             .enter().append("g")
             .attr("class", "legend")
             .attr("transform", function (d, i) {
-                return "translate(0," + i * 20 + ")";
+                return "translate("+i * 180+",380)";
             });
 
         legend.append("rect")
@@ -606,11 +602,11 @@ $(document).ready(function() {
             .style("fill", color);
 
         myText = legend.append("text")
-            .attr("x", width - 24)
-            .attr("y", 9)
+            .attr("x", 18)
+            .attr("y", 25)
             .attr("dy", ".35em")
             .style("text-anchor", "end")
-            .attr("fill", "white")
+            .attr("fill", "yellow")
             .text(function (d) {
                 return d;
             });
@@ -622,7 +618,7 @@ $(document).ready(function() {
 
         var margin = {top: 15, right: 0, bottom: 0, left: 0},
             width = 900 - margin.left - margin.right,
-            height = 400 - margin.top - margin.bottom;
+            height = 430 - margin.top - margin.bottom;
 
         x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -638,7 +634,7 @@ $(document).ready(function() {
          }));*/
 
         var color = d3.scale.ordinal()
-            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+            .range(["#DFE2DB", "#DE1B1B"]);
 
 
 
@@ -661,7 +657,6 @@ $(document).ready(function() {
 
         });
 
-
         x0.domain(data.map(function (d) {
             return d.country;
         }));
@@ -672,14 +667,8 @@ $(document).ready(function() {
             });
         })]);
 
-
         state = bigSvg.selectAll(".g")
             .data(data);
-
-
-        var stateEnter =  state.enter().append("g")
-            .attr("class", "g")
-            .attr("transform", function(d) { return x0(d.country)  });
 
 
         bars = state.selectAll("rect")
@@ -689,24 +678,6 @@ $(document).ready(function() {
         //console.log(stateEnter);
         //enter function never used since whole svg is deleted when main filter category is
         //changed
-        stateEnter.selectAll("rect")
-            .data(function (d) {
-                return d.cat;
-            })
-            .enter().append("rect")
-            .attr("width", x1.rangeBand())
-            .attr("x", function (d, i) {
-                return x1(i);
-            })
-            .attr("y", function (d) {
-                return y(d.value);
-            })
-            .attr("height", function (d) {
-                return height - y(d.value);
-            })
-            .style("fill", function (d) {
-                return color(d.name);
-            });
 
         bars.transition().duration(1000)
             .attr("width", x1.rangeBand())
@@ -717,16 +688,13 @@ $(document).ready(function() {
                 return y(d.value);
             })
             .attr("height", function (d) {
-                return height - y(d.value);
+                return height - y(d.value) -50;
             })
             .style("fill", function (d) {
                 return color(d.name);
             });
 
-        state.exit()
-            .remove();
-
-        redrawText()
+       redrawText()
 
         function redrawText() {
             myText
@@ -788,12 +756,12 @@ $(document).ready(function() {
         var h = 450;
 
         if(first) {
-             svg = d3.select("#barcontainer")
+            svg = d3.select("#barcontainer")
                 .append("svg")
                 .attr("id", "barchart")
                 .attr("width", w)
                 .attr("height", h);
-                first = false;
+            first = false;
         }
         xScale = d3.scale.linear()
             .domain([0, d3.max(dataset, function (d) {
@@ -862,11 +830,11 @@ $(document).ready(function() {
         var text =svg.selectAll("text")
             .data(dataset, key)
 
-            text.transition() // <-- This is new,
+        text.transition() // <-- This is new,
             .duration(1000) // and so is this.
             .text(function(d) {
 
-                    return d.country + " " + d.amount;
+                return d.country + " " + d.amount;
             })
             .attr("text-anchor", "middle")
             .attr("x", 25)
@@ -881,10 +849,10 @@ $(document).ready(function() {
         // return "rgb(0, 0, " + Math.round(colorScale(d.count)) + ")";
         // });
 
-    text.enter()
+        text.enter()
             .append("text")
             .text(function(d) {
-                 return d.country + " " + d.amount;
+                return d.country + " " + d.amount;
             })
             .attr("text-anchor", "middle")
             .attr("x", 25)
@@ -895,9 +863,9 @@ $(document).ready(function() {
             .attr("font-size", "11px")
             .attr("fill", "yellow");
 
-    text.exit()
-          .transition()
-          .remove();
+        text.exit()
+            .transition()
+            .remove();
 
         //. attrTween("d", tweenPie);
         datas.exit()
