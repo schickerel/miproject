@@ -94,7 +94,7 @@ $(document).ready(function(){
         width: 200,
         height: 400,
         open: function(event, ui) {
-            $(event.target).parent().css('top', '470px');
+            $(event.target).parent().css('top', '500px');
             $(event.target).parent().css('left', '20px');
         }
     });

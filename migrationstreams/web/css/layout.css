@@ -1,8 +1,3 @@
-*{
-	margin:0;
-	padding:0;
-}
-
 a {
 	color: #ccc;
 	text-decoration: none;
@@ -14,7 +9,7 @@ body {
 	margin: 0;
 	min-height: 700px;
 	font-family: KarbidWeb, sans-serif;
-	min-width: 1240px;
+	width: 1265px;
 }
 
 
@@ -22,8 +17,9 @@ body {
 	background: #363636;
 	padding-bottom: 10px;
 	z-index: 10;
-	position: relative;
+	position: absolute;
 	height: 60px;
+	width:1265px;
 }
 
 .header h1 {
@@ -77,28 +73,50 @@ h1 {
 
 .header .menu a , .header h1 { line-height: 27px; }
 
-.container {
+/*.container {
 	width: 1200px;
 	margin: auto;
 	height: auto;
+}*/
+
+.containerMenu {
+	width: 1200px;
+	margin-left: 30px;
+}
+
+.containerHeader {
+	width: 1200px;
+	margin-left: 30px;
+}
+
+.containerSlider {
+	width: 1200px;
+	margin-left: 30px;
 }
 
 .subheader {
+	top: 71px;
 	padding-top: 2px;
 	background: #000000 url("../images/ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
 	padding-bottom: 4px;
 	z-index: 10;
-	position: relative;
+	position: absolute;
 	height: 50px;
+	width: 1265px;
 }
 
-.buttonMenu {
-	padding-top: 15px;
-	padding-bottom: 0px;
-	z-index: 10;
-	position: relative;
-	height: 35px;
+.subheader2 {
+	top: 143px;
+	position: absolute;
+	height: 50px;
+	width: 1265px;
 }
+
+/*.buttonMenu {
+	top: 50px;
+	position: absolute;
+	height: 35px;
+}*/
 
 select {
 	width: 200px;

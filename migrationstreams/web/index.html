@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="header">
-    <div class="container">
+    <div class="containerHeader">
         <h1>Migration aus dem Deutschen Reich 1933-1970</h1>
         <div class="menu">
             <span><a href="index.html">Start</a></span>
@@ -26,7 +26,7 @@
 </div>
 
 <div class="subheader">
-    <div class="container">
+    <div class="containerMenu">
         <button id="overview" class="button">Überblick</button>
         <button id="firstMigration" class="button">Erstmigration</button>
         <button id="destination" class="button">Zielmigration</button>
@@ -34,9 +34,10 @@
         <button id="dialogDetail" class="button">Detailansicht</button>
         <button id="helpButtonStart" class="button" style="left: 380px"><img src="images/Help-icon.png"></button>
     </div>
+</div>
 
-<div class="buttonMenu">
-    <div class="container">
+<div class="subheader2">
+    <div class="containerSlider">
         <div id="slider"></div>
         <div style="float:right; color: yellow">
             <p id="sliderLabel"></p>
@@ -49,7 +50,7 @@
     <div style="float:right; color: yellow; margin-top:25px">
         <p id="sliderLabel2"></p>
     </div>
-    <div class="buttonMenu" style="top:20px; padding-bottom: 15px">
+    <div style="position: absolute; top:55px">
         <div>
             <select id="selectdenom" class="selectmenu" name="denomination">
                 <option selected>Konfession</option>
@@ -65,25 +66,28 @@
                 <option value="3">Bildende Kunst und Architektur</option>
                 <option value="4">Film</option>
             </select>
-            <div class="helpDialogDetail"> ts r t, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+            <div class="helpDialogDetail">Es wird die Zugehörigkeit zu einer Konfession oder einer Berufsgruppe am aktuell visualisierten Datensatz mithilfe von Vergleichsbalken angezeigt</div>
         </div>
     </div>
-    <div id="barcontainertwo" style="width: 900px; height: 450px; margin-bottom: 15px; margin-top: 15px"></div>
+    <div id="barcontainertwo" style="position: absolute; width: 900px; height: 450px; top:115px"></div>
+
+    <div style="position: absolute; top: 570px">
     <button id="firstMigrationRefined" class="button">Erstmigration</button>
     <button id="destinationRefined" class="button">Zielmigration</button>
     <button id="DistributionRefined" class="button">Verteilung</button>
     <button id="closeDialog" class="button" style="left: 300px">Cancel</button>
     <button id="helpButtonDetail" class="button" style="left: 320px"><img src="images/Help-icon.png"></button>
+    </div>
 </div>
 
 <div class="dialogStart">
     <div id="barcontainer" style="width: 400px; height: 80px"></div>
 </div>
 
-<div id="container" style="position: absolute; top: 120px; width: 1200px; height: 800px;">
-    <div class="helpDialogStart" style="position:absolute; left:800px; top: 0px; width:450px">Die Migrationsdaten werden sowohl auf der Landkarte als auch durch Balkendiagramme visualisiert. Die Buttons am oberen Rand der Seite ermöglichen eine Auswahl und Sortierung der Daten. Folgende Visualisierungen sind den einzelnen Buttons zugeorndet: <br /> <b>Überblick:</b> Weltkarte und Balkendiagramm zeigen die Gesamtheit der Länder in die eingewandert wurde.   <br /> <b>Erstmigration:</b>Die  Weltkarte und das Balkendiagramm zeigen die Länder in die die Emigranten als erstes eingewandert sind.  <br /> <b>Zielmigration:</b> Weltkarte und Balkendiagramm zeigen die Zielländer der Auswanderer. Ein Zielland ist das Land in dem ein Emigrant sich am längsten aufgehalten hat. <br /> <b>Verteilung:</b> Weltkarte und Balkendiagramm zeigen die Verteilung der Emigranten  für das im Time Slider ausgewählte Jahr.  <br /> <b>Detailansicht:</b> Ermöglicht es für die Perspektiven Erstmigration Zielmigration und Verteilung die zwei Filterkriterien Religionszugehörigkeit und Berufsgruppe anzuwenden.</div>
-    <div class="helpDialogStart2" style="position: absolute; left: 60px; top: 140px; width: 700px">Das Balkendiagramm visualisiert dieselbe Information wie die Weltkarte. Erst beim Ankliken eines Landes bekommt das Balkendiagramm eine neue Information. Es zeigt dann die jährliche Ein-und Auswnaderungsrate. Der blaue Balken repräsentiert die Anzahl der Einwanderer , der weiße Balken die Anzahl der Auswanderer.</div>
-    <div class="helpDialogStart" style="position: absolute; left: 500px; top: 400px">Die Weltkarte visualisiert die ausgewählten Daten nach dem Prinzip der Heatmap. Je dunkler ein Land eingefärbt ist desto Grösser ist der Wert dahinter.</div>
+<div id="container" style="position: absolute; top: 180px; width: 1200px; height: 800px;">
+    <div class="helpDialogStart" style="position:absolute; left:800px; top: 0px; width:450px">Die Migrationsdaten werden sowohl auf der Landkarte als auch durch Balkendiagramme visualisiert. Die obigen Menü-Buttons ermöglichen eine Auswahl und Sortierung der Daten. Folgende Visualisierungen sind den einzelnen Buttons zugeorndet: <br /> <b>Überblick:</b> Weltkarte und Balkendiagramm zeigen die Gesamtheit der Länder, in die eingewandert wurde. <br /> <b>Erstmigration:</b>Weltkarte und Balkendiagramm zeigen die Länder, in die die Emigranten als erstes eingewandert sind. <br /> <b>Zielmigration:</b> Weltkarte und Balkendiagramm zeigen die Zielländer der Auswanderer. Ein Zielland ist als Land mit dem längsten Aufenthalt eines Emigranten definiert <br /> <b>Verteilung:</b> Weltkarte und Balkendiagramm zeigen die Verteilung der Emigranten für das im Time-Slider ausgewählte Jahr.  <br /> <b>Detailansicht:</b> Ermöglicht es, für die Perspektiven Erstmigration, Zielmigration und Verteilung die zwei Filterkriterien Religionszugehörigkeit und Berufsgruppe anzuwenden.</div>
+    <div class="helpDialogStart2" style="position: absolute; left: 60px; top: 140px; width: 700px">Das Balkendiagramm visualisiert dieselbe Information wie die Weltkarte. Erst beim Anklicken eines Landes bekommt das Balkendiagramm eine neue Information. Es zeigt dann die jährliche Ein-und Auswanderungsrate. Der blaue Balken repräsentiert die Anzahl der Einwanderer, der weiße Balken die Anzahl der Auswanderer.</div>
+    <div class="helpDialogStart" style="position: absolute; left: 500px; top: 400px">Die Weltkarte visualisiert die ausgewählten Daten nach dem Prinzip der Heatmap. Je dunkler ein Land eingefärbt ist, desto mehr Personen sind in dieses Land migriert.</div>
 </div>
 
 <script src="js/map.js"></script>
