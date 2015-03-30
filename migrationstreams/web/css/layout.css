@@ -85,7 +85,7 @@ h1 {
 
 .subheader {
 	padding-top: 2px;
-	background: #000000 url("ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
+	background: #000000 url("../images/ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
 	padding-bottom: 4px;
 	z-index: 10;
 	position: relative;
@@ -170,4 +170,12 @@ select {
 
 #person-list.not-clickable li:hover {
 	cursor: wait;
+}
+
+#sliderLabel {
+	visibility:hidden;
+}
+
+#sliderLabel2 {
+	visibility:hidden;
 }

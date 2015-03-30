@@ -127,10 +127,23 @@ $(document).ready(function() {
             d3.select("#chart")
                 .remove();
             getDistribution(updateMap, ui.value);
+            $("#sliderLabel").text(ui.value);
 
             //firstRefined = true
         }
     });
+
+    $( "#slider2" ).slider({
+        change: function (event, ui) {
+            d3.select("#chart")
+                .remove();
+            getDistribution(updateMap, ui.value);
+            $("#sliderLabel2").text(ui.value);
+
+            //firstRefined = true
+        }
+    });
+
 
 
     $("#distributionmonth").selectmenu({
@@ -745,7 +758,7 @@ $(document).ready(function() {
                 return y(d.value);
             })
             .attr("height", function (d) {
-                return height - y(d.value) -50;
+                return height - y(d.value) -80;
             })
             .style("fill", function (d) {
                 return color(d.name);
