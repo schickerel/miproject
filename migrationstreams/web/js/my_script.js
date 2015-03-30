@@ -90,7 +90,7 @@ $(document).ready(function(){
         autoOpen: false,
         draggable: false,
         resizable: false,
-        width: 60,
+        width: 200,
         height: 400,
         open: function(event, ui) {
             $(event.target).parent().css('top', '470px');

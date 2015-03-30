@@ -159,3 +159,11 @@ select {
 	color: #fff;
 	cursor: pointer;
 }
+
+.datamaps-arc {
+	pointer-events: none;
+}
+
+.datamaps-hoverover {
+	color: #000000;
+}
