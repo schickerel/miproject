@@ -63,7 +63,6 @@ $(document).ready(function(){
             $('#person-information').empty();
             $('#person-migrations').empty();
             $('#map-wrapper').empty();
-            $('#error-message').hide();
             var personId = $(this).val();
             var personName = $(this).html();
             $('#person-information').html("<h2>" + personName + "</h2>");

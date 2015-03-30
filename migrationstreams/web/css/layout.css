@@ -167,3 +167,7 @@ select {
 .datamaps-hoverover {
 	color: #000000;
 }
+
+#person-list.not-clickable li:hover {
+	cursor: wait;
+}
