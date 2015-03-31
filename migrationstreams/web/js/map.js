@@ -226,13 +226,14 @@ $(document).ready(function () {
             //get the selected Text value; used for the diagram's legend
             currentLegend = $("#selectdenom :selected").text();
             var empty = false;
+            var legend = true;
             if (firstRefined) {
                 d3.select("#refinedChart")
                     .remove();
-                filter(newChart, currentURL, currentLegend, empty);
+                filter(newChart, currentURL, currentLegend, empty, legend);
                 firstRefined = false;
             } else {
-                filter(recalculateRefined, currentURL, currentLegend, empty);
+                filter(recalculateRefined, currentURL, currentLegend, empty, legend);
             }
         }
     });
@@ -251,13 +252,14 @@ $(document).ready(function () {
             //get the selected Text value; used for the diagram's legend
             currentLegend = $("#selectprof :selected").text();
             var empty = false;
+            var legend = true;
             if (firstRefined) {
                 d3.select("#refinedChart")
                     .remove();
-                filter(newChart, currentURL, currentLegend, empty);
+                filter(newChart, currentURL, currentLegend, empty, legend);
                 firstRefined = false;
             } else {
-                filter(recalculateRefined, currentURL, currentLegend, empty);
+                filter(recalculateRefined, currentURL, currentLegend, empty, legend);
             }
         }
     });
@@ -562,7 +564,7 @@ $(document).ready(function () {
     };
 
     //function for creating an new array with both data
-    function filter(callback, url, category, empty) {
+    function filter(callback, url, category, empty, legend) {
         if (empty === false) {
             $.getJSON(url)
                 .done(function (json) {
@@ -590,7 +592,7 @@ $(document).ready(function () {
                         }
                     })
                     //console.log(refinedDatasets);
-                    callback(refinedDatasets);
+                    callback(refinedDatasets, legend);
                     //firstRefined = false;
                 })
         } else {
@@ -625,13 +627,15 @@ $(document).ready(function () {
     }
 
 
-    var newChart = function drawRefinedChart(data) {
+    var newChart = function drawRefinedChart(data, legend) {
 
+        console.log(legend);
         //margin values zum Abstand zwischen den zwei den mehreren SVG-Grafiken, die gezeichnet werden;
         //jede Gruppe von Balken ist eine SVG-Grafik!
         var margin = {top: 15, right: 0, bottom: 0, left: 0},
             width = 900 - margin.left - margin.right,
-            height = 470 - margin.top - margin.bottom;
+            height = 470 - margin.top - margin.bottom,
+            barheight = 370;
 
         x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -639,7 +643,7 @@ $(document).ready(function () {
         x1 = d3.scale.ordinal();
 
         y = d3.scale.linear()
-            .range([height, 0]);
+            .range([barheight, 0]);
 
         var color = d3.scale.ordinal()
             .range(["#DFE2DB", "#DE1B1B"]);
@@ -702,11 +706,35 @@ $(document).ready(function () {
                 return y(d.value);
             })
             .attr("height", function (d) {
-                return height - y(d.value) - 80;
+                return barheight - y(d.value);
             })
             .style("fill", function (d) {
                 return color(d.name);
             });
+            if( legend == true){
+        bars.on("mouseover", function(d, i){
+
+                var xPosition = 10;
+                var yPosition = 30;
+                console.log(xPosition);
+
+                bigSvg.append("text")
+                    .attr("id", "tooltip")
+                    .attr("x", xPosition)
+                    .attr("y", yPosition)
+                     .attr("font-family", "sans-serif")
+                    .attr("font-size", "13px")
+                    .attr("font-weight", "bold")
+                    .attr("fill", "yellow")
+                    .text(d.value);
+
+            })
+            .on ("mouseout", function(){
+            //# steht für IDs
+            d3.select("#tooltip").remove();
+        });}
+
+
 
         bigSvg.selectAll("text")
             .data(dataset) //Bind data with custom key function
@@ -757,15 +785,15 @@ $(document).ready(function () {
 
         var margin = {top: 15, right: 0, bottom: 0, left: 0},
             width = 900 - margin.left - margin.right,
-            height = 470 - margin.top - margin.bottom;
-
+            height = 470 - margin.top - margin.bottom,
+            barheight = 370;
         x0 = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
 
         x1 = d3.scale.ordinal();
 
         y = d3.scale.linear()
-            .range([height, 0]);
+            .range([barheight, 0]);
 
 
         /* console.log(d3.max(data, function(d){
@@ -826,7 +854,7 @@ $(document).ready(function () {
                 return y(d.value);
             })
             .attr("height", function (d) {
-                return height - y(d.value) - 80;
+                return barheight - y(d.value);
             })
             .style("fill", function (d) {
                 return color(d.name);
