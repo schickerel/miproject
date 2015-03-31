@@ -173,13 +173,9 @@ $(document).ready(function () {
         change: function (event, ui) {
 
             if (mainFilter == 'distributionByCountries') {
-
                 var year = $('#slider2').slider("value");
-
                 var month = 5;
-
                 currentURL = buildUrl(this.name, this.value, year, month);
-
             } else {
                 currentURL = buildUrl(this.name, this.value);
             }
@@ -201,7 +197,6 @@ $(document).ready(function () {
         change: function (event, ui) {
             if (mainFilter == 'distributionByCountries') {
                 var year = $('#slider2').slider("value");
-
                 var month = 5;
                 currentURL = buildUrl(this.name, this.value, year, month);
             } else {
@@ -225,8 +220,6 @@ $(document).ready(function () {
         var countryMap = {};
         $.getJSON("../src/index.php/migration/migrations")
             .done(function (json) {
-
-
                 for (var country in json) {
                     var currentCountry = json[country];
                     countryMap[currentCountry] = '#ce2834';
@@ -275,7 +268,7 @@ $(document).ready(function () {
             ]);
 
         barsvg.selectAll("rect")
-            .data(dataset)    //Bind data with custom key function
+            .data(dataset)
             .enter()
             .append("rect")
             .attr("x", function (d, i) {
@@ -356,10 +349,8 @@ $(document).ready(function () {
                 };
                 recalculateBarchart(json);
                 mainFilter = "targetCountryMigration";
-
             })
     }
-
 
     function getDistribution(callback, value) {
         var url = "../src/index.php/migration/migrations?filter=distributionByCountries&";
@@ -485,6 +476,39 @@ $(document).ready(function () {
             })
             .attr("y", height)
             .style("fill", "red");
+
+
+        var migrations = ["Immigrations", "Emmigrations"];
+        var colors = ["white", "blue"];
+
+        var countryLegend = svg.selectAll(".legend")
+            .data(migrations)
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function (d, i) {
+                return "translate(0,"+ i * 10 +")";
+                //
+            });
+
+        countryLegend.append("rect")
+            .attr("x", 18)
+            .attr("y", 22)
+            .attr("width", 10)
+            .attr("height", 10)
+            .style("fill", function(d,i){
+                return colors[i];
+            });
+
+        countryLegend.append("text")
+            .attr("x", 30)
+            .attr("y", 26)
+            .attr("dy", ".35em")
+            .attr("fill", "yellow")
+            .attr("font-size", "8px")
+            .text(function (d, i) {
+                return migrations[i];
+            });
+
 
 
     };
