@@ -494,6 +494,8 @@ $(document).ready(function () {
             .remove();
         d3.select("#barchart")
             .remove();
+        d3.select("#yearchart")
+            .remove();
 
         first = true;
         var svg = d3.select("#barcontainer")
