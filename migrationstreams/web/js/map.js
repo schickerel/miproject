@@ -144,10 +144,14 @@ $(document).ready(function () {
                 .remove();
             d3.select("#yearchart")
                 .remove();
-            getDistribution(updateMap, ui.value);
+            firstRefined = true;
+            mainFilter = "distributionbyCountry";
+            d3.select("#refinedChart")
+                .remove();
             $("#sliderLabel2").text(ui.value);
+            getDistribution(updateMap, ui.value);
 
-            //firstRefined = true
+            newChart(dataset);
         }
     });
 
@@ -179,7 +183,7 @@ $(document).ready(function () {
         d3.select("#refinedChart")
             .remove();
         getfirstMigrations(updateMap);
-        //mainFilter = "firstMigration";
+        mainFilter = "firstMigration";
         newChart(dataset);
 
 
@@ -195,7 +199,7 @@ $(document).ready(function () {
         d3.select("#refinedChart")
             .remove();
         getDestinations(updateMap);
-        //mainFilter = "targetCountryMigration";
+        mainFilter = "targetCountryMigration";
         var empty = true;
         newChart(dataset);
 
@@ -213,8 +217,8 @@ $(document).ready(function () {
         //construct the URL for the json request
         change: function (event, ui) {
             if (mainFilter == 'distributionbyCountry') {
-                var year = $("#distributionyear").val();
-                var month = $("#distributionmonth").val();
+                var year = $('#slider2').slider("value");
+                var month = 5;
                 currentURL = buildUrl(this.name, this.value, year, month);
             } else {
                 currentURL = buildUrl(this.name, this.value);
@@ -237,8 +241,9 @@ $(document).ready(function () {
         //construct the URL for the json request
         change: function (event, ui) {
             if (mainFilter == 'distributionbyCountry') {
-                var year = $("#distributionyear").val();
-                var month = $("#distributionmonth").val();
+                var year = $('#slider2').slider("value");
+                console.log(year);
+                var month = 5;
                 currentURL = buildUrl(this.name, this.value, year, month);
             } else {
                 currentURL = buildUrl(this.name, this.value);
@@ -705,8 +710,8 @@ $(document).ready(function () {
             .data(dataset) //Bind data with custom key function
             .enter()
             .append("text")
-            .text(function (d) {
-                return d.country;
+            .html(function (d) {
+                return d.country + " " + d.amount;
             })
             .attr("text-anchor", "middle")
             .attr("x", function (d, i) {
@@ -715,7 +720,7 @@ $(document).ready(function () {
             })
             .attr("y", height - 70)
             .attr("font-family", "sans-serif")
-            .attr("font-size", "11px")
+            .attr("font-size", "8px")
             .attr("fill", "yellow");
 
         legend = bigSvg.selectAll(".legend")
