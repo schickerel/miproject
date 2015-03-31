@@ -478,7 +478,7 @@ $(document).ready(function () {
             .style("fill", "red");
 
 
-        var migrations = ["Immigrations", "Emmigrations"];
+        var migrations = ["Emmigrations", "Immigrations",];
         var colors = ["white", "blue"];
 
         var countryLegend = svg.selectAll(".legend")
@@ -492,7 +492,7 @@ $(document).ready(function () {
 
         countryLegend.append("rect")
             .attr("x", 18)
-            .attr("y", 22)
+            .attr("y", 5)
             .attr("width", 10)
             .attr("height", 10)
             .style("fill", function(d,i){
@@ -501,7 +501,7 @@ $(document).ready(function () {
 
         countryLegend.append("text")
             .attr("x", 30)
-            .attr("y", 26)
+            .attr("y", 9)
             .attr("dy", ".35em")
             .attr("fill", "yellow")
             .attr("font-size", "8px")
