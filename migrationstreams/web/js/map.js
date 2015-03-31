@@ -145,7 +145,7 @@ $(document).ready(function () {
             d3.select("#yearchart")
                 .remove();
             firstRefined = true;
-            mainFilter = "distributionbyCountry";
+            mainFilter = "distributionByCountries";
             d3.select("#refinedChart")
                 .remove();
             $("#sliderLabel2").text(ui.value);
@@ -216,10 +216,15 @@ $(document).ready(function () {
     $('#selectdenom').selectmenu({
         //construct the URL for the json request
         change: function (event, ui) {
-            if (mainFilter == 'distributionbyCountry') {
+
+            if (mainFilter == 'distributionByCountries') {
+
                 var year = $('#slider2').slider("value");
+
                 var month = 5;
+
                 currentURL = buildUrl(this.name, this.value, year, month);
+
             } else {
                 currentURL = buildUrl(this.name, this.value);
             }
@@ -241,7 +246,7 @@ $(document).ready(function () {
     $('#selectprof').selectmenu({
         //construct the URL for the json request
         change: function (event, ui) {
-            if (mainFilter == 'distributionbyCountry') {
+            if (mainFilter == 'distributionByCountries') {
                 var year = $('#slider2').slider("value");
                 console.log(year);
                 var month = 5;
@@ -429,7 +434,7 @@ $(document).ready(function () {
         var year = value;
         var month = 5;
 
-        url += url + "year=" + year + "&month=" + month;
+        url += "year=" + year + "&month=" + month;
 
         $.getJSON(url)
             .done(function (json) {
@@ -613,6 +618,7 @@ $(document).ready(function () {
     };
     //category is the general category, number the specific no of this category
     function buildUrl(category, number, year, month) {
+        console.log(year + "" + month);
         var url = "  ../src/index.php/migration/migrations?filter=";
         var and = "";
         //index.php / migration / migrations ? filter = distributionByCountries & year = 1933 & month = 3
@@ -629,8 +635,7 @@ $(document).ready(function () {
 
     var newChart = function drawRefinedChart(data, legend) {
 
-        console.log(legend);
-        //margin values zum Abstand zwischen den zwei den mehreren SVG-Grafiken, die gezeichnet werden;
+       //margin values zum Abstand zwischen den zwei den mehreren SVG-Grafiken, die gezeichnet werden;
         //jede Gruppe von Balken ist eine SVG-Grafik!
         var margin = {top: 15, right: 0, bottom: 0, left: 0},
             width = 900 - margin.left - margin.right,
@@ -656,8 +661,6 @@ $(document).ready(function () {
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        //get an array of all key values (the ages) in the dataset; States are excluded
-        //first line (title line is evaluated)
         var catNames = d3.keys(data[0]).filter(function (key) {
             return key !== "country";
         });
@@ -716,7 +719,6 @@ $(document).ready(function () {
 
                 var xPosition = 10;
                 var yPosition = 30;
-                console.log(xPosition);
 
                 bigSvg.append("text")
                     .attr("id", "tooltip")
